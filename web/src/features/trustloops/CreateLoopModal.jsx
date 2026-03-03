@@ -29,8 +29,6 @@ export default function CreateLoopModal({ onClose, onCreated }) {
         role,
         expiresInDays: expiresIn,
       });
-
-      // ✅ önce parent refresh, sonra kapat (istersen tersini yapabilirsin)
       await onCreated?.();
       onClose?.();
     } catch (e) {
