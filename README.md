@@ -1,4 +1,4 @@
-#TrustLoop<img width="1914" height="914" alt="p6" src="https://github.com/user-attachments/assets/2210dbaa-980b-4f1f-b177-bfa8264e0d58" />
+
 <img width="1914" height="1019" alt="p1" src="https://github.com/user-attachments/assets/4968ee43-8b0b-4b81-ae6d-2d1725bf9d33" />
 <img width="1919" height="913" alt="Ekran görüntüsü 2026-03-03 231428" src="https://github.com/user-attachments/assets/590715e4-636d-4b1a-8d39-7ebec9424e91" />
 <img width="1904" height="973" alt="Ekran görüntüsü 2026-03-03 230924" src="https://github.com/user-attachments/assets/711b0bb4-c3ae-4be8-9839-a62cc952b588" />
