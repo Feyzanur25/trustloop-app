@@ -1,10 +1,18 @@
 #TrustLoop
 
+Test the application by connecting a Freighter wallet on Stellar Testnet.
 On-chain Trust Signals for Freelancers & Clients (Stellar + Soroban)
 
 TrustLoop is a lightweight trust-tracking dApp that converts real collaboration milestones into verifiable on-chain signals. Users can create a loop with a counterparty, confirm progress, close the loop, and visualize trust events and loop statistics — all on Stellar Testnet with optional Soroban integration.
 
 Built for hackathons (Level 5–6 scope), TrustLoop provides a clear MVP, measurable outcomes, and a real on-chain audit trail.
+
+
+## Live Demo
+
+Production URL:
+https://trustloop-ap-git-main-feyzanur25s-projects.vercel.app
+
 
 #What Problem Does TrustLoop Solve?
 
