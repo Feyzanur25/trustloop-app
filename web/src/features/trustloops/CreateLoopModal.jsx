@@ -1,16 +1,14 @@
 // src/features/trustloops/CreateLoopModal.jsx
 import React, { useState } from "react";
-import trustloopApi from "../../services/trustloopApi";
+import trustloopApi from "../../services/trustloopApi"; // default export
 import { getConnectedWallet } from "../../services/wallet";
 
-export default function CreateLoopModal({ open, onClose, onCreated }) {
+export default function CreateLoopModal({ onClose, onCreated }) {
   const [counterparty, setCounterparty] = useState("");
   const [role, setRole] = useState("Client");
   const [expiresIn, setExpiresIn] = useState(14);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(null);
-
-  if (!open) return null;
 
   const onCreate = async () => {
     setError(null);
@@ -20,19 +18,21 @@ export default function CreateLoopModal({ open, onClose, onCreated }) {
       const walletPk = await getConnectedWallet();
       if (!walletPk) throw new Error("Önce cüzdanı bağla.");
 
-      if (!counterparty || counterparty.trim().length < 20) {
+      const cp = counterparty.trim();
+      if (!cp || cp.length < 20) {
         throw new Error("Geçerli bir Stellar adresi gir.");
       }
 
       await trustloopApi.createLoop({
         walletPk,
-        counterparty: counterparty.trim(),
+        counterparty: cp,
         role,
         expiresInDays: expiresIn,
       });
 
+      // ✅ önce parent refresh, sonra kapat (istersen tersini yapabilirsin)
+      await onCreated?.();
       onClose?.();
-      onCreated?.(); // ✅ parent refresh
     } catch (e) {
       setError(e?.message || "Create failed");
     } finally {
@@ -41,11 +41,11 @@ export default function CreateLoopModal({ open, onClose, onCreated }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center">
       {/* overlay */}
       <div
         className="absolute inset-0 bg-black/60"
-        onClick={onClose}
+        onClick={() => !busy && onClose?.()}
         role="button"
         tabIndex={-1}
       />
@@ -72,8 +72,8 @@ export default function CreateLoopModal({ open, onClose, onCreated }) {
               onChange={(e) => setRole(e.target.value)}
               className="w-full rounded-xl border border-white/10 bg-black/30 px-3 py-2 text-sm outline-none"
             >
-              <option>Client</option>
-              <option>Freelancer</option>
+              <option value="Client">Client</option>
+              <option value="Freelancer">Freelancer</option>
             </select>
           </div>
 
@@ -94,14 +94,16 @@ export default function CreateLoopModal({ open, onClose, onCreated }) {
 
           <div className="flex justify-end gap-3 pt-3">
             <button
+              type="button"
               onClick={onClose}
-              className="px-4 py-2 rounded-xl border border-white/10 hover:bg-white/5"
+              className="px-4 py-2 rounded-xl border border-white/10 hover:bg-white/5 disabled:opacity-60"
               disabled={busy}
             >
               Cancel
             </button>
 
             <button
+              type="button"
               onClick={onCreate}
               disabled={busy}
               className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 disabled:opacity-60"
