@@ -2,6 +2,7 @@
 import { buildDemoManageDataXdr } from "./demoTx";
 import { signXdr } from "./wallet";
 import { submitToHorizon } from "./submitTx";
+import { http } from "./http";
 
 const HORIZON_TESTNET = "https://horizon-testnet.stellar.org";
 const STORAGE_KEY = "trustloop:loops:v1";
@@ -115,7 +116,7 @@ async function getHorizonTrustEvents({ walletPk, limit = 40 } = {}) {
 
     const action = key.split(".")[1] || key; // created/confirmed/closed
 
-    // ✅ created_at op içinde yok -> transaction endpoint’inden al
+    // ✅ created_at op içinde yok -> transaction endpoint'inden al
     const txHref = op?._links?.transaction?.href;
 
     let timeIso = "";
@@ -167,8 +168,8 @@ function applyEventsToLoops(loops, events) {
 
     loop.lastEvent = ev.type;
 
-    if (ev.type === "trust.created") loop.status = "Active";
-    if (ev.type === "trust.confirmed") loop.status = "Pending";
+    if (ev.type === "trust.created") loop.status = "Pending";
+    if (ev.type === "trust.confirmed") loop.status = "Active";
     if (ev.type === "trust.closed") loop.status = "Completed";
   }
 
@@ -208,28 +209,64 @@ async function createLoop({ walletPk, counterparty, role, expiresInDays }) {
   const local = loadLocalLoops();
   const id = nextLoopId(local);
 
-  // Chain: trust.created + "TL-001|created" (64 byte safe)
-  const xdr = await buildDemoManageDataXdr(walletPk, {
-    loopId: id,
-    action: "created",
-  });
+  let submitRes = null;
+  let txHash = null;
 
-  const signedXdr = await signXdr(xdr, "TESTNET");
-  const submitRes = await submitToHorizon(signedXdr, "TESTNET");
+  // Blockchain transaction dene
+  try {
+    const xdr = await buildDemoManageDataXdr(walletPk, {
+      loopId: id,
+      action: "created",
+    });
 
+    const signedXdr = await signXdr(xdr, "TESTNET");
+    submitRes = await submitToHorizon(signedXdr, "TESTNET");
+    txHash = submitRes?.hash;
+    console.log("Blockchain transaction successful:", txHash);
+  } catch (chainError) {
+    console.warn("Blockchain transaction failed, using API fallback:", chainError.message);
+  }
+
+  // Loop objesi oluştur (API ile uyumlu: create = Pending)
   const newLoop = {
     id,
     counterparty: shortenGAddress(counterparty),
     role: role || "Client",
-    status: "Active",
+    status: "Pending",
     score: 0,
-    expiresInDays: Number(expiresInDays) || 0,
+    expiresInDays: Number(expiresInDays) || 14,
     lastEvent: "trust.created",
     createdAt: new Date().toISOString(),
-    txHash: submitRes?.hash,
+    txHash: txHash,
   };
 
+  // Önce localStorage'a kaydet
   saveLocalLoops([newLoop, ...local]);
+
+  // Backend API'ye de kaydet
+  try {
+    const apiLoop = await http("/api/trustloops", {
+      method: "POST",
+      body: JSON.stringify({
+        counterparty: counterparty.trim(),
+        role: role || "Client",
+        expiresInDays: Number(expiresInDays) || 14,
+      }),
+    });
+    
+    console.log("API response:", apiLoop);
+    
+    // API'den gelen veriyi kullanarak localStorage'ı güncelle
+    if (apiLoop && apiLoop.id) {
+      const mergedLoop = { ...newLoop, ...apiLoop };
+      const existingLoops = loadLocalLoops();
+      const filtered = existingLoops.filter(l => l.id !== id && l.id !== apiLoop.id);
+      saveLocalLoops([mergedLoop, ...filtered]);
+      return { loop: mergedLoop, tx: submitRes };
+    }
+  } catch (apiError) {
+    console.warn("API save failed, continuing with local data:", apiError.message);
+  }
 
   return { loop: newLoop, tx: submitRes };
 }
@@ -241,19 +278,33 @@ async function confirmLoop(loopId) {
   const walletPk = await getConnectedWallet();
   if (!walletPk) throw new Error("Önce cüzdanı bağla.");
 
-  const xdr = await buildDemoManageDataXdr(walletPk, {
-    loopId,
-    action: "confirmed",
-  });
+  let submitRes = null;
 
-  const signedXdr = await signXdr(xdr, "TESTNET");
-  const submitRes = await submitToHorizon(signedXdr, "TESTNET");
+  try {
+    const xdr = await buildDemoManageDataXdr(walletPk, {
+      loopId,
+      action: "confirmed",
+    });
 
+    const signedXdr = await signXdr(xdr, "TESTNET");
+    submitRes = await submitToHorizon(signedXdr, "TESTNET");
+  } catch (chainError) {
+    console.warn("Blockchain confirm failed:", chainError.message);
+  }
+
+  // LocalStorage güncelle
   const local = loadLocalLoops();
   const updated = local.map((l) =>
-    l.id === loopId ? { ...l, status: "Pending", lastEvent: "trust.confirmed" } : l
+    l.id === loopId ? { ...l, status: "Active", lastEvent: "trust.confirmed" } : l
   );
   saveLocalLoops(updated);
+
+  // API'ye de bildir
+  try {
+    await http(`/api/trustloops/${loopId}/confirm`, { method: "POST" });
+  } catch (apiError) {
+    console.warn("API confirm failed:", apiError.message);
+  }
 
   return submitRes;
 }
@@ -265,19 +316,33 @@ async function closeLoop(loopId) {
   const walletPk = await getConnectedWallet();
   if (!walletPk) throw new Error("Önce cüzdanı bağla.");
 
-  const xdr = await buildDemoManageDataXdr(walletPk, {
-    loopId,
-    action: "closed",
-  });
+  let submitRes = null;
 
-  const signedXdr = await signXdr(xdr, "TESTNET");
-  const submitRes = await submitToHorizon(signedXdr, "TESTNET");
+  try {
+    const xdr = await buildDemoManageDataXdr(walletPk, {
+      loopId,
+      action: "closed",
+    });
 
+    const signedXdr = await signXdr(xdr, "TESTNET");
+    submitRes = await submitToHorizon(signedXdr, "TESTNET");
+  } catch (chainError) {
+    console.warn("Blockchain close failed:", chainError.message);
+  }
+
+  // LocalStorage güncelle
   const local = loadLocalLoops();
   const updated = local.map((l) =>
     l.id === loopId ? { ...l, status: "Completed", lastEvent: "trust.closed" } : l
   );
   saveLocalLoops(updated);
+
+  // API'ye de bildir
+  try {
+    await http(`/api/trustloops/${loopId}/close`, { method: "POST" });
+  } catch (apiError) {
+    console.warn("API close failed:", apiError.message);
+  }
 
   return submitRes;
 }
@@ -301,8 +366,21 @@ const trustloopApi = {
   },
 
   async getStats() {
-    const loops = await this.getLoops();
-    return buildStatsFromLoops(loops);
+    try {
+      // Backend stats - reliable demo data
+      const backendStats = await http("/api/dashboard/stats");
+      return {
+        activeLoops: backendStats.loopsActive ?? 0,
+        pending: backendStats.loopsPending ?? 0,
+        completed: backendStats.loopsCompleted ?? 0,
+        avgScore: backendStats.trustScoreAvg ?? 0,
+      };
+    } catch (backendError) {
+      console.warn("Backend stats failed, using client fallback:", backendError.message);
+      // Fallback to client-side
+      const loops = await this.getLoops();
+      return buildStatsFromLoops(loops);
+    }
   },
 
   async createLoop(payload) {
