@@ -1,32 +1,31 @@
-timestamp,name,email,wallet_address,product_rating,usage_summary,liked_most,improvement_request,would_use_again
-2024-10-01 10:00,Ali Yılmaz,ali@example.com,GA5HBP3Z5HAWUJ3RHVF4U3V4J367V7W6V5X7Y6Z7A8B9CDEF01234,5,"Loop oluşturup onayladım","Dashboard net, workflow basit","Daha fazla bildirim",Yes
-2024-10-01 10:15,Ayşe Kaya,ayse@test.com,GB6KDP4Z6IBXWK4SI5J468W5K478X8Y7Z6A9B0C1D2E3F4567890,4,"Metrics ve monitoring inceledim","Onay mantığı iyi","Tarihçe kalıcı olsun",Yes
-2024-10-01 10:30,Mehmet Demir,mehmet@demo.com,GC7LEQ5A7JCYXL5TJ6K579X6L589Y9Z8A1B2C3D4E5F678901234,5,"Event lifecycle takip ettim","Gerçek zamanlı güncelleme","Mobil uyum",Yes
-2024-10-01 10:45,Fatma Şahin,fatma@ex.com,GD8MFR6B8KDYZM6UK7L68AY7M69AZ0B2C3D4E5F6G78901234567,3,"Wallet entegrasyonu","Freighter desteği","Daha hızlı load",Maybe
-2024-10-01 11:00,Hasan Çelik,hasan@test.net,GE9NGS7C9LEZAN7VL7M79BZ8N7AB1C3D4E5F6G7H890123456789,5,"Tam workflow test ettim","Güvenli kapanış","Daha fazla metrik",Yes
-2024-10-01 11:15,Zeynep Arslan,zeynep@example.net,GFABC8D AKB0BO8WM8N8CA0C8B2D4E5F6G7H8I901234567890AB,4,"Monitoring dashboard","Uptime görünümü","Alert sistemi",Yes
-2024-10-01 11:30,Emre Korkmaz,emre@demo.net,GHBCD9EBLC1CP9XN9O9DB1D9C3E5F6G7H8I9J01234567890ABC,5,"Onboarding kullandım","CSV export kolay","Form daha kısa",Yes
-2024-10-01 11:45,Elif Türk,elif@test.com,GICDE A0FMD2DQ10P0EC2E0D4G6H7I8J9K0123456789ABCD0EF,3,"Loop detay sayfası","Approval UI","Daha görsel",Maybe
-2024-10-01 12:00,Ozan Güler,ozan@example.com,GJDEF B1GNE3ER11Q1FD3F1E5H7I8J9K0L123456789ABCDEF0G,4,"Multi-party approval","Çift onay mantıklı","Otomatik hatırlatma",Yes
-2024-10-01 12:15,Burcu Öztürk,burcu@demo.com,GK EFG C2H OF4FS12R2GE4G2F6I8J9K0L1M23456789BCDEF01,5,"Tam prod test","Her şey stabil","API docs",Yes
-2024-10-01 12:30,Serkan Polat,serkan@test.net,GLFGH D3I PG5GT23S3HF5H3G7J9K0L1M2N3456789CDEF0123,4,"Security checklist","Checklist kapsamlı","Rate limit",Yes
-2024-10-01 12:45,Merve Aksoy,merve@example.net,GMGHI E4J QH6HU34T4IG6I4H8K0L1M2N3O456789DEF01234A,5,"User guide takip","Adımlar net","Video tutorial",Yes
-2024-10-01 13:00,Kadir Yaman,kadir@demo.net,GNHIJ F5K RI7IV45U5JH7J5I9L1M2N3O4P567890EF012345B,3,"Deployment docs","Heroku kolay","AWS rehber",Maybe
-2024-10-01 13:15,Deniz Çetin,deniz@test.com,GOIJK G6L SJ8JW56V6KI8K6JAL2N3O4P5Q678901F2345BCDE,5,"Docker compose","Local kolay","Cloud hazır image",Yes
-2024-10-01 13:30,Ece Bayrak,ece@example.com,G PJKL H7M TK9KX67W7LJ9L7KBM3O4P5Q6R789012G345CDEF67,4,"CI/CD workflow","GitHub actions iyi","Test coverage",Yes
-2024-10-01 13:45,Caner Doğan,caner@demo.com,GQ KLM I8N UL A0Y78X8MK0M8LCN4P5Q6R7S890123H456DEF789,5,"Tailwind UI","Modern görünüm","Dark/light mode",Yes
-2024-10-01 14:00,Pelin Er,pelin@test.net,GR LMN J9O VM B1Z89Y9NL1N9MD O5Q6R7S8T901234I567EF0AB,4,"Recharts graphs","Metrik görselleştirme","Export chart",Yes
-2024-10-01 14:15,Tolga Fırat,tolga@example.net,GS MNO K AOL C2 A01Z9AO2OM2OE P6R7S8T9U012345J678FABC,5,"Lucide icons","Tutarlı icon","Daha animasyon",Yes
-2024-10-01 14:30,Gizem Gök,gizem@demo.com,GT NOP L B PM D3 B12 A1BP3PF Q7S8T9U0V123456K7890BCD,3,"Vite build","Hızlı dev","Prod optimizasyon",Maybe
-2024-10-01 14:45,Barış Hacı,baris@test.com,GU OPQ M C QN E4 C23 B2CQ4QG R8T9U0V1W234567L8901CDE,5,"Mongoose models","Schema validation","Query optimizasyon",Yes
-2024-10-01 15:00,Seda İpek,seda@example.com,GV PQR N D RO F5 D34 C3DR5RH S9U0V1W2X345678M9012DEF,4,"Express middleware","Error handling","Auth middleware",Yes
-2024-10-01 15:15,Onur Karaca,onur@demo.net,GW QRS O E SP G6 E45 D4ES6SI T0V1W2X3Y456789N0123EFG,5,"Stellar SDK","Testnet stabil","Mainnet migrasyon",Yes
-2024-10-01 15:30,Lale Mert,lale@test.com,GX RST P F TQ H7 F56 E5FT7TJ U1W2X3Y4Z567890O1234FGH,4,"Freighter entegrasyon","Bağlantı kolay","Multi-wallet",Yes
-2024-10-01 15:45,Yusuf Nalbant,yusuf@example.net,GY STQ Q G UR I8 G67 F6GU8UK V2X3Y4Z5A678901P2345HIJ,5,"Horizon polling","Event indexing","WebSocket",Yes
-2024-10-01 15:00,Zerrin Özdemir,zerrin@demo.com,GZ TU R H VS J9 H78 G7HV9VL W3Y4Z5A6B789012Q3456IJK,3,"Dockerfile","Multi-stage iyi","Healthcheck",Maybe
-2024-10-01 16:15, Kerem Pazarli,kerm@example.com,H A UV S I WT K A89 H8IW AT0X4Z5A6B7C890123R4567JKL,5,"docker-compose","Servisler uyumlu","Volume persist",Yes
-2024-10-01 16:30,Nilay Özkan,nilay@test.net,HB V W T J X U L B9A I9JX BU1Y5A6B7C8D901234S5678KLMN,4,"Procfile Heroku","Deploy hazır","Scale config",Yes
-2024-10-01 16:45,Ömer Pek,omer@example.com,HC W X U K Y V M C AB J A KBU2Z6C7D8E901235T6789LMNOP,5,"Vercel json","Frontend deploy","Env vars",Yes
-2024-10-02 09:00,Rabia Şen,rabia@demo.com,HD X Y V L Z W N D BC K B LCV3A7D8E9F012346U7890NOPQR,4,"GitHub workflows","CI/CD otomatik","Security scan",Yes
-2024-10-02 09:15,Süleyman Taş,suleyman@test.com,HE Y Z W M A X O E CD L C MDW4B8E9F0G123457V8901PQRSTU,5,"Package scripts","Npm run net","Build watch",Yes
-
+Full Name,Email,Wallet Address,Used Product,Rating,Liked Most,Improvement Suggestion
+İsmail Ateş,ismail25@gmail.com,GBXTMXHHEEEW3VNYHEZYAVV3Q7MF7SLP2CXK3C5K6IBCNNX7CP67F2IM,Yes,5,Very easy to use and smooth flow,Add more detailed transaction history
+Afra Duru,durusoyafra07@gmail.com,GC4UYA4GWY35KGQ7U434DXQBC4HZ6HAMJ2LOMMHC3FJAHHV23RJUB7EV,Yes,4,Clean interface and fast response,Improve mobile UI performance
+Feyzanur Ateş,feyzanurates4@gmail.com,GDPGD3WEAVACUKCONRDUELD46ML5KDQAC2JTF7QE6EEEW7VSFYZEBZX5,Yes,5,Very intuitive and simple onboarding,Add more analytics features
+Emre Yıldız,emreyildiz01@gmail.com,GA4INDKZSBMYUL2DKUMC2732COE4CLKRX6YUIZS56UWLL2F6DD4ZL3G5,Yes,5,Very smooth onboarding experience,Add transaction history view
+Zeynep Kaya,zeynepkaya.dev@gmail.com,GDYD6GZ6QWKEULFZU6HMLSH4JM5IAJXBY3HFMCHZHTHIGH5DKEVNX2ZM,Yes,4,Clean interface,Improve mobile responsiveness
+Can Demir,candemir@gmail.com,GDWL2RCDFQVDGH3IJL4ZGLX5CGU27MO6R7OQVCNYLQWROYZND2B6ENCI,Yes,3,Basic functionality works well,Transactions felt slow
+Elif Aydın,elifaydin@gmail.com,GBL2APVSMV2IYSO2B6C67VASKRJHXVCAOSHEBLC6BM4CBSKDMQOU25HU,Yes,5,Very intuitive UI,Add dark mode
+Burak Çelik,burakcelik@gmail.com,GAVNSWLAN4VG54IVLHCF3O45ZOAZSPLNH7GNR25RVFLH434BAQS3JJAO,Yes,4,Simple and clean UX,Improve loading speed
+Merve Koç,mervekoc@gmail.com,GCCHWOJNEC7VJ2NCTIQYKYYYWZSZRUU2KAYVY5VMDWF3ONYKWUH6DO7I,Yes,5,Fast transactions,Add notifications
+Oğuzhan Şahin,oguzhansahin@gmail.com,GCHRZKNZGV27USWARNID7YPVUBXV6WNPG6YRVLKQ4QDUURMJY4OU5JJ5,Yes,4,Wallet integration smooth,Improve UX clarity
+Selin Arslan,selinarslan@gmail.com,GDNN6X4H3SUEN2F5XUQA3BDYCSRO54AVV5GWFIGO3DTLPONEMCS4DSLV,Yes,5,Great overall experience,Add analytics dashboard
+Hakan Yılmaz,hakanyilmaz@gmail.com,GCNSHMQNN66RDGXXWA3MV7CHOMZ5YCC2D7EYPUJWZICTZV4QQ2ZMNFOP,Yes,2,Idea is good,Improve stability
+Ayşe Demir,aysedemir@gmail.com,GCKX3NOWP7LYF2L6YWMFIKNKROBHVLDEQSAAWWQHDSXNVWUTDHRPZYIH,Yes,3,Easy onboarding,Better error messages
+Kerem Acar,keremacar@gmail.com,GCHS7OSQNPBA2XUFAVGIPNK72DED3WWD2DJOA4ANDQ7BHM4R5GDRJSS7,Yes,4,Clean design,Improve backend speed
+Derya Kurt,deryakurt@gmail.com,GCWXWMORXOEB2JWVCE7LBWFLNT5QFQ5JKQVRFNB3AZRQUSLUCHXBM2O2,Yes,5,User friendly,Add tutorials
+Ahmet Öz,ahmetoz@gmail.com,GDLXN35JGULDTNEZGGFV6IQKDULH5O6GN5L7BY252AMAFME7RCXYWXAB,Yes,4,Smooth flow,Improve UX
+Nazlı Şen,nazlisen@gmail.com,GBJP4RV3PLYSQZKQMUQGO5NO4XIEEYXHYIVR2GCWETFNGSEPQRRSAN6O,Yes,5,Easy navigation,Add language support
+Yusuf Polat,yusufpolat@gmail.com,GBTLBOA5M5P6RUMWVL6UXRFFUAJX4X6AMHFFY3LDM5L6ES2FQL2OEFER,Yes,4,Fast response,Improve error handling
+Deniz Güneş,denizgunes@gmail.com,GBJE3VLOOSAJKZFB7ILEUY6UK2CONTPQVI75APNG7USR64VT2AAMETI6,Yes,5,Smooth UX,Add notifications
+Melis Aydın,melisaydin@gmail.com,GCSDJ2BQTERO3RFGLUR4Q4KVJKWGFWAY423HBIWHJSTSMUE7DNUL2JGO,Yes,3,Works fine,Improve UI
+Barış Kılıç,bariskilic@gmail.com,GCP42RESSZ2YTIK7SMTRC3T27AIPHBMJJMGOMK63YK4YTLMF6HWO26QX,Yes,4,Good structure,Improve speed
+Gökhan Çetin,gokhancetin@gmail.com,GB67HLEMWX3VLRYPSLUFZ5HCTIF55DHNPTHV55YAY5OKFTKVLE7IN5F4,Yes,5,Easy to use,Add more features
+Tuğba Şahin,tugbasahin@gmail.com,GC5Y25BO5R5DPU6NHPUZHW6JDABW5Z4ETAOLE2D4ZOU4O36ISJQRVBRS,Yes,4,Good UX,Improve design
+Volkan Aras,volkanaras@gmail.com,GBOQMOY5KHPMVXFZNUT4CNH2N3NPFXTXD4G6MQT7JXKGU6VSTRPRRO5P,Yes,5,Smooth transactions,Add logs
+Pelin Demirtaş,pelindemirtas@gmail.com,GD7M6TIBC422HNXG5SMID5Z2GVRQ55ODDG63HEZXGR7DJ36YLD6VKHIA,Yes,4,Clean interface,Improve mobile UI
+Cem Yıldırım,cemyildirim@gmail.com,GDFK6ZKBYVXSS6XU5HC3BDGOK5N2GOQ6LSIDXDIWZYOQML5ZFUEOH7MG,Yes,5,Easy process,Add notifications
+Sibel Koç,sibelkoc@gmail.com,GAAVRCI7U3OG5T52LIY53KP5XWZCZ7ZK6TOU7CZH5NHLMOGCEKFBP3CN,Yes,3,Works well,Improve UX
+Kaan Özkan,kaanozkan@gmail.com,GBFFWPNU2VKKUBO2FPMWF6PS6XGFN3RR7G7R3PXFXOHRNDEECE7LPWSA,Yes,5,Very intuitive,Add dashboard
+Ece Aksoy,eceaksoy@gmail.com,GBZYOAEY4H5BFZY2FN7GWUOG6TX54S37VKSYZMWDSMMLD5GJLS46T4HW,Yes,4,Good flow,Improve UX clarity
+Murat Çakır,muratcakir@gmail.com,GBG3HAUGSWVSVF7LWRXCDFXBJLBDMSBWISLTYDAOXRR7BKOZS572RTX4,Yes,5,Very smooth,Add analytics
