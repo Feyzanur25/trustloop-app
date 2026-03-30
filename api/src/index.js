@@ -2,19 +2,12 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 
-const { connectDB } = require("./db");
-const Loop = require("./models/Loop");
-const Event = require("./models/Event");
-const Onboarding = require("./models/Onboarding");
-const Approval = require("./models/Approval");
 const { errorHandler, requestLogger, asyncHandler, AppError } = require("./middleware");
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(requestLogger);
-
-let isDBConnected = false;
 
 function nowIso() {
   return new Date().toISOString();
@@ -43,7 +36,7 @@ function shortWallet(address) {
   const value = String(address || "").trim();
   if (!value) return "UNKNOWN";
   if (value.length <= 12) return value;
-  return `${value.slice(0, 4)}...${value.slice(-4)}`;
+  return value.slice(0, 4) + '...' + value.slice(-4);
 }
 
 const loops = [
@@ -102,9 +95,9 @@ const events = [
 
 const onboardingProfiles = Array.from({ length: 32 }, (_, index) => {
   const dayOffset = index % 7;
-  const wallet = `GDEMOUSERWALLET${String(index + 1).padStart(2, "0")}ZXCVBNM`;
+  const wallet = `GDEMOUSERWALLET${String(index + 1).padStart(2, '0')}ZXCVBNM`;
   return {
-    id: `OB-${String(index + 1).padStart(3, "0")}`,
+    id: `OB-${String(index + 1).padStart(3, '0')}`,
     createdAt: daysAgo(dayOffset),
     name: `Pilot User ${index + 1}`,
     email: `pilot${index + 1}@trustloop.app`,
@@ -305,23 +298,7 @@ app.get("/api/health", (_req, res) => {
   });
 });
 
-app.get("/api/trustloops", async (_req, res) => {
-  try {
-    if (isDBConnected) {
-      const dbLoops = await Loop.find().lean();
-      const approvalData = await Promise.all(
-        dbLoops.map(async (loop) => {
-          const approval = await Approval.findOne({ loopId: loop.id }).lean();
-          return { ...loop, approvals: approval || null };
-        })
-      );
-      return res.json(approvalData);
-    }
-  } catch (err) {
-    console.warn("DB query failed, using fallback:", err.message);
-  }
-  
-  // Fallback to in-memory
+app.get("/api/trustloops", (_req, res) => {
   res.json(loops.map((loop) => ({ ...loop, approvals: approvals[loop.id] || null })));
 });
 
@@ -389,7 +366,7 @@ app.post("/api/onboarding", (req, res) => {
   res.status(201).json(record);
 });
 
-app.post("/api/trustloops", async (req, res) => {
+app.post("/api/trustloops", (req, res) => {
   const { counterparty, role, expiresInDays } = req.body ?? {};
   if (!counterparty || typeof counterparty !== "string") {
     return res.status(400).json({ error: "counterparty required (string)" });
@@ -407,26 +384,7 @@ app.post("/api/trustloops", async (req, res) => {
     createdAt: nowIso(),
   };
 
-  try {
-    if (isDBConnected) {
-      const newLoop = await Loop.create(item);
-      const approval = await Approval.create({
-        loopId: id,
-        clientApproved: false,
-        freelancerApproved: false,
-      });
-      const eventDoc = await Event.create({
-        type: "trust.created",
-        loopId: id,
-        detail: `${id} created`,
-      });
-      return res.status(201).json({ ...newLoop.toObject(), approvals: approval.toObject() });
-    }
-  } catch (err) {
-    console.warn("DB write failed, using fallback:", err.message);
-  }
-
-  // Fallback to in-memory
+  // In-memory
   loops.unshift(item);
   approvals[item.id] = {
     clientApproved: false,
@@ -517,12 +475,6 @@ app.use((_req, res) => {
 
 const PORT = process.env.PORT || 4000;
 
-(async () => {
-  // Try to connect to MongoDB
-  isDBConnected = await connectDB();
-  
-  app.listen(PORT, () => {
-    const dbStatus = isDBConnected ? "with MongoDB" : "in fallback mode (memory)";
-    console.log(`✓ API running at http://localhost:${PORT} ${dbStatus}`);
-  });
-})();
+app.listen(PORT, () => {
+  console.log('✓ API running at http://localhost:' + PORT + ' (pure in-memory mode)');
+});

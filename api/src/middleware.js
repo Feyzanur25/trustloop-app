@@ -24,23 +24,7 @@ function errorHandler(err, req, res, next) {
     });
   }
 
-  // Handle Mongoose validation errors
-  if (err.name === "ValidationError") {
-    return res.status(400).json({
-      error: "Validation failed",
-      details: Object.values(err.errors).map((e) => e.message),
-      statusCode: 400,
-    });
-  }
 
-  // Handle duplicate key errors
-  if (err.code === 11000) {
-    const field = Object.keys(err.keyPattern)[0];
-    return res.status(400).json({
-      error: `${field} already exists`,
-      statusCode: 400,
-    });
-  }
 
   // Generic error
   res.status(500).json({
