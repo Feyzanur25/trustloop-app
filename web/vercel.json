@@ -1,0 +1,11 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "installCommand": "npm install",
+  "framework": "vite",
+  "env": {
+    "VITE_API_BASE_URL": "@api-url",
+    "VITE_STELLAR_NETWORK": "TESTNET",
+    "VITE_STELLAR_HORIZON_URL": "https://horizon-testnet.stellar.org"
+  }
+}
