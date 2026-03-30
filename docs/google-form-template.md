@@ -9,12 +9,16 @@
 5. README.md'ye **form linkini** ekle
 6. 30+ yanıt topla > **Responses > Export CSV/Google Sheet** > README'ye link ekle
 
-## Form Başlığı
-**TrustLoop Kullanıcı Onboarding Formu - Level 6**
+## Form Başlığı (English)
+**TrustLoop Community Feedback - Join 30+ Users**
 
-## Açıklama
-Teşekkürler TrustLoop'u test ettiğiniz için!  
-Level 6 üretim hazırlığı için wallet adresi, iletişim ve ürün feedback'inizi paylaşın.
+## Form Description (English)
+Thank you for testing TrustLoop! 🙏
+
+Please help us with your feedback and information to ensure production readiness for Level 6.
+Your wallet address, contact information, and product feedback are invaluable.
+
+⏱️ Time: 2-3 minutes
 
 ## Sorular (Required işaretli)
 
@@ -45,10 +49,10 @@ Level 6 üretim hazırlığı için wallet adresi, iletişim ve ürün feedback'
 9. **Opsiyonel: X/Telegram link**  
    Kısa cevap | Required: Hayır
 
-## Form Linki Ekle (README)
+## Form Linki (LIVE)
 ```
-Google Form: https://forms.gle/YOUR_FORM_ID
-Exported CSV: https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID
+Google Form: https://docs.google.com/forms/d/e/1FAIpQLSfEhQWE5--ySph6w8lnHzsfSK8LwJOvbyRZwb9QsFiUb9ydDg/viewform
+Exported CSV: https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID (Responses haftada update edilecek)
 ```
 
 ## Örnek Export

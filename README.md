@@ -358,10 +358,11 @@ Relevant files:
 - Run locally: `docker-compose up` → http://localhost:5174/onboarding
 - Test CSV export functionality
 
-**Option 2: Setup Real Google Form** (For production)
-- [Google Form Setup Guide](docs/google-form-template.md)
-- Form fields: Name, Email, Wallet Address, Product Rating (1-5), Feedback
-- Export responses → Google Sheet → Add link below
+**Option 2: Setup Real Google Form** (For production) ✅ **LIVE**
+- **Form Name:** TrustLoop Community Feedback - Join 30+ Users
+- **📋 Form Link:** [TrustLoop Feedback Form](https://docs.google.com/forms/d/e/1FAIpQLSfEhQWE5--ySph6w8lnHzsfSK8LwJOvbyRZwb9QsFiUb9ydDg/viewform)
+- **Share with friends:** Spread the form to reach 30+ responses!
+- **Export responses:** Responses → Create spreadsheet → Share link in README
 
 **Current User Feedback Summary (30+ Demo Users):**
 - Average Rating: **4.3/5**
@@ -371,11 +372,11 @@ Relevant files:
 
 ### 🔗 Deployment Links
 
-- **Frontend:** https://trustloop.vercel.app
-- **API:** https://trustloop-api.up.railway.app
-- **GitHub Repository:** https://github.com/yourusername/trustloop-app *
-
-*Update with your public GitHub repo link
+- **Frontend:** https://trustloop.vercel.app *(Deploy after testing)*
+- **API:** https://trustloop-api.up.railway.app *(Deploy after testing)*
+- **GitHub Repository:** https://github.com/yourusername/trustloop-app
+- **📋 Google Form (LIVE):** https://docs.google.com/forms/d/e/1FAIpQLSfEhQWE5--ySph6w8lnHzsfSK8LwJOvbyRZwb9QsFiUb9ydDg/viewform
+- **📊 User Responses Sheet:** *(To be added after responses)*
 
 ### 📊 Key Metrics
 
