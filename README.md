@@ -1,4 +1,4 @@
-<img width="1919" height="1018" alt="image" src="https://github.com/user-attachments/assets/82cc10ae-1e0b-43c4-8ccd-94c4657e6b66" />🚀 TrustLoop – Production Ready Stellar Application
+🚀 TrustLoop – Production Ready Stellar Application
 
 🔴 Live Demo: https://web-5dlm6qkga-feyzanur25s-projects.vercel.app/
 🎥 Demo Video: https://youtu.be/ieTD3J7gx5E
