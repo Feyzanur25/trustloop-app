@@ -112,7 +112,7 @@ We welcome contributions!
 
 Setup
 
-git clone https://github.com/YOUR_USERNAME/trustloop-app.git
+git clone https://github.com/Feyzanur25/trustloop-app.git
 cd trustloop-app
 
 cd api && npm install
