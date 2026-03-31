@@ -372,8 +372,8 @@ https://docs.google.com/spreadsheets/d/18AmzDfSUtz5FqXFK-Y1VJgJmIkD6Nuo2q1nC9djh
 
 ### 🔗 Deployment Links
 
-- **Frontend:** https://trustloop.vercel.app *(Deploy after testing)*
-- **API:** https://trustloop-api.up.railway.app *(Deploy after testing)*
+- **Frontend:** https://web-5dlm6qkga-feyzanur25s-projects.vercel.app/
+- **API:** https://web-5dlm6qkga-feyzanur25s-projects.vercel.app/
 - **GitHub Repository:** https://github.com/yourusername/trustloop-app
 - **📋 Google Form (LIVE):** https://docs.google.com/forms/d/e/1FAIpQLSfEhQWE5--ySph6w8lnHzsfSK8LwJOvbyRZwb9QsFiUb9ydDg/viewform
 - **📊 User Responses Sheet:** *(To be added after responses)*
