@@ -38,35 +38,29 @@ export async function getAccountBalance(publicKey) {
 }
 
 export async function simulateTransaction(transaction) {
-  const simResponse = await getSorobanClient().simulateTransaction(transaction);
-  return simResponse;
+  return await getSorobanClient().simulateTransaction(transaction);
 }
 
 export async function sendTransaction(transaction) {
-  const sendResponse = await getSorobanClient().sendTransaction(transaction);
-  return sendResponse;
+  return await getSorobanClient().sendTransaction(transaction);
 }
 
 export async function getTransactionStatus(transactionHash) {
-  const getResponse = await getSorobanClient().getTransaction(transactionHash);
-  return getResponse;
+  return await getSorobanClient().getTransaction(transactionHash);
 }
 
 export async function waitForTransaction(transactionHash, maxAttempts = 30) {
   const client = getSorobanClient();
-  
+
   for (let i = 0; i < maxAttempts; i++) {
     const response = await client.getTransaction(transactionHash);
-    
-    if (response.status === "success") {
-      return response;
-    } else if (response.status === "failed") {
-      throw new Error(`Transaction failed`);
-    }
-    
+
+    if (response.status === "success") return response;
+    if (response.status === "failed") throw new Error("Transaction failed");
+
     await new Promise((resolve) => setTimeout(resolve, 2000));
   }
-  
+
   throw new Error("Transaction confirmation timeout");
 }
 
@@ -75,25 +69,18 @@ export function buildUploadWasmTransaction(
   wasmByteArray,
   fee = 1000
 ) {
-  // const client = getSorobanClient();
-  
   const uploadWasmOp = xdr.Operation.uploadWasmWasm({
     contents: wasmByteArray,
     hash: xdr.Hash.fromHex("0000000000000000000000000000000000000000000000000000000000000000"),
   });
 
-  const transaction = new TransactionBuilder(
-    sourcePublicKey,
-    {
-      fee: fee.toString(),
-      networkPassphrase: config.networkPassphrase,
-    }
-  )
+  return new TransactionBuilder(sourcePublicKey, {
+    fee: fee.toString(),
+    networkPassphrase: config.networkPassphrase,
+  })
     .setTimeout(TimeoutInfinite)
     .appendOperation(uploadWasmOp)
     .build();
-
-  return transaction;
 }
 
 export function buildDeployContractTransaction(
@@ -101,25 +88,18 @@ export function buildDeployContractTransaction(
   wasmId,
   fee = 1000
 ) {
-  const client = getSorobanClient();
-  
   const deployContractOp = xdr.Operation.createDeployContractWithId({
     wasmId: xdr.Hash.fromHex(wasmId),
     salt: xdr.Salt.generate(),
   });
 
-  const transaction = new TransactionBuilder(
-    sourcePublicKey,
-    {
-      fee: fee.toString(),
-      networkPassphrase: config.networkPassphrase,
-    }
-  )
+  return new TransactionBuilder(sourcePublicKey, {
+    fee: fee.toString(),
+    networkPassphrase: config.networkPassphrase,
+  })
     .setTimeout(TimeoutInfinite)
     .appendOperation(deployContractOp)
     .build();
-
-  return transaction;
 }
 
 export function buildInvokeContractTransaction(
@@ -129,10 +109,8 @@ export function buildInvokeContractTransaction(
   args = [],
   fee = 1000
 ) {
-  const client = getSorobanClient();
-  
   const scArgs = args.map((arg) => nativeToScVal(arg));
-  
+
   const invokeOp = xdr.Operation.invokeContractFunc({
     contractId: xdr.ScVal.scvAddress(
       xdr.ScAddress.addressTypeContract(contractId)
@@ -141,34 +119,20 @@ export function buildInvokeContractTransaction(
     args: scArgs,
   });
 
-  const transaction = new TransactionBuilder(
-    sourcePublicKey,
-    {
-      fee: fee.toString(),
-      networkPassphrase: config.networkPassphrase,
-    }
-  )
+  return new TransactionBuilder(sourcePublicKey, {
+    fee: fee.toString(),
+    networkPassphrase: config.networkPassphrase,
+  })
     .setTimeout(TimeoutInfinite)
     .appendOperation(invokeOp)
     .build();
-
-  return transaction;
 }
 
-export async function signAndSendSorobanTx(
-  transaction,
-  publicKey,
-  network = "TESTNET"
-) {
+export async function signAndSendSorobanTx(transaction, network = "TESTNET") {
   const client = getSorobanClient();
-  
-  const transactionXDR = transaction.toXDR();
-  
-  const signedXDR = await signXdr(transactionXDR, network);
-  
-  const response = await client.sendTransaction(signedXDR);
-  
-  return response;
+
+  const signedXDR = await signXdr(transaction.toXDR(), network);
+  return await client.sendTransaction(signedXDR);
 }
 
 export async function invokeContract({
@@ -179,9 +143,8 @@ export async function invokeContract({
   fee = 1000,
 }) {
   const client = getSorobanClient();
-  
   const source = await client.getAccount(publicKey);
-  
+
   const transaction = buildInvokeContractTransaction(
     publicKey,
     contractId,
@@ -189,107 +152,21 @@ export async function invokeContract({
     args,
     fee
   );
-  
-  transaction.source = source;
-  
-  const simResponse = await client.simulateTransaction(transaction);
-  
-  if (simResponse.results && simResponse.results.length > 0) {
-    const transactionData = simResponse.transactionData;
-    const auth = simResponse.results[0].auth;
-    
-    const preparedTransaction = await client.prepareTransaction(transaction, {
-      transactionData,
-      auth: auth ? [auth] : [],
-    });
-  
-    const signedXDR = await signXdr(preparedTransaction.toXDR(), "TESTNET");
-    
-    const response = await client.sendTransaction(signedXDR);
-    
-    return response;
-  }
-  
-  const signedXDR = await signXdr(transaction.toXDR(), "TESTNET");
-  const response = await client.sendTransaction(signedXDR);
-  
-  return response;
-}
 
-export async function deployContract({
-  publicKey,
-  wasmId,
-  fee = 5000,
-}) {
-  const client = getSorobanClient();
-  
-  const source = await client.getAccount(publicKey);
-  
-  const transaction = buildDeployContractTransaction(
-    publicKey,
-    wasmId,
-    fee
-  );
-  
   transaction.source = source;
-  
-  const simResponse = await client.simulateTransaction(transaction);
-  
-  if (simResponse.results && simResponse.results.length > 0) {
-    const transactionData = simResponse.transactionData;
-    
-    const preparedTransaction = await client.prepareTransaction(transaction, {
-      transactionData,
-    });
-  
-    const signedXDR = await signXdr(preparedTransaction.toXDR(), "TESTNET");
-    
-    const response = await client.sendTransaction(signedXDR);
-    
-    return response;
-  }
-  
-  const signedXDR = await signXdr(transaction.toXDR(), "TESTNET");
-  const response = await client.sendTransaction(signedXDR);
-  
-  return response;
-}
 
-export async function uploadWasm({
-  publicKey,
-  wasmByteArray,
-  fee = 10000,
-}) {
-  const client = getSorobanClient();
-  
-  const source = await client.getAccount(publicKey);
-  
-  const transaction = buildUploadWasmTransaction(
-    publicKey,
-    wasmByteArray,
-    fee
-  );
-  
-  transaction.source = source;
-  
   const simResponse = await client.simulateTransaction(transaction);
-  
-  if (simResponse.results && simResponse.results.length > 0) {
-    const transactionData = simResponse.transactionData;
-    
-    const preparedTransaction = await client.prepareTransaction(transaction, {
-      transactionData,
+
+  if (simResponse.results?.length > 0) {
+    const prepared = await client.prepareTransaction(transaction, {
+      transactionData: simResponse.transactionData,
+      auth: simResponse.results[0].auth ? [simResponse.results[0].auth] : [],
     });
-  
-    const signedXDR = await signXdr(preparedTransaction.toXDR(), "TESTNET");
-    
-    const response = await client.sendTransaction(signedXDR);
-    
-    return response;
+
+    const signed = await signXdr(prepared.toXDR(), "TESTNET");
+    return await client.sendTransaction(signed);
   }
-  
-  const signedXDR = await signXdr(transaction.toXDR(), "TESTNET");
-  const response = await client.sendTransaction(signedXDR);
-  
-  return response;
+
+  const signed = await signXdr(transaction.toXDR(), "TESTNET");
+  return await client.sendTransaction(signed);
 }
