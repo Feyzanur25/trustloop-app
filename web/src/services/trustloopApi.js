@@ -150,9 +150,9 @@ function loadRawLocalLoops() {
   return seedLocalLoops().map(normalizeLoop);
 }
 
-function loadLocalLoops() {
+/* function loadLocalLoops() {
   return loadRawLocalLoops().map(displayLoop);
-}
+} */
 
 function loadApprovals() {
   return loadJson(APPROVALS_KEY, {});

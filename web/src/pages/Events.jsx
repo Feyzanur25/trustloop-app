@@ -2,9 +2,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import trustloopApi from "../services/trustloopApi";
 
-function cn(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
+
 
 function badge(type) {
   const base =

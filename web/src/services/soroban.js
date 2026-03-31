@@ -20,15 +20,15 @@ export function getSorobanClient() {
 }
 
 export async function getAccountSequence(publicKey) {
-  const client = getSorobanClient();
-  const account = await client.getAccount(publicKey);
+  // const client = getSorobanClient();
+  const account = await getSorobanClient().getAccount(publicKey);
   return account.sequenceNumber();
 }
 
 export async function getAccountBalance(publicKey) {
-  const client = getSorobanClient();
+  // const client = getSorobanClient();
   try {
-    const account = await client.getAccount(publicKey);
+    const account = await getSorobanClient().getAccount(publicKey);
     const balance = account.balances.find(
       (b) => b.asset_type === "native"
     );
@@ -40,20 +40,20 @@ export async function getAccountBalance(publicKey) {
 }
 
 export async function simulateTransaction(transaction) {
-  const client = getSorobanClient();
-  const simResponse = await client.simulateTransaction(transaction);
+  // const client = getSorobanClient();
+  const simResponse = await getSorobanClient().simulateTransaction(transaction);
   return simResponse;
 }
 
 export async function sendTransaction(transaction) {
-  const client = getSorobanClient();
-  const sendResponse = await client.sendTransaction(transaction);
+  // const client = getSorobanClient();
+  const sendResponse = await getSorobanClient().sendTransaction(transaction);
   return sendResponse;
 }
 
 export async function getTransactionStatus(transactionHash) {
-  const client = getSorobanClient();
-  const getResponse = await client.getTransaction(transactionHash);
+  // const client = getSorobanClient();
+  const getResponse = await getSorobanClient().getTransaction(transactionHash);
   return getResponse;
 }
 
@@ -80,7 +80,7 @@ export function buildUploadWasmTransaction(
   wasmByteArray,
   fee = 1000
 ) {
-  const client = getSorobanClient();
+  // const client = getSorobanClient();
   
   const uploadWasmOp = xdr.Operation.uploadWasmWasm({
     contents: wasmByteArray,
