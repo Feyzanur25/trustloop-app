@@ -20,13 +20,11 @@ export function getSorobanClient() {
 }
 
 export async function getAccountSequence(publicKey) {
-  // const client = getSorobanClient();
   const account = await getSorobanClient().getAccount(publicKey);
   return account.sequenceNumber();
 }
 
 export async function getAccountBalance(publicKey) {
-  // const client = getSorobanClient();
   try {
     const account = await getSorobanClient().getAccount(publicKey);
     const balance = account.balances.find(
@@ -40,19 +38,16 @@ export async function getAccountBalance(publicKey) {
 }
 
 export async function simulateTransaction(transaction) {
-  // const client = getSorobanClient();
   const simResponse = await getSorobanClient().simulateTransaction(transaction);
   return simResponse;
 }
 
 export async function sendTransaction(transaction) {
-  // const client = getSorobanClient();
   const sendResponse = await getSorobanClient().sendTransaction(transaction);
   return sendResponse;
 }
 
 export async function getTransactionStatus(transactionHash) {
-  // const client = getSorobanClient();
   const getResponse = await getSorobanClient().getTransaction(transactionHash);
   return getResponse;
 }
