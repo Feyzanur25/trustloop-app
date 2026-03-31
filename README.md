@@ -81,9 +81,21 @@ Ensures stable demo without external database dependency.
 
 🛠️ Tech Stack
 
-Frontend: React, Vite, Tailwind
-Backend: Node.js, Express
-Blockchain: Stellar SDK, Horizon
+```md
+## 🛠️ Tech Stack
+
+**Frontend**
+- React
+- Vite
+- Tailwind CSS
+
+**Backend**
+- Node.js
+- Express
+
+**Blockchain**
+- Stellar SDK
+- Horizon API
 
 ---
 
