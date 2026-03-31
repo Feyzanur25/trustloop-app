@@ -376,7 +376,7 @@ https://docs.google.com/spreadsheets/d/18AmzDfSUtz5FqXFK-Y1VJgJmIkD6Nuo2q1nC9djh
 - **API:** https://web-5dlm6qkga-feyzanur25s-projects.vercel.app/
 - **GitHub Repository:** https://github.com/yourusername/trustloop-app
 - **📋 Google Form (LIVE):** https://docs.google.com/forms/d/e/1FAIpQLSfEhQWE5--ySph6w8lnHzsfSK8LwJOvbyRZwb9QsFiUb9ydDg/viewform
-- **📊 User Responses Sheet:** *(To be added after responses)*
+- **📊 User Responses Sheet:** https://docs.google.com/spreadsheets/d/18AmzDfSUtz5FqXFK-Y1VJgJmIkD6Nuo2q1nC9djhf5s/edit?gid=1186746776#gid=1186746776
 
 ### 📊 Key Metrics
 
