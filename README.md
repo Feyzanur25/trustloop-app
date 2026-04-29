@@ -144,16 +144,7 @@ React, Vite, Tailwind, Node.js, Express, Stellar SDK
 
 ---
 
-# 🧠 Final Note
-TrustLoop is fully production-ready and scalable.
 
-🚀 Ready for real-world usage.
-
-👉 Full dataset (30+ users):
-
-https://docs.google.com/spreadsheets/d/18AmzDfSUtz5FqXFK-Y1VJgJmIkD6Nuo2q1nC9djhf5s/edit
-
-👉 All accounts can be verified via Stellar Explorer.
 
 ---
 
@@ -375,7 +366,17 @@ TrustLoop is fully prepared for Demo Day:
 
 ---
 
-🧠 Final Note
+# 🧠 Final Note
+
+TrustLoop is fully production-ready and scalable.
+
+🚀 Ready for real-world usage.
+
+👉 Full dataset (30+ users):
+
+https://docs.google.com/spreadsheets/d/18AmzDfSUtz5FqXFK-Y1VJgJmIkD6Nuo2q1nC9djhf5s/edit
+
+👉 All accounts can be verified via Stellar Explorer.
 
 TrustLoop demonstrates a complete transition from prototype to production:
 
