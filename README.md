@@ -13,8 +13,11 @@
 TrustLoop is a production-ready Stellar-based application that enables trust-driven workflows between clients and freelancers using structured approval logic and on-chain signals.
 
 ✔ Real users onboarded
+
 ✔ Metrics & monitoring dashboards
+
 ✔ Multi-party approval system
+
 ✔ Production-ready architecture
 
 ---
