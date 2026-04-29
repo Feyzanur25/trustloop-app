@@ -1,3 +1,15 @@
+# 🚀 TrustLoop – Production Ready Stellar Application
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Status-Production%20Ready-brightgreen?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Level-6%20Submission-blue?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Stellar-Testnet-yellow?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Users-35-orange?style=for-the-badge" />
+</p>
+
+
+
+
 🚀 TrustLoop – Production Ready Stellar Application
 
 🔴 Live Demo: https://web-5dlm6qkga-feyzanur25s-projects.vercel.app/
@@ -29,14 +41,6 @@ TrustLoop is a production-ready Stellar-based application that enables trust-dri
 
 ---
 
-# 🚀 TrustLoop – Production Ready Stellar Application
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Status-Production%20Ready-brightgreen?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/Level-6%20Submission-blue?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/Stellar-Testnet-yellow?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/Users-35-orange?style=for-the-badge" />
-</p>
 
 ---
 
