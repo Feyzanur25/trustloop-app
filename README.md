@@ -272,6 +272,7 @@ Hybrid architecture:
 - Stellar Testnet indexing
 
 Ensures:
+
 ✔ Stability
 
 ✔ Reliability
