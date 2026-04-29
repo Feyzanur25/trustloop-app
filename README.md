@@ -1,7 +1,9 @@
 🚀 TrustLoop – Production Ready Stellar Application
 
 🔴 Live Demo: https://web-5dlm6qkga-feyzanur25s-projects.vercel.app/
+
 🎥 Demo Video: https://youtu.be/ieTD3J7gx5E
+
 📊 User Dataset (30+ verified): https://docs.google.com/spreadsheets/d/18AmzDfSUtz5FqXFK-Y1VJgJmIkD6Nuo2q1nC9djhf5s/edit?gid=1186746776#gid=1186746776
 
 ---
