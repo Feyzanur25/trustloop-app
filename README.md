@@ -10,7 +10,6 @@
 
 
 
-🚀 TrustLoop – Production Ready Stellar Application
 
 🔴 Live Demo: https://web-5dlm6qkga-feyzanur25s-projects.vercel.app/
 
