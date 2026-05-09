@@ -61,7 +61,7 @@ export const opsApi = {
     return withFallback(
       () => http("/api/onboarding"),
       async () => {
-        const records = trustloopApi.listOnboardingProfiles();
+        const records = await trustloopApi.listOnboardingProfiles();
         return { count: records.length, records };
       }
     );

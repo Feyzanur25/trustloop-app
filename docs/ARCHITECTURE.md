@@ -1,313 +1,146 @@
-# TrustLoop System Architecture
+# TrustLoop Architecture
 
 ## Overview
 
-TrustLoop is a distributed trust workflow manager built on Stellar Testnet with production-grade monitoring and analytics.
+TrustLoop is a two-tier application:
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    Frontend (React + Vite)                  │
-│  Dashboard | Events | Metrics | Monitoring | Onboarding    │
-└────────────────────┬────────────────────────────────────────┘
-                     │ HTTPS / REST API
-                     ↓
-┌─────────────────────────────────────────────────────────────┐
-│              Backend API (Express.js)                        │
-│  Health | TrustLoops | Events | Analytics | Monitoring      │
-└────────────────────┬──────────────────────┬─────────────────┘
-                     │                      │
-         ┌───────────┴────────────┐    ┌────┴──────────┐
-         │ MongoDB (Persistence)  │    │ Stellar API   │
-         │ - Loops & Events       │    │ (Horizon)     │
-         │ - Users & Feedback     │    │ - Indexing    │
-         │ - Analytics Data       │    │ - Validation  │
-         └───────────────────────┘    └───────────────┘
-```
+- `web/` contains the React frontend
+- `api/` contains the Express backend
 
-## Component Architecture
+The app models a trust loop lifecycle:
 
-### Frontend Layer (`web/`)
+1. create a loop
+2. confirm it
+3. capture approvals
+4. close it when requirements are satisfied
 
-**Pages:**
-- `Dashboard.jsx` - Main UI, trust loop overview
-- `LoopDetail.jsx` - Individual loop with multi-party approval
-- `Events.jsx` - Event history feed
-- `Metrics.jsx` - Usage analytics and charts
-- `Monitoring.jsx` - System health dashboard
-- `Onboarding.jsx` - User registration & CSV export
+## Runtime Topology
 
-**Services:**
-- `http.js` - HTTP client with retry logic
-- `trustloopApi.js` - Trust loop API client
-- `opsApi.js` - Stellar Horizon event indexing
-- `soroban.js` - Soroban contract interaction (future)
-- `wallet.js` - Freighter wallet integration
-- `demoTx.js` - Demo transaction generator
-- `demoTx.js` - Transaction submission
-
-**UI Components:**
-- `AppLayout.jsx` - Root layout with navbar
-- `Sidebar.jsx` - Navigation menu
-- `Modal.jsx` - Reusable modal component
-
-### Backend Layer (`api/`)
-
-**Core Files:**
-- `index.js` - Express server setup, route handlers
-- `db.js` - MongoDB connection & initialization
-- `middleware.js` - Error handling, CORS, logging
-
-**Data Models (`api/src/models/`):**
-- `Loop.js` - Trust loop document schema
-- `Event.js` - Indexed blockchain event schema
-- `Approval.js` - Multi-party approval state
-- `Onboarding.js` - User registration schema
-
-**Endpoints:**
-```
-GET  /api/health                    # Health check
-GET  /api/trustloops                # List loops
-GET  /api/trustloops/:id            # Get loop detail
-POST /api/trustloops                # Create loop
-POST /api/trustloops/:id/confirm    # Confirm loop
-POST /api/trustloops/:id/close      # Close loop
-GET  /api/events                    # List events
-GET  /api/dashboard/stats           # Quick stats
-GET  /api/metrics/overview          # Detailed metrics
-GET  /api/monitoring                # System health
-GET  /api/indexer                   # Indexer status
-GET  /api/security-checklist        # Security audit
+```text
+Browser (React + Vite)
+  -> /api requests
+Express API
+  -> JSON-backed persistent store
+  -> optional Horizon event reads from Stellar Testnet
 ```
 
-### Data Layer
+## Frontend
 
-**MongoDB Collections:**
+### Pages
 
-```javascript
-// Loop Document
+- `Dashboard.jsx`
+  Main loop overview, search, sorting, and actions.
+- `LoopDetail.jsx`
+  Loop-level approval and closure state.
+- `Events.jsx`
+  Indexed event stream.
+- `Metrics.jsx`
+  Product and operational metrics.
+- `Monitoring.jsx`
+  Service health, indexer status, and security checklist.
+- `Onboarding.jsx`
+  User registry and export workflow.
+
+### Services
+
+- `http.js`
+  Shared fetch wrapper with structured errors.
+- `trustloopApi.js`
+  Main frontend data service for loops, approvals, onboarding, and events.
+- `opsApi.js`
+  Operations-oriented reads for metrics, monitoring, and indexer state.
+- `wallet.js`
+  Freighter wallet connection and signing helpers.
+- `submitTx.js`
+  Horizon transaction submission helper.
+
+## Backend
+
+### Core files
+
+- `api/src/index.js`
+  API routes, persistence, metrics assembly, security checklist, monitoring state.
+- `api/src/middleware.js`
+  Error handling, request logging, and rate limiting.
+
+### Persistence model
+
+Server data is persisted in `api/data/store.json` and contains:
+
+- trust loops
+- events
+- approvals
+- onboarding profiles
+- metadata such as last index sync time
+
+This is intentionally simple and local-friendly. It is suitable for demo readiness and can be replaced later by a production database.
+
+## Data Model
+
+### Trust loop
+
+```json
 {
-  _id: ObjectId,
-  clientWallet: "GAAA...",
-  freelancerWallet: "GBBB...",
-  status: "pending|active|completed|cancelled",
-  amount: 100,
-  createdAt: Date,
-  expirationDate: Date,
-  score: Number,
-  closedAt: Date,
-  clientApproval: Boolean,
-  freelancerApproval: Boolean
-}
-
-// Event Document
-{
-  _id: ObjectId,
-  loopId: ObjectId,
-  transactionHash: "abc123",
-  operationType: "create|confirm|close",
-  timestamp: Date,
-  indexedAt: Date,
-  blockNumber: Number,
-  metadata: {}
-}
-
-// Onboarding Document
-{
-  _id: ObjectId,
-  name: String,
-  email: String,
-  walletAddress: "GAAA...",
-  rating: 1-5,
-  feedback: String,
-  createdAt: Date,
-  verifiedAt: Date
+  "id": "TL-001",
+  "counterparty": "G...",
+  "role": "Client",
+  "status": "Pending | Active | Completed",
+  "score": 72,
+  "expiresInDays": 14,
+  "lastEvent": "trust.confirmed",
+  "approvalPolicy": "single | dual",
+  "createdAt": "2026-05-08T10:00:00.000Z"
 }
 ```
 
-### External Integrations
+### Approval
 
-**Stellar Horizon:**
-- Real-time event polling every 30s
-- Transaction verification
-- Account balance queries
-- Testnet validation
-
-**Freighter Wallet:**
-- User authentication via wallet connection
-- Transaction signing
-- Keypair management (browser-based, non-custodial)
-
-## Deployment Architecture
-
-### Local Development
-```
-docker-compose up
-├── Frontend (port 5174)
-├── API (port 4000)
-└── MongoDB (port 27017)
+```json
+{
+  "clientApproved": true,
+  "freelancerApproved": false,
+  "requiredApprovals": 2,
+  "updatedAt": "2026-05-08T10:30:00.000Z"
+}
 ```
 
-### Production Deployment Options
+### Onboarding profile
 
-**Option 1: Vercel + Railway**
-- Frontend: Vercel (serverless)
-- Backend: Railway (containerized Node.js)
-- Database: Railway MongoDB or MongoDB Atlas
-
-**Option 2: Railway Full Stack**
-- Single Railway project with both services
-- Automatic deployments from git
-- Built-in monitoring and logging
-
-**Option 3: Heroku**
-- Single Heroku dyno (if small scale)
-- MongoDB Atlas for database
-- GitHub Actions for deployment
-
-**Option 4: AWS/GCP**
-- ECS/Cloud Run for containers
-- CloudSQL/DocumentDB for database
-- CloudFront for CDN
-- CloudWatch for monitoring
-
-## Data Flow
-
-### Creating a Trust Loop
-
-```
-User (Frontend)
-  ↓
-  ├─ Connect Freighter Wallet ─→ Wallet.js
-  ├─ Fill Loop Details (counterparty, amount)
-  └─ Submit Form
-       ↓
-  HTTP POST /api/trustloops
-       ↓
-Backend - Loop Creation
-  ├─ Validate wallet signature
-  ├─ Verify counterparty wallet exists
-  ├─ Create Loop document in MongoDB
-  └─ Return loop ID
-       ↓
-Frontend
-  ├─ Poll /api/events for confirmation
-  └─ Show success message
-       ↓
-Background - Event Indexing
-  ├─ Horizon polls every 30s
-  ├─ Finds matching transactions
-  └─ Creates Event documents
+```json
+{
+  "id": "OB-001",
+  "name": "User Name",
+  "email": "user@example.com",
+  "walletAddress": "G...",
+  "feedback": "Loved the approval flow",
+  "productRating": 5,
+  "createdAt": "2026-05-08T11:00:00.000Z"
+}
 ```
 
-### Monitoring & Analytics
+## Security and Operational Controls
 
-```
-Frontend Dashboard (auto-refresh 30s)
-  ↓
-GET /api/dashboard/stats → Quick metrics
-  ↓
-Backend Aggregation
-  ├─ Count active loops
-  ├─ Calculate completion rate
-  ├─ Compute trust scores
-  ├─ Aggregate user metrics
-  └─ Check system health
-       ↓
-Response with:
-  - Active users
-  - Completion rate %
-  - Average trust score
-  - API uptime
-  - Last indexed event
-```
+- server-side input validation
+- API rate limiting
+- structured request logging
+- user-facing error handling
+- approval-gated closure flow
+- monitoring and security visibility exposed in-app
 
-## Security Architecture
+## Data Indexing
 
-**Principles:**
-1. Non-custodial - User keeps private keys in Freighter
-2. Testnet-only - No real assets at risk during development
-3. Transparent - Security status visible in-app
-4. Validated - Multi-party approval required for closure
+TrustLoop exposes indexed activity through:
 
-**Data Protection:**
-- MongoDB connection string in environment variables
-- CORS configured for known domains only
-- API validates wallet signatures
-- Error messages user-friendly (don't leak internals)
-- Rate limiting planned for Phase 2
+- `GET /api/events`
+- `GET /api/indexer`
 
-**Deployment Security:**
-- HTTPS/SSL enforced in production
-- Environment variables for secrets
-- Health checks configured
-- Monitoring for suspicious activity
+The current backend maintains server-side event history and the frontend can also read optional Horizon trust events for wallet-specific views.
 
-## Performance Optimization
+## Deployment Shape
 
-**Frontend:**
-- Skeleton loading screens (shimmer effect)
-- Event-driven updates (no constant polling)
-- API response caching (frontend memory)
-- Code splitting with Vite
+Recommended deployment split:
 
-**Backend:**
-- Database query optimization (indexes on common fields)
-- Connection pooling for MongoDB
-- Error middleware prevents crashes
-- Horizon polling batching
+- frontend on Vercel or Netlify
+- backend on Railway, Render, Fly.io, or another Node host
 
-**Monitoring:**
-- API response time tracking
-- Error rate alerting
-- Database performance metrics
-- Indexer freshness checks
-
-## Scalability Roadmap
-
-**Phase 1 (Current):** 30-100 active users
-- Single MongoDB instance
-- Single API instance
-- Horizon polling sufficient
-
-**Phase 2:** 100-1000 active users
-- MongoDB replica set for HA
-- API auto-scaling (Railway/Heroku)
-- WebSocket for real-time updates
-- Redis cache layer
-
-**Phase 3:** 1000+ active users
-- Distributed backend (multiple regions)
-- Database sharding
-- Message queue (event processing)
-- CDN for frontend assets
-
-## Troubleshooting
-
-**API not responding:**
-- Check MongoDB connection: `GET /api/health`
-- Review environment variables (.env)
-- Check logs: `docker-compose logs api`
-
-**Events not indexing:**
-- Check Horizon API status
-- Verify transaction hash exists on Testnet
-- Check indexer endpoint: `GET /api/indexer`
-
-**Frontend not updating:**
-- Clear browser cache (hard refresh)
-- Check API connectivity
-- Review browser console for errors
-
-## Maintenance
-
-**Regular Tasks:**
-- Monitor MongoDB disk usage
-- Review API error logs weekly
-- Update dependencies monthly
-- Verify Horizon API availability
-- Test failover procedures
-
-**Backup Strategy:**
-- MongoDB Atlas automated backups
-- GitHub repo as code backup
-- Environment variable backup in manager
+The frontend should point to the backend through `VITE_API_BASE_URL`, or use the Vite proxy during local development.

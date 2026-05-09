@@ -15,8 +15,7 @@ export default function CreateLoopModal({ onClose, onCreated }) {
     setBusy(true);
 
     try {
-      const walletPk = await getConnectedWallet();
-      if (!walletPk) throw new Error("Connect your wallet first.");
+      const walletPk = await getConnectedWallet().catch(() => null);
 
       const trimmed = counterparty.trim();
       if (!trimmed || trimmed.length < 20) {

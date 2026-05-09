@@ -1,40 +1,49 @@
-# TrustLoop Level 6 Submission - ✅ Hazır
+# TrustLoop Level 6 Submission Pack
 
-## Gereksinim Haritası
+## What Is Complete In This Repository
 
-### ✅ 30+ verified active users
-- Onboarding hub + CSV export destekli
-- Demo: 30+ satır [docs/onboarding-template.csv](./onboarding-template.csv)
-- Gerçek: Google Form/Sheet linki README'de ekle
+- metrics dashboard
+- monitoring dashboard
+- security checklist
+- indexed event visibility
+- onboarding registry
+- export artifacts
+- advanced feature: multi-party approval
+- deployment documentation
+- user guide and architecture docs
 
-### ✅ Metrics dashboard live
-- `/metrics` - Kullanım, completion rate, trust score
+## What Must Be Added Externally Before Submission
 
-### ✅ Security checklist completed
-- [docs/security-checklist.md](./security-checklist.md)
-- `/monitoring` sayfasında canlı
+- public frontend URL
+- public backend URL
+- public repository URL
+- real Google Form link
+- real response spreadsheet link
+- screenshot links for metrics and monitoring
+- final community post link
+- verified public commit count
+- real commit links inside the improvement section
 
-### ✅ Monitoring active
-- `/monitoring` - Uptime, latency, alerts, indexer
+## Submission Checklist
 
-### ✅ Data indexing implemented
-- Event freshness + indexed count visibility
+- [ ] public GitHub repository
+- [ ] live frontend deployment
+- [ ] live backend deployment
+- [ ] metrics screenshot link in README
+- [ ] monitoring screenshot link in README
+- [ ] real response sheet link in README
+- [ ] community contribution link in README
+- [ ] commit links added in roadmap
+- [ ] commit count verified publicly
 
-### ✅ Full documentation
-- README + docs/ klasörü tam
+## Internal Evidence Links
 
-### ✅ 1 advanced feature implemented
-- Multi-party approval (LoopDetail.jsx)
-
-### ✅ Minimum 15+ meaningful commits
-- Git history kontrol et
-
-## Manuel Tamamlanacaklar
-- Deploy linki (Vercel/Heroku)
-- GitHub repo linki (public)
-- Community post linki
-- Deploy screenshot'ları
-- **GERÇEK** 30+ kullanıcı CSV (form responses)
-
-**Durum: Kod/Demo hazır. Kullanıcı form toplasın, link eklesin.**
-
+- README: [../README.md](../README.md)
+- architecture: [./ARCHITECTURE.md](./ARCHITECTURE.md)
+- API: [./API.md](./API.md)
+- user guide: [./user-guide.md](./user-guide.md)
+- deployment: [./DEPLOYMENT.md](./DEPLOYMENT.md)
+- security: [./security-checklist.md](./security-checklist.md)
+- roadmap: [./improvement-roadmap.md](./improvement-roadmap.md)
+- onboarding CSV: [./onboarding-template.csv](./onboarding-template.csv)
+- onboarding XLSX: [./onboarding-responses.xlsx](./onboarding-responses.xlsx)

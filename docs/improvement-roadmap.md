@@ -1,58 +1,96 @@
-# TrustLoop İyileştirme Roadmap - Kullanıcı Feedback Temelli
+# TrustLoop Improvement Roadmap
 
-Level 6 README bölümü için: Ürün feedback'ine göre evrim planı.
+This roadmap is intended for the Level 6 README improvement section.
 
-## Örnek Feedback Temaları (30+ Demo Kullanıcıdan)
-- **Bildirim eksik** (12 kullanıcı): "Hatırlatma gelsin"
-- **Tarihçe kalıcı olsun** (8 kullanıcı): "DB persist"
-- **Mobil uyum** (5 kullanıcı)
-- **Hızlı load** (4 kullanıcı)
-- **Daha fazla metrik** (3 kullanıcı)
+## Feedback Themes From The Seeded User Set
 
-Ortalama Puan: 4.3/5 (Demo veriden)
+- users want clearer notifications
+- users want persistent history and reliable records
+- users want stronger metrics visibility
+- users want mobile-friendly flows
+- users want smoother error handling
 
-## Öncelikli İyileştirmeler (Kullanıcı Feedback Tabanlı - 30+ Aktif Kullanıcıdan)
+## Improvements Already Reflected In The Repository
 
-### ✅ Tamamlanan İyileştirmeler (Phase 1)
+### 1. Persistent backend storage
 
-1. **Kalıcı DB Depolama**  
-   MongoDB'ye tam geçiş. Veritabanı persistence gerçekleşti.  
-   [Commit: 5f3a8c2d](https://github.com/trustloop/trustloop-app/commit/5f3a8c2d)  
-   **Feedback Sonuç:** "Tarihçe artık kalıcı" ✅
+Why:
 
-2. **Bildirim Akışı**  
-   In-app notification system ve event badge'leri.  
-   [Commit: 7e2b4f1a](https://github.com/trustloop/trustloop-app/commit/7e2b4f1a)  
-   **Feedback Sonuç:** "Bildirim eksikliği çözüldü" (12 kullanıcı tarafından talep) ✅
+- users should not lose loop or onboarding history on restart
 
-3. **Event Indexing Derinleştir**  
-   Horizon polling + zengin analitik dashboard.  
-   [Commit: a1f9e3c5](https://github.com/trustloop/trustloop-app/commit/a1f9e3c5)  
-   **Feedback Sonuç:** "Daha fazla metrik görmek istiyorum" (3 kullanıcı) ✅
+Current repo evidence:
 
-4. **Operasyonel Log**  
-   API error handling + failure görünürlüğü.  
-   [Commit: 3b2d7g8h](https://github.com/trustloop/trustloop-app/commit/3b2d7g8h)  
-   **Feedback Sonuç:** "System stability göründü" ✅
+- [api/src/index.js](../api/src/index.js)
 
-5. **Mobil Responsive**  
-   Tailwind CSS ile tam mobile uyum.  
-   [Commit: 6k4m9i0j](https://github.com/trustloop/trustloop-app/commit/6k4m9i0j)  
-   **Feedback Sonuç:** "Mobil uyum talep edildi" (5 kullanıcı) ✅
+Public commit link:
 
-6. **Kullanıcı Retention Takip**  
-   DAU/MAU metrikleri ve retention dashboard.  
-   [Commit: 8p5n1q2r](https://github.com/trustloop/trustloop-app/commit/8p5n1q2r)  
-   **Feedback Sonuç:** "Analytics mükkemmel" ✅
+- `ADD_REAL_PUBLIC_COMMIT_LINK_FOR_PERSISTENCE`
 
-### 🔄 Phase 2 - Planlanan İyileştirmeler (Sonraki Faz)
+### 2. Monitoring and operations visibility
 
-- **API Rate Limiting** - DoS koruması
-- **Structured Server Logs** - Better debugging
-- **Audit Persistence** - Compliance logging
-- **Role-Based Auth** - Operator management
-- **WebSocket Support** - Real-time events
+Why:
 
-## Sonraki Faz
-Demo → Prod: Gerçek kullanıcı → Mainnet → Scale.
+- production-readiness requires visible uptime, latency, and alert state
 
+Current repo evidence:
+
+- [web/src/pages/Monitoring.jsx](../web/src/pages/Monitoring.jsx)
+- [api/src/index.js](../api/src/index.js)
+
+Public commit link:
+
+- `ADD_REAL_PUBLIC_COMMIT_LINK_FOR_MONITORING`
+
+### 3. Metrics dashboard
+
+Why:
+
+- Level 6 requires user and transaction visibility
+
+Current repo evidence:
+
+- [web/src/pages/Metrics.jsx](../web/src/pages/Metrics.jsx)
+
+Public commit link:
+
+- `ADD_REAL_PUBLIC_COMMIT_LINK_FOR_METRICS`
+
+### 4. Multi-party approval workflow
+
+Why:
+
+- this is the advanced feature and core trust differentiator
+
+Current repo evidence:
+
+- [web/src/pages/LoopDetail.jsx](../web/src/pages/LoopDetail.jsx)
+- [api/src/index.js](../api/src/index.js)
+
+Public commit link:
+
+- `ADD_REAL_PUBLIC_COMMIT_LINK_FOR_APPROVAL_WORKFLOW`
+
+### 5. Security hardening
+
+Why:
+
+- production readiness requires input validation, logging, and rate limiting
+
+Current repo evidence:
+
+- [api/src/middleware.js](../api/src/middleware.js)
+- [docs/security-checklist.md](./security-checklist.md)
+
+Public commit link:
+
+- `ADD_REAL_PUBLIC_COMMIT_LINK_FOR_SECURITY_HARDENING`
+
+## Next Phase Plan
+
+These are strong next-month goals after the current submission:
+
+- move from seeded/demo onboarding to real public responses
+- deploy frontend and backend publicly with monitoring evidence
+- replace local persistent store with managed production storage
+- add stronger audit logging for approvals and closure history
+- add deeper wallet and event verification against Horizon

@@ -15,6 +15,7 @@ export default function LoopDetail() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [approvalBusy, setApprovalBusy] = useState("");
 
   const load = async () => {
     setError(null);
@@ -44,13 +45,29 @@ export default function LoopDetail() {
   );
 
   const onApprove = async (actor) => {
-    trustloopApi.approveLoop(id, actor);
-    await load();
+    setError(null);
+    setApprovalBusy(`approve-${actor}`);
+    try {
+      await trustloopApi.approveLoop(id, actor);
+      await load();
+    } catch (err) {
+      setError(err?.message || "Approval failed");
+    } finally {
+      setApprovalBusy("");
+    }
   };
 
   const onRevoke = async (actor) => {
-    trustloopApi.revokeApproval(id, actor);
-    await load();
+    setError(null);
+    setApprovalBusy(`revoke-${actor}`);
+    try {
+      await trustloopApi.revokeApproval(id, actor);
+      await load();
+    } catch (err) {
+      setError(err?.message || "Revoke failed");
+    } finally {
+      setApprovalBusy("");
+    }
   };
 
   if (loading) return <div className="p-6 text-white">Loading...</div>;
@@ -143,12 +160,14 @@ export default function LoopDetail() {
               <button
                 className="rounded-2xl border border-emerald-400/20 bg-emerald-400/15 px-4 py-2 text-sm"
                 onClick={() => onApprove("Client")}
+                disabled={approvalBusy !== ""}
               >
                 Approve
               </button>
               <button
                 className="rounded-2xl border border-white/10 bg-white/[0.05] px-4 py-2 text-sm"
                 onClick={() => onRevoke("Client")}
+                disabled={approvalBusy !== ""}
               >
                 Revoke
               </button>
@@ -164,12 +183,14 @@ export default function LoopDetail() {
               <button
                 className="rounded-2xl border border-emerald-400/20 bg-emerald-400/15 px-4 py-2 text-sm"
                 onClick={() => onApprove("Freelancer")}
+                disabled={approvalBusy !== ""}
               >
                 Approve
               </button>
               <button
                 className="rounded-2xl border border-white/10 bg-white/[0.05] px-4 py-2 text-sm"
                 onClick={() => onRevoke("Freelancer")}
+                disabled={approvalBusy !== ""}
               >
                 Revoke
               </button>

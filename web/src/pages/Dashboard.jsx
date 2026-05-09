@@ -186,7 +186,7 @@ export default function Dashboard() {
       
       // User-friendly error messages
       if (e?.statusCode === 0) {
-        setError("Network error: Cannot connect to API. Make sure the backend is running on http://localhost:4000");
+        setError("Network error: Cannot connect to API. Make sure the backend is running and the frontend proxy is configured.");
       } else if (e?.statusCode === 404) {
         setError("API endpoint not found");
       } else if (e?.statusCode >= 500) {
@@ -201,14 +201,6 @@ export default function Dashboard() {
 
   useEffect(() => {
     load();
-  }, [load]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      load();
-    }, 30000); // Refresh every 30 seconds
-
-    return () => clearInterval(interval);
   }, [load]);
 
   const filteredLoops = useMemo(() => {
@@ -359,8 +351,8 @@ export default function Dashboard() {
               <div className="mt-4 rounded-lg bg-black/30 p-3 text-xs text-white/50 font-mono">
                 <div className="mb-1 font-semibold">Troubleshooting:</div>
                 <ul className="list-disc list-inside space-y-1">
-                  <li>Check if API is running: http://localhost:4000</li>
-                  <li>Frontend should be on http://localhost:5174</li>
+                  <li>Check if API is running on the configured backend port</li>
+                  <li>When using Vite locally, the frontend proxies /api requests to the backend</li>
                   <li>Check browser console (F12) for more details</li>
                 </ul>
               </div>
@@ -841,7 +833,7 @@ export default function Dashboard() {
                         </td>
 
                         <td className="px-5 py-4 text-[0.95rem] text-white/85">
-                          {loop.expiresInDays > 0 ? `${loop.expiresInDays} days` : "14 days"}
+                          {loop.expiresInDays > 0 ? `${loop.expiresInDays} days` : "0 days"}
                         </td>
 
                         <td className="px-5 py-4 text-[0.95rem] text-white/65">

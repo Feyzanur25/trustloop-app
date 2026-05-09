@@ -1,130 +1,157 @@
-# TrustLoop API Documentation
+# TrustLoop API Reference
 
 ## Base URL
-- Development: `http://localhost:4000`
-- Production: `https://trustloop-api.up.railway.app`
 
-## Authentication
-All endpoints use wallet-based verification. Include wallet address in request headers or body.
+- local: `http://localhost:4000`
+- deployed: `ADD_DEPLOYED_API_URL`
 
-## Core Endpoints
+## Response Style
 
-### Health Check
-```
-GET /api/health
-```
-Returns server status and MongoDB connection state.
-
-### Trust Loops
-
-#### List All Loops
-```
-GET /api/trustloops?status=active&limit=50&offset=0
-```
-
-#### Get Loop Detail
-```
-GET /api/trustloops/:id
-```
-
-#### Create Loop
-```
-POST /api/trustloops
-Body: {
-  "clientWallet": "G...",
-  "freelancerWallet": "G...",
-  "amount": 100,
-  "status": "pending",
-  "expirationDate": "2026-04-30"
-}
-```
-
-#### Confirm Loop (Pending → Active)
-```
-POST /api/trustloops/:id/confirm
-```
-
-#### Close Loop (Active → Completed)
-```
-POST /api/trustloops/:id/close
-Body: {
-  "clientApproval": true,
-  "freelancerApproval": true
-}
-```
-
-### Events
-
-#### Get Indexed Events
-```
-GET /api/events?limit=100&loopId=:loopId
-```
-
-Returns on-chain events from Horizon with timestamps.
-
-### Analytics
-
-#### Dashboard Stats
-```
-GET /api/dashboard/stats
-```
-Response: `{ activeLoops, completedLoops, avgScore, totalUsers }`
-
-#### Detailed Metrics
-```
-GET /api/metrics/overview
-```
-Response: Usage metrics, completion rate, retention data
-
-### Monitoring
-
-#### System Health
-```
-GET /api/monitoring
-```
-Response: API uptime, latency, error rates, alerts
-
-#### Indexer Status
-```
-GET /api/indexer
-```
-Response: Last indexed block, event count, freshness
-
-#### Security Checklist
-```
-GET /api/security-checklist
-```
-Response: Security status and completed items
-
-## Response Format
-All responses use standard JSON format:
+The API returns plain JSON payloads. Errors use:
 
 ```json
 {
-  "success": true,
-  "data": { /* payload */ },
-  "message": "Optional message"
+  "error": "Human readable message",
+  "statusCode": 400,
+  "timestamp": "2026-05-08T10:00:00.000Z"
 }
 ```
 
-## Error Handling
+## Core Endpoints
 
-| Code | Meaning |
-|------|---------|
-| 200 | OK |
-| 400 | Bad Request (validation error) |
-| 401 | Unauthorized (invalid wallet) |
-| 404 | Not Found |
-| 500 | Server Error |
+### Health
 
-## Rate Limiting (TBD)
-- Planned: 100 requests per minute per wallet
-- Current: Unlimited (development)
+`GET /api/health`
 
-## Webhook Support (TBD)
-- Planned: Event notifications via HTTP POST
-- Status: Planned for Phase 2
+Returns:
 
-## SDK / Client Libraries
-- JavaScript/TypeScript: Coming soon
-- Python: Coming soon
+- API status
+- server timestamp
+- uptime seconds
+
+### Trust loops
+
+`GET /api/trustloops`
+
+Returns all loops with approval state.
+
+`GET /api/trustloops/:id`
+
+Returns one loop with approval state.
+
+`POST /api/trustloops`
+
+Request body:
+
+```json
+{
+  "counterparty": "G...",
+  "role": "Client",
+  "expiresInDays": 14,
+  "approvalPolicy": "dual"
+}
+```
+
+`POST /api/trustloops/:id/confirm`
+
+Moves a loop from `Pending` to `Active`.
+
+`POST /api/trustloops/:id/approve`
+
+Request body:
+
+```json
+{
+  "actor": "Client"
+}
+```
+
+Captures an approval for `Client` or `Freelancer`.
+
+`POST /api/trustloops/:id/revoke`
+
+Request body:
+
+```json
+{
+  "actor": "Freelancer"
+}
+```
+
+Revokes the selected approval.
+
+`POST /api/trustloops/:id/close`
+
+Closes an active loop only if the required approval state is satisfied.
+
+### Events
+
+`GET /api/events`
+
+Returns indexed trust loop events in reverse chronological order.
+
+### Onboarding
+
+`GET /api/onboarding`
+
+Returns:
+
+```json
+{
+  "count": 30,
+  "records": []
+}
+```
+
+`POST /api/onboarding`
+
+Request body:
+
+```json
+{
+  "name": "User Name",
+  "email": "user@example.com",
+  "walletAddress": "G...",
+  "feedback": "Clear workflow",
+  "productRating": 5
+}
+```
+
+### Metrics and monitoring
+
+`GET /api/dashboard/stats`
+
+Quick summary used by the dashboard.
+
+`GET /api/metrics/overview`
+
+Detailed metrics for the metrics dashboard.
+
+`GET /api/monitoring`
+
+Monitoring summary including uptime, request counts, latency, and alerts.
+
+`GET /api/indexer`
+
+Indexer visibility including event totals and freshness.
+
+`GET /api/security-checklist`
+
+Security checklist state exposed for the monitoring screen.
+
+## Rate Limiting
+
+All `/api` routes are protected by a lightweight in-memory rate limiter.
+
+Current default:
+
+- window: 60 seconds
+- limit: 180 requests per client
+
+If exceeded, the API returns `429 Too Many Requests`.
+
+## Notes
+
+- the backend is currently designed for demo and pilot environments
+- persistence is server-side and survives restart through `api/data/store.json`
+- wallet signing is optional for core UI flows, but available for Stellar demo interactions

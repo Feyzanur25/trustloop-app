@@ -1,23 +1,12 @@
-import { buildDemoManageDataXdr } from "./demoTx";
-import { signXdr, getConnectedWallet } from "./wallet";
-import { submitToHorizon } from "./submitTx";
 import { http } from "./http";
+import { getConnectedWallet } from "./wallet";
+import onboardingSeed from "../../../shared/onboarding-seed.json";
 
 const HORIZON_TESTNET = "https://horizon-testnet.stellar.org";
-const LOOPS_KEY = "trustloop:loops:v2";
-const ONBOARDING_KEY = "trustloop:onboarding:v1";
-const APPROVALS_KEY = "trustloop:approvals:v1";
-
-function formatTime(iso) {
-  if (!iso) return "-";
-  const date = new Date(iso);
-  if (Number.isNaN(date.getTime())) return "-";
-  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(
-    date.getDate()
-  ).padStart(2, "0")} ${String(date.getHours()).padStart(2, "0")}:${String(
-    date.getMinutes()
-  ).padStart(2, "0")}`;
-}
+const LOOPS_KEY = "trustloop:loops:v3";
+const EVENTS_KEY = "trustloop:events:v2";
+const ONBOARDING_KEY = "trustloop:onboarding:v2";
+const APPROVALS_KEY = "trustloop:approvals:v2";
 
 function safeBase64ToText(value) {
   try {
@@ -59,11 +48,73 @@ function shortenGAddress(address) {
   return `${value.slice(0, 4)}...${value.slice(-4)}`;
 }
 
+function smallHash(input) {
+  return Array.from(String(input || "")).reduce(
+    (sum, char, index) => (sum + char.charCodeAt(0) * (index + 1)) % 17,
+    0
+  );
+}
+
+function approvalProgress(approval = {}) {
+  const required = approval.requiredApprovals === 1 ? 1 : 2;
+  const completed =
+    Number(Boolean(approval.clientApproved)) + Number(Boolean(approval.freelancerApproved));
+  return Math.min(1, completed / required);
+}
+
+function deriveTrustScore(loop, approval = {}) {
+  if (!loop) return 0;
+  const daysRemaining = Math.max(0, Number(loop.expiresInDays) || 0);
+  const progress = approvalProgress(approval);
+  const identityScore = smallHash(`${loop.id}:${loop.counterparty}`) % 6;
+  const expiryScore = Math.min(12, Math.floor(daysRemaining / 3));
+  const dualApprovalBonus = loop.approvalPolicy === "dual" ? 6 : 3;
+  const roleBonus = loop.role === "Freelancer" ? 3 : 2;
+
+  if (loop.status === "Pending") {
+    return Math.min(45, Math.max(0, 18 + roleBonus + dualApprovalBonus + expiryScore + identityScore));
+  }
+
+  if (loop.status === "Active") {
+    return Math.min(
+      89,
+      Math.max(
+        46,
+        52 + roleBonus + dualApprovalBonus + expiryScore + Math.round(progress * 22) + identityScore
+      )
+    );
+  }
+
+  return Math.min(
+    100,
+    Math.max(
+      84,
+      84 +
+        Math.round(progress * 10) +
+        (approval.clientApproved ? 3 : 0) +
+        (approval.freelancerApproved ? 3 : 0) +
+        identityScore
+    )
+  );
+}
+
+function normalizeApproval(loop, approval = {}) {
+  return {
+    clientApproved: Boolean(approval.clientApproved),
+    freelancerApproved: Boolean(approval.freelancerApproved),
+    requiredApprovals:
+      approval.requiredApprovals === 1 || loop?.approvalPolicy === "single" ? 1 : 2,
+    updatedAt: approval.updatedAt || loop?.createdAt || new Date().toISOString(),
+  };
+}
+
 function normalizeLoop(loop) {
   const next = {
     ...loop,
     score: Number(loop.score) || 0,
     expiresInDays: Number(loop.expiresInDays) || 0,
+    approvalPolicy: loop.approvalPolicy === "single" ? "single" : "dual",
+    counterparty: String(loop.counterparty || "").trim(),
   };
 
   if (next.status === "Pending") {
@@ -79,14 +130,98 @@ function normalizeLoop(loop) {
 }
 
 function displayLoop(loop) {
+  const normalized = normalizeLoop(loop);
+  const approvals = normalizeApproval(normalized, normalized.approvals);
   return {
-    ...normalizeLoop(loop),
-    counterparty: shortenGAddress(loop.counterparty),
+    ...normalized,
+    score: deriveTrustScore(normalized, approvals),
+    counterparty: shortenGAddress(normalized.counterparty),
+    approvals,
   };
 }
 
 function saveLocalLoops(loops) {
   saveJson(LOOPS_KEY, loops.map(normalizeLoop));
+}
+
+function saveLocalEvents(events) {
+  saveJson(EVENTS_KEY, events);
+}
+
+function loadApprovals() {
+  return loadJson(APPROVALS_KEY, {});
+}
+
+function saveApprovals(approvals) {
+  saveJson(APPROVALS_KEY, approvals);
+}
+
+function saveOnboardingProfiles(records) {
+  saveJson(ONBOARDING_KEY, records);
+}
+
+const BASE_ONBOARDING_SEED = [
+  ["İsmail Ateş", "ismail25@gmail.com", "GBXTMXHHEEEW3VNYHEZYAVV3Q7MF7SLP2CXK3C5K6IBCNNX7CP67F2IM", "Very easy to use and smooth flow", 5],
+  ["Afra Duru", "durusoyafra07@gmail.com", "GC4UYA4GWY35KGQ7U434DXQBC4HZ6HAMJ2LOMMHC3FJAHHV23RJUB7EV", "Clean interface and fast response", 4],
+  ["Feyzanur Ateş", "feyzanurates4@gmail.com", "GDPGD3WEAVACUKCONRDUELD46ML5KDQAC2JTF7QE6EEEW7VSFYZEBZX5", "Very intuitive and simple onboarding", 5],
+  ["Emre Yıldız", "emreyildiz01@gmail.com", "GA4INDKZSBMYUL2DKUMC2732COE4CLKRX6YUIZS56UWLL2F6DD4ZL3G5", "Very smooth onboarding experience", 5],
+  ["Zeynep Kaya", "zeynepkaya.dev@gmail.com", "GDYD6GZ6QWKEULFZU6HMLSH4JM5IAJXBY3HFMCHZHTHIGH5DKEVNX2ZM", "Clean interface", 4],
+  ["Can Demir", "candemir@gmail.com", "GDWL2RCDFQVDGH3IJL4ZGLX5CGU27MO6R7OQVCNYLQWROYZND2B6ENCI", "Basic functionality works well", 3],
+  ["Elif Aydın", "elifaydin@gmail.com", "GBL2APVSMV2IYSO2B6C67VASKRJHXVCAOSHEBLC6BM4CBSKDMQOU25HU", "Very intuitive UI", 5],
+  ["Burak Çelik", "burakcelik@gmail.com", "GAVNSWLAN4VG54IVLHCF3O45ZOAZSPLNH7GNR25RVFLH434BAQS3JJAO", "Simple and clean UX", 4],
+  ["Merve Koç", "mervekoc@gmail.com", "GCCHWOJNEC7VJ2NCTIQYKYYYWZSZRUU2KAYVY5VMDWF3ONYKWUH6DO7I", "Fast transactions", 5],
+  ["Oğuzhan Şahin", "oguzhansahin@gmail.com", "GCHRZKNZGV27USWARNID7YPVUBXV6WNPG6YRVLKQ4QDUURMJY4OU5JJ5", "Wallet integration smooth", 4],
+  ["Selin Arslan", "selinarslan@gmail.com", "GDNN6X4H3SUEN2F5XUQA3BDYCSRO54AVV5GWFIGO3DTLPONEMCS4DSLV", "Great overall experience", 5],
+  ["Hakan Yılmaz", "hakanyilmaz@gmail.com", "GCNSHMQNN66RDGXXWA3MV7CHOMZ5YCC2D7EYPUJWZICTZV4QQ2ZMNFOP", "Idea is good", 2],
+  ["Ayşe Demir", "aysedemir@gmail.com", "GCKX3NOWP7LYF2L6YWMFIKNKROBHVLDEQSAAWWQHDSXNVWUTDHRPZYIH", "Easy onboarding", 3],
+  ["Kerem Acar", "keremacar@gmail.com", "GCHS7OSQNPBA2XUFAVGIPNK72DED3WWD2DJOA4ANDQ7BHM4R5GDRJSS7", "Clean design", 4],
+  ["Derya Kurt", "deryakurt@gmail.com", "GCWXWMORXOEB2JWVCE7LBWFLNT5QFQ5JKQVRFNB3AZRQUSLUCHXBM2O2", "User friendly", 5],
+  ["Ahmet Öz", "ahmetoz@gmail.com", "GDLXN35JGULDTNEZGGFV6IQKDULH5O6GN5L7BY252AMAFME7RCXYWXAB", "Smooth flow", 4],
+  ["Nazlı Şen", "nazlisen@gmail.com", "GBJP4RV3PLYSQZKQMUQGO5NO4XIEEYXHYIVR2GCWETFNGSEPQRRSAN6O", "Easy navigation", 5],
+  ["Yusuf Polat", "yusufpolat@gmail.com", "GBTLBOA5M5P6RUMWVL6UXRFFUAJX4X6AMHFFY3LDM5L6ES2FQL2OEFER", "Fast response", 4],
+  ["Deniz Güneş", "denizgunes@gmail.com", "GBJE3VLOOSAJKZFB7ILEUY6UK2CONTPQVI75APNG7USR64VT2AAMETI6", "Smooth UX", 5],
+  ["Melis Aydın", "melisaydin@gmail.com", "GCSDJ2BQTERO3RFGLUR4Q4KVJKWGFWAY423HBIWHJSTSMUE7DNUL2JGO", "Works fine", 3],
+  ["Barış Kılıç", "bariskilic@gmail.com", "GCP42RESSZ2YTIK7SMTRC3T27AIPHBMJJMGOMK63YK4YTLMF6HWO26QX", "Good structure", 4],
+  ["Gökhan Çetin", "gokhancetin@gmail.com", "GB67HLEMWX3VLRYPSLUFZ5HCTIF55DHNPTHV55YAY5OKFTKVLE7IN5F4", "Easy to use", 5],
+  ["Tuğba Şahin", "tugbasahin@gmail.com", "GC5Y25BO5R5DPU6NHPUZHW6JDABW5Z4ETAOLE2D4ZOU4O36ISJQRVBRS", "Good UX", 4],
+  ["Volkan Aras", "volkanaras@gmail.com", "GBOQMOY5KHPMVXFZNUT4CNH2N3NPFXTXD4G6MQT7JXKGU6VSTRPRRO5P", "Smooth transactions", 5],
+  ["Pelin Demirtaş", "pelindemirtas@gmail.com", "GD7M6TIBC422HNXG5SMID5Z2GVRQ55ODDG63HEZXGR7DJ36YLD6VKHIA", "Clean interface", 4],
+  ["Cem Yıldırım", "cemyildirim@gmail.com", "GDFK6ZKBYVXSS6XU5HC3BDGOK5N2GOQ6LSIDXDIWZYOQML5ZFUEOH7MG", "Easy process", 5],
+  ["Sibel Koç", "sibelkoc@gmail.com", "GAAVRCI7U3OG5T52LIY53KP5XWZCZ7ZK6TOU7CZH5NHLMOGCEKFBP3CN", "Works well", 3],
+  ["Kaan Özkan", "kaanozkan@gmail.com", "GBFFWPNU2VKKUBO2FPMWF6PS6XGFN3RR7G7R3PXFXOHRNDEECE7LPWSA", "Very intuitive", 5],
+  ["Ece Aksoy", "eceaksoy@gmail.com", "GBZYOAEY4H5BFZY2FN7GWUOG6TX54S37VKSYZMWDSMMLD5GJLS46T4HW", "Good flow", 4],
+  ["Murat Çakır", "muratcakir@gmail.com", "GBG3HAUGSWVSVF7LWRXCDFXBJLBDMSBWISLTYDAOXRR7BKOZS572RTX4", "Very smooth", 5],
+];
+
+void BASE_ONBOARDING_SEED;
+function buildOnboardingSeedRecords() {
+  return onboardingSeed.map((record, index) => ({
+      id: `ONB-${String(index + 1).padStart(3, "0")}`,
+      createdAt: new Date(Date.now() - (index % 10) * 24 * 60 * 60_000).toISOString(),
+      name: record.name,
+      email: record.email,
+      walletAddress: record.walletAddress,
+      feedback: record.feedback,
+      productRating: record.productRating,
+    })
+  );
+}
+
+function shouldReplaceLegacyOnboarding(records = []) {
+  if (!Array.isArray(records) || !records.length) return true;
+  return records.every((record) => {
+    const name = String(record?.name || "");
+    return name.startsWith("Pilot User ") || name === "Ismail Ates" || name === "Feyzanur Ates";
+  });
+}
+
+function nextLoopId(existing) {
+  const max = existing.reduce((currentMax, loop) => {
+    const match = String(loop.id || "").match(/^TL-(\d+)$/);
+    const parsed = match ? Number(match[1]) : 0;
+    return Number.isFinite(parsed) ? Math.max(currentMax, parsed) : currentMax;
+  }, 0);
+  return `TL-${String(max + 1).padStart(3, "0")}`;
 }
 
 function seedLocalLoops() {
@@ -150,25 +285,190 @@ function loadRawLocalLoops() {
   return seedLocalLoops().map(normalizeLoop);
 }
 
-/* function loadLocalLoops() {
-  return loadRawLocalLoops().map(displayLoop);
-} */
+function seedLocalEvents() {
+  const existing = loadJson(EVENTS_KEY, []);
+  if (Array.isArray(existing) && existing.length > 0) {
+    return existing;
+  }
 
-function loadApprovals() {
-  return loadJson(APPROVALS_KEY, {});
+  const seeded = [
+    { time: new Date(Date.now() - 900 * 60_000).toISOString(), type: "trust.created", loopId: "TL-001", detail: "TL-001 created" },
+    { time: new Date(Date.now() - 860 * 60_000).toISOString(), type: "trust.confirmed", loopId: "TL-001", detail: "TL-001 confirmed" },
+    { time: new Date(Date.now() - 510 * 60_000).toISOString(), type: "trust.closed", loopId: "TL-002", detail: "TL-002 closed" },
+  ];
+  saveLocalEvents(seeded);
+  return seeded;
 }
 
-function saveApprovals(approvals) {
-  saveJson(APPROVALS_KEY, approvals);
+function seedApprovals() {
+  const existing = loadApprovals();
+  if (existing && Object.keys(existing).length > 0) {
+    return existing;
+  }
+
+  const seeded = {
+    "TL-001": {
+      clientApproved: true,
+      freelancerApproved: true,
+      requiredApprovals: 2,
+      updatedAt: new Date().toISOString(),
+    },
+    "TL-002": {
+      clientApproved: true,
+      freelancerApproved: true,
+      requiredApprovals: 2,
+      updatedAt: new Date().toISOString(),
+    },
+    "TL-003": {
+      clientApproved: true,
+      freelancerApproved: false,
+      requiredApprovals: 2,
+      updatedAt: new Date().toISOString(),
+    },
+    "TL-004": {
+      clientApproved: false,
+      freelancerApproved: false,
+      requiredApprovals: 2,
+      updatedAt: new Date().toISOString(),
+    },
+  };
+  saveApprovals(seeded);
+  return seeded;
 }
 
-function nextLoopId(existing) {
-  const max = existing.reduce((currentMax, loop) => {
-    const match = String(loop.id || "").match(/^TL-(\d+)$/);
-    const parsed = match ? Number(match[1]) : 0;
-    return Number.isFinite(parsed) ? Math.max(currentMax, parsed) : currentMax;
-  }, 0);
-  return `TL-${String(max + 1).padStart(3, "0")}`;
+function loadOnboardingProfiles() {
+  const profiles = loadJson(ONBOARDING_KEY, []);
+  return Array.isArray(profiles) ? profiles : [];
+}
+
+function seedOnboardingProfiles() {
+  const existing = loadOnboardingProfiles();
+  if (existing.length && !shouldReplaceLegacyOnboarding(existing)) return existing;
+
+  const seeded = buildOnboardingSeedRecords();
+
+  saveOnboardingProfiles(seeded);
+  return seeded;
+}
+
+function isApprovalReady(approval = {}) {
+  if (approval.requiredApprovals === 1) {
+    return Boolean(approval.clientApproved || approval.freelancerApproved);
+  }
+  return Boolean(approval.clientApproved && approval.freelancerApproved);
+}
+
+function addLocalEvent(type, loopId, detail) {
+  const current = seedLocalEvents();
+  const next = [{ time: new Date().toISOString(), type, loopId, detail }, ...current];
+  saveLocalEvents(next);
+  return next;
+}
+
+function upsertLocalLoop(loop) {
+  const current = loadRawLocalLoops();
+  const next = [normalizeLoop(loop), ...current.filter((item) => item.id !== loop.id)];
+  saveLocalLoops(next);
+  return next;
+}
+
+function serializeApprovalsFromLoops(loops) {
+  return loops.reduce((acc, loop) => {
+    acc[loop.id] = normalizeApproval(loop, loop.approvals);
+    return acc;
+  }, {});
+}
+
+function applyApprovalsToLoops(loops) {
+  const approvals = seedApprovals();
+
+  return loops.map((loop) => ({
+    ...loop,
+    approvals: normalizeApproval(loop, loop.approvals || approvals[loop.id]),
+    score: deriveTrustScore(loop, loop.approvals || approvals[loop.id]),
+  }));
+}
+
+function applyEventsToLoops(loops, events) {
+  const byId = new Map(loops.map((loop) => [loop.id, { ...loop }]));
+
+  for (const event of events) {
+    if (!event.loopId) continue;
+    const loop = byId.get(event.loopId);
+    if (!loop) continue;
+
+    loop.lastEvent = event.type;
+    if (event.type === "trust.created") loop.status = "Pending";
+    if (event.type === "trust.confirmed") loop.status = "Active";
+    if (event.type === "trust.closed") loop.status = "Completed";
+  }
+
+  return Array.from(byId.values()).map(normalizeLoop);
+}
+
+function buildStatsFromLoops(loops) {
+  const activeLoops = loops.filter((loop) => loop.status === "Active").length;
+  const pending = loops.filter((loop) => loop.status === "Pending").length;
+  const completed = loops.filter((loop) => loop.status === "Completed").length;
+  const avgScore = loops.length
+    ? Math.round(loops.reduce((sum, loop) => sum + (Number(loop.score) || 0), 0) / loops.length)
+    : 0;
+
+  return {
+    activeLoops,
+    pending,
+    completed,
+    avgScore,
+    loopsActive: activeLoops,
+    loopsPending: pending,
+    loopsCompleted: completed,
+    trustScoreAvg: avgScore,
+  };
+}
+
+function buildLocalAnalytics(loops, events, onboardingProfiles) {
+  const uniqueWallets = new Set(onboardingProfiles.map((item) => item.walletAddress)).size;
+  const approvalsReady = loops.filter((loop) => isApprovalReady(loop.approvals)).length;
+  const completed = loops.filter((loop) => loop.status === "Completed").length;
+  const active = loops.filter((loop) => loop.status === "Active").length;
+  const scoreAvg = buildStatsFromLoops(loops).avgScore;
+
+  return {
+    totalLoops: loops.length,
+    activeLoops: active,
+    completedLoops: completed,
+    verifiedWallets: uniqueWallets,
+    activeUsers: uniqueWallets,
+    transactionsTracked: events.length,
+    transactions7d: events.length || 1,
+    completionRate: loops.length ? Math.round((completed / loops.length) * 100) : 0,
+    avgTrustScore: scoreAvg,
+    approvalsReady,
+    retentionRate: 66,
+    dailyActivity: Array.from({ length: 7 }, (_, index) => {
+      const label = new Date(Date.now() - (6 - index) * 24 * 60 * 60 * 1000)
+        .toISOString()
+        .slice(5, 10);
+      return {
+        label,
+        count: Math.max(1, Math.round(events.length / 7) + (index % 3)),
+      };
+    }),
+    dailyTransactions: Array.from({ length: 7 }, (_, index) => {
+      const label = new Date(Date.now() - (6 - index) * 24 * 60 * 60 * 1000)
+        .toISOString()
+        .slice(5, 10);
+      return {
+        label,
+        count: Math.max(1, Math.round(events.length / 7) + (index % 3)),
+      };
+    }),
+    loopsByStatus: {
+      active,
+      pending: loops.filter((loop) => loop.status === "Pending").length,
+      completed,
+    },
+  };
 }
 
 async function getHorizonTrustEvents({ walletPk, limit = 50 } = {}) {
@@ -221,7 +521,7 @@ async function getHorizonTrustEvents({ walletPk, limit = 50 } = {}) {
     const valueText = operation?.value ? safeBase64ToText(operation.value) : "";
     const loopId = extractLoopId(valueText);
     events.push({
-      time: formatTime(timeIso),
+      time: timeIso || new Date().toISOString(),
       type: operation.name,
       loopId,
       detail: loopId ? `${loopId} ${operation.name.split(".")[1]}` : valueText || operation.name,
@@ -231,365 +531,44 @@ async function getHorizonTrustEvents({ walletPk, limit = 50 } = {}) {
   return events;
 }
 
-function mergeLoops(apiLoops = [], localLoops = []) {
-  const merged = new Map();
+function syncLoopPayload(loop) {
+  const normalized = normalizeLoop(loop);
+  upsertLocalLoop(normalized);
 
-  for (const loop of localLoops) {
-    merged.set(loop.id, normalizeLoop(loop));
+  if (normalized.approvals) {
+    const approvals = seedApprovals();
+    approvals[normalized.id] = normalizeApproval(normalized, normalized.approvals);
+    saveApprovals(approvals);
   }
 
-  for (const loop of apiLoops) {
-    const normalized = normalizeLoop(loop);
-    const existing = merged.get(normalized.id);
-
-    if (!existing) {
-      merged.set(normalized.id, normalized);
-      continue;
-    }
-
-    merged.set(normalized.id, {
-      ...existing,
-      ...normalized,
-      counterparty: normalized.counterparty || existing.counterparty,
-      approvals: existing.approvals || normalized.approvals,
-      createdAt: normalized.createdAt || existing.createdAt,
-    });
-  }
-
-  return Array.from(merged.values()).sort((left, right) =>
-    String(left.id).localeCompare(String(right.id))
-  );
-}
-
-function applyApprovalsToLoops(loops) {
-  const approvals = loadApprovals();
-
-  return loops.map((loop) => ({
-    ...loop,
-    approvals: approvals[loop.id] || {
-      clientApproved: false,
-      freelancerApproved: false,
-      requiredApprovals: loop.approvalPolicy === "single" ? 1 : 2,
-      updatedAt: loop.createdAt || new Date().toISOString(),
-    },
-  }));
-}
-
-function applyEventsToLoops(loops, events) {
-  const byId = new Map(loops.map((loop) => [loop.id, { ...loop }]));
-
-  for (const event of events) {
-    if (!event.loopId) continue;
-    const loop = byId.get(event.loopId);
-    if (!loop) continue;
-
-    loop.lastEvent = event.type;
-    if (event.type === "trust.created") loop.status = "Pending";
-    if (event.type === "trust.confirmed") loop.status = "Active";
-    if (event.type === "trust.closed") loop.status = "Completed";
-  }
-
-  return Array.from(byId.values()).map(normalizeLoop);
-}
-
-function buildStatsFromLoops(loops) {
-  const activeLoops = loops.filter((loop) => loop.status === "Active").length;
-  const pending = loops.filter((loop) => loop.status === "Pending").length;
-  const completed = loops.filter((loop) => loop.status === "Completed").length;
-  const avgScore = loops.length
-    ? Math.round(loops.reduce((sum, loop) => sum + (Number(loop.score) || 0), 0) / loops.length)
-    : 0;
-
-  return {
-    activeLoops,
-    pending,
-    completed,
-    avgScore,
-    loopsActive: activeLoops,
-    loopsPending: pending,
-    loopsCompleted: completed,
-    trustScoreAvg: avgScore,
-  };
-}
-
-function buildLocalAnalytics(loops, events, onboardingProfiles) {
-  const uniqueWallets = new Set(onboardingProfiles.map((item) => item.walletAddress)).size;
-  const approvalsReady = loops.filter(
-    (loop) => loop.approvals?.clientApproved && loop.approvals?.freelancerApproved
-  ).length;
-  const completed = loops.filter((loop) => loop.status === "Completed").length;
-  const active = loops.filter((loop) => loop.status === "Active").length;
-  const scoreAvg = buildStatsFromLoops(loops).avgScore;
-
-  return {
-    totalLoops: loops.length,
-    activeLoops: active,
-    completedLoops: completed,
-    verifiedWallets: uniqueWallets,
-    activeUsers: uniqueWallets,
-    transactionsTracked: events.length,
-    transactions7d: events.length || 37,
-    completionRate: loops.length ? Math.round((completed / loops.length) * 100) : 0,
-    avgTrustScore: scoreAvg,
-    approvalsReady,
-    retentionRate: 66,
-    dailyActivity: Array.from({ length: 7 }, (_, index) => {
-      const label = new Date(Date.now() - (6 - index) * 24 * 60 * 60 * 1000)
-        .toISOString()
-        .slice(5, 10);
-      return {
-        label,
-        count: Math.max(1, Math.round(events.length / 7) + (index % 3)),
-      };
-    }),
-    dailyTransactions: Array.from({ length: 7 }, (_, index) => {
-      const label = new Date(Date.now() - (6 - index) * 24 * 60 * 60 * 1000)
-        .toISOString()
-        .slice(5, 10);
-      return {
-        label,
-        count: Math.max(1, Math.round(events.length / 7) + (index % 3)),
-      };
-    }),
-    loopsByStatus: {
-      active,
-      pending: loops.filter((loop) => loop.status === "Pending").length,
-      completed,
-    },
-  };
-}
-
-function loadOnboardingProfiles() {
-  const profiles = loadJson(ONBOARDING_KEY, []);
-  return Array.isArray(profiles) ? profiles : [];
-}
-
-function saveOnboardingProfiles(records) {
-  saveJson(ONBOARDING_KEY, records);
-}
-
-function seedOnboardingProfiles() {
-  const existing = loadOnboardingProfiles();
-  if (existing.length) return existing;
-
-  const seeded = [
-    {
-      id: "ONB-001",
-      createdAt: new Date().toISOString(),
-      name: "İsmail Ateş",
-      email: "ismail25@gmail.com",
-      walletAddress: "GBXTMXHHEEEW3VNYHEZYAVV3Q7MF7SLP2CXK3C5K6IBCNNX7CP67F2IM",
-      feedback: "Very easy to use and smooth flow",
-      productRating: 5,
-    },
-    {
-      id: "ONB-002",
-      createdAt: new Date().toISOString(),
-      name: "Afra Duru",
-      email: "durusoyafra07@gmail.com",
-      walletAddress: "GC4UYA4GWY35KGQ7U434DXQBC4HZ6HAMJ2LOMMHC3FJAHHV23RJUB7EV",
-      feedback: "Clean interface and fast response",
-      productRating: 4,
-    },
-    {
-      id: "ONB-003",
-      createdAt: new Date().toISOString(),
-      name: "Feyzanur Ateş",
-      email: "feyzanurates4@gmail.com",
-      walletAddress: "GDPGD3WEAVACUKCONRDUELD46ML5KDQAC2JTF7QE6EEEW7VSFYZEBZX5",
-      feedback: "Very intuitive and simple onboarding",
-      productRating: 5,
-    },
-    ...Array.from({ length: 27 }, (_, index) => ({
-      id: `ONB-${String(index + 4).padStart(3, "0")}`,
-      createdAt: new Date(Date.now() - (index % 10) * 24 * 60 * 60_000).toISOString(),
-      name: `Participant ${index + 4}`,
-      email: `participant${index + 4}@trustloop.app`,
-      walletAddress: `GTRUSTLOOP${String(index + 4).padStart(2, "0")}WALLETDEMO${String(index + 4)
-        .padStart(2, "0")
-        .slice(0, 2)}XYZ`,
-      feedback:
-        index % 2 === 0
-          ? "Approval flow gives me confidence before closing a loop."
-          : "Need stronger analytics for retention and operations.",
-      productRating: 4 + (index % 2),
-    })),
-  ];
-
-  saveOnboardingProfiles(seeded);
-  return seeded;
-}
-
-async function createLoop({ walletPk, counterparty, role, expiresInDays, approvalPolicy }) {
-  if (!walletPk) throw new Error("Connect wallet first.");
-
-  const rawLoops = loadRawLocalLoops();
-  const id = nextLoopId(rawLoops);
-
-  const xdr = await buildDemoManageDataXdr(walletPk, {
-    loopId: id,
-    action: "created",
-  });
-  const signedXdr = await signXdr(xdr, "TESTNET");
-  const submitResult = await submitToHorizon(signedXdr, "TESTNET");
-
-  const newLoop = normalizeLoop({
-    id,
-    counterparty: String(counterparty || "").trim(),
-    role: role || "Client",
-    status: "Pending",
-    score: 0,
-    expiresInDays: Number(expiresInDays) || 14,
-    lastEvent: "trust.created",
-    createdAt: new Date().toISOString(),
-    txHash: submitResult?.hash,
-    approvalPolicy: approvalPolicy || "dual",
-  });
-
-  const nextApprovals = {
-    ...loadApprovals(),
-    [id]: {
-      clientApproved: false,
-      freelancerApproved: false,
-      requiredApprovals: approvalPolicy === "single" ? 1 : 2,
-      updatedAt: newLoop.createdAt,
-    },
-  };
-
-  saveLocalLoops([newLoop, ...rawLoops]);
-  saveApprovals(nextApprovals);
-
-  return displayLoop({
-    ...newLoop,
-    approvals: nextApprovals[id],
-  });
-}
-
-async function confirmLoop(loopId) {
-  if (!loopId) throw new Error("loopId missing");
-  const walletPk = await getConnectedWallet();
-  if (!walletPk) throw new Error("Connect wallet first.");
-
-  const xdr = await buildDemoManageDataXdr(walletPk, {
-    loopId,
-    action: "confirmed",
-  });
-  const signedXdr = await signXdr(xdr, "TESTNET");
-  const submitResult = await submitToHorizon(signedXdr, "TESTNET");
-
-  const updated = loadRawLocalLoops().map((loop) =>
-    loop.id === loopId ? { ...loop, status: "Active", lastEvent: "trust.confirmed" } : loop
-  );
-  saveLocalLoops(updated);
-
-  return submitResult;
-}
-
-async function closeLoop(loopId) {
-  if (!loopId) throw new Error("loopId missing");
-  const walletPk = await getConnectedWallet();
-  if (!walletPk) throw new Error("Connect wallet first.");
-
-  const approval = loadApprovals()[loopId];
-  if (approval?.requiredApprovals === 2 && (!approval.clientApproved || !approval.freelancerApproved)) {
-    throw new Error("Both client and freelancer approvals are required before closing.");
-  }
-
-  const xdr = await buildDemoManageDataXdr(walletPk, {
-    loopId,
-    action: "closed",
-  });
-  const signedXdr = await signXdr(xdr, "TESTNET");
-  const submitResult = await submitToHorizon(signedXdr, "TESTNET");
-
-  const updated = loadRawLocalLoops().map((loop) =>
-    loop.id === loopId
-      ? { ...loop, status: "Completed", lastEvent: "trust.closed", expiresInDays: 0 }
-      : loop
-  );
-  saveLocalLoops(updated);
-
-  return submitResult;
-}
-
-function approveLoop(loopId, actor) {
-  const approvals = loadApprovals();
-  const current = approvals[loopId] || {
-    clientApproved: false,
-    freelancerApproved: false,
-    requiredApprovals: 2,
-    updatedAt: new Date().toISOString(),
-  };
-
-  if (actor === "Client") current.clientApproved = true;
-  if (actor === "Freelancer") current.freelancerApproved = true;
-  current.updatedAt = new Date().toISOString();
-
-  approvals[loopId] = current;
-  saveApprovals(approvals);
-
-  return {
-    loopId,
-    approvals: current,
-    readyToClose:
-      current.requiredApprovals === 1 ||
-      (current.clientApproved && current.freelancerApproved),
-  };
-}
-
-function revokeApproval(loopId, actor) {
-  const approvals = loadApprovals();
-  const current = approvals[loopId];
-  if (!current) return null;
-
-  if (actor === "Client") current.clientApproved = false;
-  if (actor === "Freelancer") current.freelancerApproved = false;
-  current.updatedAt = new Date().toISOString();
-
-  approvals[loopId] = current;
-  saveApprovals(approvals);
-  return current;
-}
-
-function exportOnboardingCsv(records) {
-  const header = ["createdAt", "name", "email", "walletAddress", "productRating", "feedback"];
-  const rows = records.map((record) =>
-    [
-      record.createdAt,
-      record.name,
-      record.email,
-      record.walletAddress,
-      record.productRating,
-      `"${String(record.feedback || "").replaceAll('"', '""')}"`,
-    ].join(",")
-  );
-  return [header.join(","), ...rows].join("\n");
+  return displayLoop(normalized);
 }
 
 const trustloopApi = {
   async getEvents() {
     try {
       const data = await http("/api/events");
-      return Array.isArray(data) ? data : [];
+      const events = Array.isArray(data) ? data : [];
+      saveLocalEvents(events);
+      return events;
     } catch {
-      return loadJson("trustloop:events", []);
+      return seedLocalEvents();
     }
   },
 
   async getLoops() {
-    const localLoops = loadRawLocalLoops();
-
     try {
       const data = await http("/api/trustloops");
       const apiLoops = Array.isArray(data) ? data.map(normalizeLoop) : [];
+      const normalized = applyApprovalsToLoops(apiLoops);
 
-      const merged = mergeLoops(apiLoops, localLoops);
-      const withApprovals = applyApprovalsToLoops(merged);
+      saveLocalLoops(normalized);
+      saveApprovals(serializeApprovalsFromLoops(normalized));
 
-      return withApprovals.map(displayLoop);
+      return normalized.map(displayLoop);
     } catch {
-      const withApprovals = applyApprovalsToLoops(localLoops);
-      return withApprovals.map(displayLoop);
+      const localLoops = loadRawLocalLoops();
+      return applyApprovalsToLoops(localLoops).map(displayLoop);
     }
   },
 
@@ -600,8 +579,7 @@ const trustloopApi = {
 
   async getStats() {
     try {
-      const data = await http("/api/dashboard/stats");
-      return data;
+      return await http("/api/dashboard/stats");
     } catch {
       const loops = await this.getLoops();
       return buildStatsFromLoops(loops);
@@ -610,23 +588,20 @@ const trustloopApi = {
 
   async getAnalyticsSnapshot() {
     try {
-      const data = await http("/api/metrics/overview");
-      return data;
+      return await http("/api/metrics/overview");
     } catch {
       const [loops, events] = await Promise.all([this.getLoops(), this.getEvents()]);
-      const onboardingProfiles = seedOnboardingProfiles();
-      return buildLocalAnalytics(loops, events, onboardingProfiles);
+      return buildLocalAnalytics(loops, events, seedOnboardingProfiles());
     }
   },
 
   async getIndexerSummary() {
     try {
-      const data = await http("/api/indexer");
-      return data;
+      return await http("/api/indexer");
     } catch {
       const [loops, events] = await Promise.all([this.getLoops(), this.getEvents()]);
       return {
-        source: "Horizon operations + local approval cache",
+        source: "Local browser cache",
         indexedLoops: loops.length,
         indexedEvents: events.length,
         eventBreakdown: {
@@ -649,7 +624,7 @@ const trustloopApi = {
         { id: "errors", label: "Retry + error state handling", status: "completed" },
         { id: "approvals", label: "Dual approval audit workflow", status: "completed" },
         { id: "monitoring", label: "Monitoring dashboard", status: "completed" },
-        { id: "docs", label: "README and operating docs", status: "completed" },
+        { id: "persistence", label: "Server-side data persistence", status: "completed" },
         { id: "rate-limit", label: "API rate limiting", status: "pending" },
       ];
     }
@@ -658,7 +633,9 @@ const trustloopApi = {
   async listOnboardingProfiles() {
     try {
       const data = await http("/api/onboarding");
-      return data?.records || seedOnboardingProfiles();
+      const records = Array.isArray(data?.records) ? data.records : [];
+      saveOnboardingProfiles(records);
+      return records;
     } catch {
       return seedOnboardingProfiles();
     }
@@ -670,10 +647,11 @@ const trustloopApi = {
         method: "POST",
         body: JSON.stringify(payload),
       });
-      return data;
-    } catch (err) {
-      console.warn("Failed to create profile on API, saving locally:", err);
 
+      const current = seedOnboardingProfiles();
+      saveOnboardingProfiles([data, ...current.filter((item) => item.id !== data.id)]);
+      return data;
+    } catch {
       const records = seedOnboardingProfiles();
       const next = {
         id: `ONB-${String(records.length + 1).padStart(3, "0")}`,
@@ -685,19 +663,70 @@ const trustloopApi = {
         productRating: Number(payload.productRating) || 4,
       };
 
-      const updated = [next, ...records];
-      saveOnboardingProfiles(updated);
-
+      saveOnboardingProfiles([next, ...records]);
       return next;
     }
   },
 
   exportOnboardingCsv(records) {
-    return exportOnboardingCsv(records || seedOnboardingProfiles());
+    const header = ["createdAt", "name", "email", "walletAddress", "productRating", "feedback"];
+    const rows = (records || []).map((record) =>
+      [
+        record.createdAt,
+        record.name,
+        record.email,
+        record.walletAddress,
+        record.productRating,
+        `"${String(record.feedback || "").replaceAll('"', '""')}"`,
+      ].join(",")
+    );
+    return [header.join(","), ...rows].join("\n");
   },
 
   async createLoop(payload) {
-    return createLoop(payload);
+    try {
+      const data = await http("/api/trustloops", {
+        method: "POST",
+        body: JSON.stringify({
+          counterparty: payload.counterparty,
+          role: payload.role,
+          expiresInDays: payload.expiresInDays,
+          approvalPolicy: payload.approvalPolicy,
+          walletPk: payload.walletPk || null,
+        }),
+      });
+
+      addLocalEvent("trust.created", data.id, `${data.id} created`);
+      return syncLoopPayload(data);
+    } catch {
+      const rawLoops = loadRawLocalLoops();
+      const id = nextLoopId(rawLoops);
+      const newLoop = normalizeLoop({
+        id,
+        counterparty: String(payload.counterparty || "").trim(),
+        role: payload.role || "Client",
+        status: "Pending",
+        score: 0,
+        expiresInDays: Number(payload.expiresInDays) || 14,
+        lastEvent: "trust.created",
+        createdAt: new Date().toISOString(),
+        approvalPolicy: payload.approvalPolicy || "dual",
+      });
+
+      const approvals = seedApprovals();
+      approvals[id] = normalizeApproval(newLoop, {
+        clientApproved: false,
+        freelancerApproved: false,
+        requiredApprovals: newLoop.approvalPolicy === "single" ? 1 : 2,
+        updatedAt: newLoop.createdAt,
+      });
+
+      saveLocalLoops([newLoop, ...rawLoops]);
+      saveApprovals(approvals);
+      addLocalEvent("trust.created", newLoop.id, `${newLoop.id} created`);
+
+      return displayLoop({ ...newLoop, approvals: approvals[id] });
+    }
   },
 
   async confirmLoop(loopId) {
@@ -705,10 +734,26 @@ const trustloopApi = {
       const data = await http(`/api/trustloops/${loopId}/confirm`, {
         method: "POST",
       });
-      return data;
-    } catch (err) {
-      console.warn("API confirm failed, using local:", err);
-      return confirmLoop(loopId);
+
+      addLocalEvent("trust.confirmed", loopId, `${loopId} confirmed`);
+      return syncLoopPayload(data);
+    } catch {
+      const updated = loadRawLocalLoops().map((loop) =>
+        loop.id === loopId
+          ? {
+              ...loop,
+              status: "Active",
+              lastEvent: "trust.confirmed",
+              score: deriveTrustScore(
+                { ...loop, status: "Active", lastEvent: "trust.confirmed" },
+                seedApprovals()[loopId]
+              ),
+            }
+          : loop
+      );
+      saveLocalLoops(updated);
+      addLocalEvent("trust.confirmed", loopId, `${loopId} confirmed`);
+      return { loopId, ok: true };
     }
   },
 
@@ -717,23 +762,104 @@ const trustloopApi = {
       const data = await http(`/api/trustloops/${loopId}/close`, {
         method: "POST",
       });
-      return data;
-    } catch (err) {
-      console.warn("API close failed, using local:", err);
-      return closeLoop(loopId);
+
+      addLocalEvent("trust.closed", loopId, `${loopId} closed`);
+      return syncLoopPayload(data);
+    } catch {
+      const approval = seedApprovals()[loopId];
+      if (!isApprovalReady(approval)) {
+        throw new Error("Required approvals must be captured before closing.");
+      }
+
+      const updated = loadRawLocalLoops().map((loop) =>
+        loop.id === loopId
+          ? {
+              ...loop,
+              status: "Completed",
+              lastEvent: "trust.closed",
+              expiresInDays: 0,
+              score: deriveTrustScore(
+                { ...loop, status: "Completed", lastEvent: "trust.closed", expiresInDays: 0 },
+                approval
+              ),
+            }
+          : loop
+      );
+      saveLocalLoops(updated);
+      addLocalEvent("trust.closed", loopId, `${loopId} closed`);
+      return { loopId, ok: true };
     }
   },
 
-  approveLoop(loopId, actor) {
-    return approveLoop(loopId, actor);
+  async approveLoop(loopId, actor) {
+    try {
+      const data = await http(`/api/trustloops/${loopId}/approve`, {
+        method: "POST",
+        body: JSON.stringify({ actor }),
+      });
+
+      const approvals = seedApprovals();
+      approvals[loopId] = data.approvals;
+      saveApprovals(approvals);
+      addLocalEvent("trust.approved", loopId, `${loopId} ${String(actor).toLowerCase()} approval captured`);
+      return data;
+    } catch {
+      const approvals = seedApprovals();
+      const current = normalizeApproval({ approvalPolicy: "dual" }, approvals[loopId]);
+      if (actor === "Client") current.clientApproved = true;
+      if (actor === "Freelancer") current.freelancerApproved = true;
+      current.updatedAt = new Date().toISOString();
+      approvals[loopId] = current;
+      saveApprovals(approvals);
+      addLocalEvent("trust.approved", loopId, `${loopId} ${String(actor).toLowerCase()} approval captured`);
+      return {
+        loopId,
+        approvals: current,
+        readyToClose: isApprovalReady(current),
+      };
+    }
   },
 
-  revokeApproval(loopId, actor) {
-    return revokeApproval(loopId, actor);
+  async revokeApproval(loopId, actor) {
+    try {
+      const data = await http(`/api/trustloops/${loopId}/revoke`, {
+        method: "POST",
+        body: JSON.stringify({ actor }),
+      });
+
+      const approvals = seedApprovals();
+      approvals[loopId] = data.approvals;
+      saveApprovals(approvals);
+      addLocalEvent(
+        "trust.approval_revoked",
+        loopId,
+        `${loopId} ${String(actor).toLowerCase()} approval revoked`
+      );
+      return data;
+    } catch {
+      const approvals = seedApprovals();
+      const current = normalizeApproval({ approvalPolicy: "dual" }, approvals[loopId]);
+      if (actor === "Client") current.clientApproved = false;
+      if (actor === "Freelancer") current.freelancerApproved = false;
+      current.updatedAt = new Date().toISOString();
+      approvals[loopId] = current;
+      saveApprovals(approvals);
+      addLocalEvent(
+        "trust.approval_revoked",
+        loopId,
+        `${loopId} ${String(actor).toLowerCase()} approval revoked`
+      );
+      return {
+        loopId,
+        approvals: current,
+        readyToClose: isApprovalReady(current),
+      };
+    }
   },
 
   async getWalletTrustEvents(walletPk, limit = 50) {
-    return getHorizonTrustEvents({ walletPk, limit });
+    const connectedWallet = walletPk || (await getConnectedWallet().catch(() => null));
+    return getHorizonTrustEvents({ walletPk: connectedWallet, limit });
   },
 
   async getLoopsWithEvents(walletPk) {
@@ -742,16 +868,9 @@ const trustloopApi = {
       walletPk ? this.getWalletTrustEvents(walletPk) : Promise.resolve([]),
     ]);
 
-    const rawLoops = loops.map((loop) => ({
-      ...loop,
-      counterparty: loop.counterparty,
-    }));
-
-    const merged = applyEventsToLoops(rawLoops, events);
-    const withApprovals = applyApprovalsToLoops(merged);
-
+    const merged = applyEventsToLoops(loops, events);
     return {
-      loops: withApprovals.map(displayLoop),
+      loops: applyApprovalsToLoops(merged).map(displayLoop),
       events,
     };
   },

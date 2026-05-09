@@ -1,60 +1,44 @@
-# Google Form Şablonu - Kopyala-Yapıştır Hazır
+# Google Form Setup Guide
 
-## Hemen Oluştur
+Use this document to create the real onboarding form required by the Level 6 brief.
 
-1. [Google Forms](https://forms.google.com) aç
-2. Aşağıdaki metni **kopyala**
-3. Forms'ta **"Boş form"** seç > **"İmport questions"** ile yapıştır veya manuel ekle
-4. **Responses > Link** al (herkese açık yap)
-5. README.md'ye **form linkini** ekle
-6. 30+ yanıt topla > **Responses > Export CSV/Google Sheet** > README'ye link ekle
+## Recommended Form Title
 
-## Form Başlığı (English)
-**TrustLoop Community Feedback - Join 30+ Users**
+`TrustLoop Community Feedback`
 
-## Form Description (English)
-Thank you for testing TrustLoop! 🙏
+## Required Questions
 
-Please help us with your feedback and information to ensure production readiness for Level 6.
-Your wallet address, contact information, and product feedback are invaluable.
+1. Full name
+2. Email address
+3. Stellar wallet address
+4. Product usage notes
+5. Product rating from 1 to 5
+6. What did you like most?
+7. What should improve next?
 
-⏱️ Time: 2-3 minutes
+## Form Description
 
-## Sorular (Required işaretli)
+Use a short description like:
 
-1. **Tam Ad Soyad**  
-   Kısa cevap | Required: Evet
+> Thank you for testing TrustLoop. This form collects your wallet address, contact details, and product feedback so we can improve the product and document Level 6 production-readiness.
 
-2. **Email Adresi**  
-   Kısa cevap | Required: Evet
+## Export Requirement
 
-3. **Stellar Wallet Adresi (Testnet)**  
-   Kısa cevap | Required: Evet
+After responses are collected:
 
-4. **TrustLoop'u nasıl kullandınız?**  
-   Paragraf | Required: Evet
+1. open the Google Form responses tab
+2. create the linked spreadsheet
+3. export the spreadsheet as Excel if needed
+4. place the public link in `README.md`
 
-5. **Ürün deneyiminizi puanlayın (1-5)**  
-   Çoktan seçmeli: 1,2,3,4,5 | Required: Evet
+## Repository Evidence
 
-6. **En çok neyi beğendiniz?**  
-   Paragraf | Required: Hayır
+Demo export artifacts already bundled in this repository:
 
-7. **Gelecekte ne geliştirilsin?**  
-   Paragraf | Required: Hayır
+- [docs/onboarding-template.csv](./onboarding-template.csv)
+- [docs/onboarding-responses.xlsx](./onboarding-responses.xlsx)
 
-8. **Gerçek işbirliğinde kullanır mısınız?**  
-   Çoktan seçmeli: Evet / Hayır / Belki | Required: Evet
+## README Fields To Fill
 
-9. **Opsiyonel: X/Telegram link**  
-   Kısa cevap | Required: Hayır
-
-## Form Linki (LIVE)
-```
-Google Form: https://docs.google.com/forms/d/e/1FAIpQLSfEhQWE5--ySph6w8lnHzsfSK8LwJOvbyRZwb9QsFiUb9ydDg/viewform
-Exported CSV: https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID (Responses haftada update edilecek)
-```
-
-## Örnek Export
-[docs/onboarding-template.csv](./onboarding-template.csv) (30+ demo satır hazır)
-
+- real form link: `ADD_REAL_GOOGLE_FORM_URL`
+- real response sheet link: `ADD_REAL_RESPONSE_SHEET_URL`

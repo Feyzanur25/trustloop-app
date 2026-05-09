@@ -1,489 +1,269 @@
 # TrustLoop
 
-> On-chain trust signals derived from confirmations & events
+TrustLoop is a Stellar Testnet workflow application for creating, confirming, approving, monitoring, and closing trust loops between two parties.
 
-TrustLoop is a production-ready Stellar Testnet workflow application for creating, confirming, monitoring, approving, and closing collaboration loops between clients and freelancers.
+The repository is structured to satisfy the technical side of the Level 6 / Black Belt requirements:
 
-**Status:** 🚀 **Production Ready** | Features: Dashboard, Analytics, Monitoring, Multi-party Approval, Real-time Events
+- live metrics dashboard
+- monitoring dashboard
+- security checklist
+- indexed event visibility
+- onboarding registry with export
+- advanced feature: multi-party approval before closure
+- production-oriented API with persistence, validation, logging, and rate limiting
 
-## 🎯 Quick Start
+## Current Status
 
-### Local Development
+Implemented in this repository:
 
-```bash
-# Prerequisites: Node.js 18+, MongoDB
+- React + Vite frontend
+- Express API backend
+- persistent backend storage via JSON-backed server store
+- 30+ seeded onboarding users
+- CSV export and bundled XLSX evidence file
+- metrics, monitoring, and security dashboards
+- multi-party approval workflow
+- data indexing visibility endpoint and dashboard
 
-# 1. Clone and install
-git clone https://github.com/yourusername/trustloop.git
-cd trustloop
+External evidence still required before final submission:
 
-# 2. Start with Docker (includes MongoDB)
-docker-compose up
+- public GitHub repository URL
+- public frontend deployment URL
+- public backend deployment URL
+- real Google Form link
+- real exported Google Sheet / Excel link
+- real community post link
+- real screenshot links
+- real public commit links in the improvement section
+- actual commit count in Git history
 
-# Or manually:
-# Terminal 1: MongoDB (optional, falls back to in-memory)
-docker run -d -p 27017:27017 mongo:7.0
+## Quick Start
 
-# Terminal 2: API
+### Local development
+
+```powershell
+# API
 cd api
 npm install
-node src/index.js
+npm run dev
 
-# Terminal 3: Frontend
+# Frontend
 cd web
 npm install
 npm run dev
 ```
 
-**Access:**
-- 🌐 Frontend: http://localhost:5174
-- 🔌 API: http://localhost:4000
-- 📊 Dashboard: http://localhost:5174/metrics
-- 📡 Monitoring: http://localhost:5174/monitoring
+Local URLs:
 
-## 🚀 Production Deployment
+- frontend: `http://localhost:5173`
+- API: `http://localhost:4000`
+- metrics dashboard: `http://localhost:5173/metrics`
+- monitoring dashboard: `http://localhost:5173/monitoring`
+- onboarding hub: `http://localhost:5173/onboarding`
 
-See [**DEPLOYMENT.md**](./docs/DEPLOYMENT.md) for detailed deployment guide.
+### Environment files
 
-**Deployment Options:**
-- Docker + Heroku
-- Vercel (Frontend) + Railway/Render (Backend)
-- Railway (Full Stack)
-- AWS / DigitalOcean
-
-## ✨ Features
-
-- **Dashboard** - Real-time trust loop overview with search & filters
-- **Analytics Charts** - Score distribution, status breakdown, daily metrics
-- **Activity Timeline** - On-chain event history with timestamps
-- **Table Sorting** - Sort loops by any column (ID, score, expiration, etc.)
-- **Real-time Updates** - Auto-refresh every 30 seconds
-- **Notification System** - Event notifications with badge counter
-- **Wallet Integration** - Freighter wallet support & balance display
-- **Metrics Dashboard** - Usage, completionrate, trust scores
-- **Monitoring** - Uptime, error rates, service status
-- **Onboarding Hub** - User registry with CSV export
-- **Multi-party Approval** - Dual-signature workflow before loop closure
-- **Error Handling** - Comprehensive error messages & recovery suggestions
-- **Skeleton Loading** - Smooth loading states with shimmer animations
-
-##  📦 Architecture
-
-```
-trustloop/
-├── api/                    # Express.js backend
-│   ├── src/
-│   │   ├── index.js       # Main server
-│   │   ├── db.js          # MongoDB connection
-│   │   ├── middleware.js  # Error handling, logging
-│   │   └── models/        # Mongoose schemas
-│   ├── Dockerfile
-│   ├── package.json
-│   └── Procfile           # Heroku deployment
-│
-├── web/                    # React + Vite frontend
-│   ├── src/
-│   │   ├── pages/         # Dashboard, Metrics, etc.
-│   │   ├── services/      # API, wallet, blockchain
-│   │   ├── ui/            # Components
-│   │   └── lib/           # Config
-│   ├── package.json
-│   ├── vercel.json        # Vercel config
-│   └── vite.config.js
-│
-├── docs/                   # Documentation
-│   ├── DEPLOYMENT.md      # 👈 Start here for deployment
-│   ├── security-checklist.md
-│   └── user-guide.md
-│
-└── docker-compose.yml     # Local development
-```
-
-## 🔧 Tech Stack
-
-**Backend:**
-- Express.js
-- Mongoose + MongoDB
-- Stellar SDK
-- Node.js 18+
-
-**Frontend:**
-- React 19
-- Vite
-- Tailwind CSS
-- Lucide Icons
-- Recharts
-
-**Deployment:**
-- Docker
-- GitHub Actions (CI/CD)
-- Vercel / Heroku / Railway
-
-## 🌍 Stellar Integration
-
-- **Network:** Testnet
-- **Horizon:** https://horizon-testnet.stellar.org
-- **Wallet:** Freighter
-- **Transactions:** Manage data operations for trust events
-
-## 📊 API Reference
-
-### Core Endpoints
-
-```bash
-# Health check
-GET /api/health
-
-# Trust loops
-GET    /api/trustloops              # List all loops
-GET    /api/trustloops/:id          # Get loop detail
-POST   /api/trustloops              # Create loop
-POST   /api/trustloops/:id/confirm  # Confirm (Pending → Active)
-POST   /api/trustloops/:id/close    # Close (Active → Completed)
-
-# Events
-GET /api/events                     # Indexed blockchain events
-
-# Analytics
-GET /api/dashboard/stats            # Quick stats
-GET /api/metrics/overview           # Detailed metrics
-
-# Monitoring
-GET /api/monitoring                 # System health
-GET /api/indexer                    # Indexer status
-GET /api/security-checklist         # Security status
-```
-
-## 🔐 Security
-
-- ✅ CORS configured
-- ✅ Input validation
-- ✅ Error handling & logging
-- ✅ MongoDB driver with schema validation
-- ✅ Wallet verification
-- ✅ Dual-approval workflow
-- ⏳ API rate limiting (planned)
-- ⏳ HTTPS/SSL enforced (on deploy)
-
-See [security-checklist.md](./docs/security-checklist.md)
-
-## ⚡ Performance
-
-- Skeleton loading screens
-- Fade-in animations
-- Database query optimization
-- API response caching (via frontend)
-- CDN-ready (Vercel, Cloudflare)
-
-## 🐛 Error Handling
-
-- Comprehensive error middleware
-- User-friendly error messages
-- Network error recovery
-- Fallback to in-memory when MongoDB unavailable
-- Server timestamps for debugging
-
-## 👥 User Onboarding
-
-- CSV export of verified wallets
-- User registry & feedback collection
-- Product rating tracking
-- Demographics & retention metrics
-
-## 📈 Metrics & Analytics
-
-- Active loops count
-- Completion rate %
-- Average trust score
-- Retention rate
-- Daily transaction volume
-- Event breakdown by type
-
-## 🔄 Advanced Workflow
-
-**Multi-party Approval System:**
-
-1. Create loop (Pending)
-2. Confirm loop (Active)
-3. **Both parties approve**
-4. Close loop (Completed)
-
-Prevents premature closure without consent.
-
-##  📝 Documentation
-  Implemented via this README and docs folder
-
-- `1 community contribution`
-  Add your final post link in the section below
-
-- `1 advanced feature implemented`
-  Implemented: multi-party approval workflow
-
-- `Minimum 15+ meaningful commits`
-  Must be satisfied in your public Git history before final submission
-
-- `Deliverable: Production-ready application`
-  Current repo includes metrics, monitoring, onboarding, security checklist, and advanced workflow support. Final production evidence still requires deployment and real user proof.
+- API example: [api/.env.example](./api/.env.example)
+- web example: [web/.env.example](./web/.env.example)
 
 ## Product Features
 
-- Dashboard with trust loop lifecycle overview
-- Searchable trust loop table
-- Event history view
-- Metrics dashboard for usage and throughput
-- Monitoring dashboard for uptime, alerts, service state, and security readiness
-- Onboarding hub with exportable user records
-- Multi-party approval workflow on loop detail pages
+- dashboard with trust loop overview, search, sorting, and actions
+- loop detail page with approval state and closure readiness
+- event feed with indexed trust activity
+- metrics dashboard for usage, throughput, and score health
+- monitoring dashboard for uptime, latency, alerts, and system visibility
+- onboarding hub for collecting user details and exporting records
+- advanced multi-party approval workflow before loop closure
 
-## Key Routes
+## Tech Stack
 
-- `/`
-  Main dashboard
+### Frontend
 
-- `/events`
-  Indexed event feed
+- React 19
+- Vite
+- Tailwind CSS
+- Recharts
+- Lucide React
 
-- `/metrics`
-  Metrics dashboard
+### Backend
 
-- `/monitoring`
-  Monitoring, security, and indexer visibility
+- Node.js
+- Express
+- JSON-backed persistent store in `api/data/store.json`
+- request logging and rate limiting middleware
 
-- `/onboarding`
-  User onboarding registry and CSV export
+### Stellar
 
-- `/loops/:id`
-  Loop detail page with advanced approval workflow
+- Stellar Testnet
+- Horizon testnet endpoint
+- Freighter wallet integration
+
+## Application Routes
+
+- `/` dashboard
+- `/events` indexed trust loop events
+- `/metrics` metrics dashboard
+- `/monitoring` monitoring and security view
+- `/onboarding` onboarding registry and export
+- `/loops/:id` loop detail and approval workflow
 
 ## Advanced Feature
 
-### Multi-signature / Multi-party Approval Workflow
+### Multi-party approval workflow
 
-Before a loop can be closed:
+TrustLoop implements a multi-signature style approval flow at the application level:
 
-- Client approval can be captured
-- Freelancer approval can be captured
-- Close readiness is visible in the loop detail page
-- Close action remains blocked until required approvals are completed
+1. a loop is created in `Pending`
+2. it is confirmed into `Active`
+3. approvals are captured from the required parties
+4. closure remains blocked until approval requirements are satisfied
 
-### Proof of Implementation
+Proof:
 
-- UI: [web/src/pages/LoopDetail.jsx](/c:/Users/FEYZANUR/Desktop/trustloop-app/web/src/pages/LoopDetail.jsx)
-- Data/service logic: [web/src/services/trustloopApi.js](/c:/Users/FEYZANUR/Desktop/trustloop-app/web/src/services/trustloopApi.js)
+- UI: [web/src/pages/LoopDetail.jsx](./web/src/pages/LoopDetail.jsx)
+- service logic: [web/src/services/trustloopApi.js](./web/src/services/trustloopApi.js)
+- API logic: [api/src/index.js](./api/src/index.js)
 
-## Metrics Dashboard
+## Level 6 Requirement Matrix
 
-- Route: `/metrics`
-- Screenshot: `ADD_SCREENSHOT_OR_IMAGE_LINK`
-- Source file: [web/src/pages/Metrics.jsx](/c:/Users/FEYZANUR/Desktop/trustloop-app/web/src/pages/Metrics.jsx)
+| Requirement | Repository Status | Evidence |
+| --- | --- | --- |
+| 30+ verified active users | Seeded/demo-ready | [docs/onboarding-template.csv](./docs/onboarding-template.csv), [docs/onboarding-responses.xlsx](./docs/onboarding-responses.xlsx) |
+| Metrics dashboard live | Implemented | route `/metrics`, [docs/user-guide.md](./docs/user-guide.md) |
+| Security checklist completed | Implemented | [docs/security-checklist.md](./docs/security-checklist.md) |
+| Monitoring active | Implemented | route `/monitoring`, [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md) |
+| Data indexing implemented | Implemented | `/api/indexer`, [docs/API.md](./docs/API.md) |
+| Full documentation | Implemented | this README + `docs/` |
+| 1 community contribution | External proof required | add final public link |
+| 1 advanced feature implemented | Implemented | multi-party approval workflow |
+| 15+ meaningful commits | External Git history required | check public Git history |
+| 30+ meaningful commits | External Git history required | target this higher threshold because the brief is inconsistent |
+| Production-ready application | Technically prepared | deployment + public evidence still needed |
 
-What it shows:
+## Required README Submission Fields
 
-- active users
-- verified wallets
-- recent transaction throughput
-- completion rate
-- trust score averages
+### Live Demo Link
 
-## Monitoring Dashboard
+- frontend: `ADD_DEPLOYED_FRONTEND_URL`
+- backend: `ADD_DEPLOYED_API_URL`
 
-- Route: `/monitoring`
-- Screenshot: `ADD_SCREENSHOT_OR_IMAGE_LINK`
-- Source file: [web/src/pages/Monitoring.jsx](/c:/Users/FEYZANUR/Desktop/trustloop-app/web/src/pages/Monitoring.jsx)
+### Metrics Dashboard
 
-What it shows:
+- route: `/metrics`
+- screenshot or public image link: `ADD_METRICS_SCREENSHOT_LINK`
 
-- API uptime
-- average latency
-- service status
-- active alerts
-- security checklist
-- indexer visibility
+### Monitoring Dashboard
 
-## Data Indexing
+- route: `/monitoring`
+- screenshot or public image link: `ADD_MONITORING_SCREENSHOT_LINK`
 
-TrustLoop indexes trust loop activity from Horizon operations and combines that information with local workflow state for loop presentation.
+### Security Checklist
 
-Indexer visibility is exposed through:
+- document: [docs/security-checklist.md](./docs/security-checklist.md)
 
-- `/monitoring`
-- backend endpoint `/api/indexer`
+### Community Contribution
 
-Relevant files:
+- template: [docs/community-post-template.md](./docs/community-post-template.md)
+- final public post link: `ADD_COMMUNITY_POST_URL`
 
-- [api/src/index.js](/c:/Users/FEYZANUR/Desktop/trustloop-app/api/src/index.js)
-- [web/src/services/opsApi.js](/c:/Users/FEYZANUR/Desktop/trustloop-app/web/src/services/opsApi.js)
+### Data Indexing
 
-## Security Checklist
+TrustLoop indexes trust loop activity from API state and surfaces freshness/volume via:
 
-- Checklist document:
-  [docs/security-checklist.md](/c:/Users/FEYZANUR/Desktop/trustloop-app/docs/security-checklist.md)
+- `GET /api/indexer`
+- monitoring dashboard `/monitoring`
 
-## Technical Documentation
+Technical references:
 
-- User guide:
-  [docs/user-guide.md](/c:/Users/FEYZANUR/Desktop/trustloop-app/docs/user-guide.md)
-- Level 6 mapping:
-  [docs/level6-submission.md](/c:/Users/FEYZANUR/Desktop/trustloop-app/docs/level6-submission.md)
-- Demo Day pitch:
-  [docs/demo-day-pitch.md](/c:/Users/FEYZANUR/Desktop/trustloop-app/docs/demo-day-pitch.md)
-- Google Form template:
-  [docs/google-form-template.md](/c:/Users/FEYZANUR/Desktop/trustloop-app/docs/google-form-template.md)
-- Improvement roadmap:
-  [docs/improvement-roadmap.md](/c:/Users/FEYZANUR/Desktop/trustloop-app/docs/improvement-roadmap.md)
+- [api/src/index.js](./api/src/index.js)
+- [docs/API.md](./docs/API.md)
+- [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md)
 
----
+### Exported User Response Sheet
 
-## 🏆 Level 6: Production Ready Submission
+- CSV artifact: [docs/onboarding-template.csv](./docs/onboarding-template.csv)
+- Excel artifact: [docs/onboarding-responses.xlsx](./docs/onboarding-responses.xlsx)
+- real Google Sheet or Form export link: `ADD_REAL_RESPONSE_SHEET_URL`
 
-### ✅ Requirements Completion Status
+## 30+ User Wallet Addresses
 
-| Requirement | Status | Evidence |
-|---|---|---|
-| 30+ verified active users | ✅ | [User Data (30+ wallets)](docs/onboarding-template.csv) |
-| Metrics dashboard live | ✅ | Route: `/metrics` - [Metrics.jsx](web/src/pages/Metrics.jsx) |
-| Security checklist completed | ✅ | [Security Checklist](docs/security-checklist.md) |
-| Monitoring active | ✅ | Route: `/monitoring` - [Monitoring.jsx](web/src/pages/Monitoring.jsx) |
-| Data indexing implemented | ✅ | [Indexer Service](web/src/services/opsApi.js) |
-| Full documentation | ✅ | [DEPLOYMENT.md](docs/DEPLOYMENT.md), [User Guide](docs/user-guide.md) |
-| Community contribution | ✅ | [Post Template](docs/community-post-template.md) - *Share below* |
-| Advanced feature (Multi-party Approval) | ✅ | [LoopDetail.jsx](web/src/pages/LoopDetail.jsx) - Dual-signature workflow |
-| 15+ meaningful commits | ✅ | See Git history (15+ public commits) |
-| Production-ready deliverable | ✅ | Live on [Vercel](https://trustloop.vercel.app) + [Railway API](https://trustloop-api.up.railway.app) |
+The current seeded/demo wallet registry used by the onboarding dataset:
 
-### 📋 User Onboarding & Feedback System
-
-**Option 1: Demo with Pre-populated Data** (Ready to test)
-- CSV Template with 30+ users: [onboarding-template.csv](docs/onboarding-template.csv)
-- Run locally: `docker-compose up` → http://localhost:5174/onboarding
-- Test CSV export functionality
-
-**Option 2: Setup Real Google Form** (For production) ✅ **LIVE**
-- **Form Name:** TrustLoop Community Feedback - Join 30+ Users
-- **📋 Form Link:** [TrustLoop Feedback Form](https://docs.google.com/forms/d/e/1FAIpQLSfEhQWE5--ySph6w8lnHzsfSK8LwJOvbyRZwb9QsFiUb9ydDg/viewform)
-- **Share with friends:** Spread the form to reach 30+ responses!
-- **Export responses:** Responses → Create spreadsheet → Share link in README
-
-**Current User Feedback Summary (30+ Demo Users):**
-- Average Rating: **4.3/5**
-- Most Liked: Dashboard clarity, Notification system, Multi-party approval
-- Improvement Requests: Mobile responsive (5), Faster load (4), More metrics (3)
-- Retry Rate: 94% would use again
-
-### 🔗 Deployment Links
-
-- **Frontend:** https://trustloop.vercel.app *(Deploy after testing)*
-- **API:** https://trustloop-api.up.railway.app *(Deploy after testing)*
-- **GitHub Repository:** https://github.com/yourusername/trustloop-app
-- **📋 Google Form (LIVE):** https://docs.google.com/forms/d/e/1FAIpQLSfEhQWE5--ySph6w8lnHzsfSK8LwJOvbyRZwb9QsFiUb9ydDg/viewform
-- **📊 User Responses Sheet:** *(To be added after responses)*
-
-### 📊 Key Metrics
-
-- **Active Wallets:** 30+
-- **Total Loops Created:** 150+
-- **Avg. Completion Rate:** 87%
-- **API Uptime:** 99.5%
-- **Event Indexing:** Real-time (Horizon polling)
-
-### 🚀 Improvement Roadmap
-
-Based on 30+ users feedback, planned enhancements documented here:
-
-**[📖 Full Improvement Roadmap →](docs/improvement-roadmap.md)**
-
-**Phase 1 Improvements (Completed):**
-1. ✅ Persistent DB Storage - MongoDB integration
-2. ✅ Notification System - Event badges + alerts
-3. ✅ Advanced Indexing - Horizon + analytics
-4. ✅ Error Logging - Comprehensive middleware
-5. ✅ Mobile Responsive - Tailwind CSS
-6. ✅ User Retention Tracking - DAU/MAU metrics
-
-**Phase 2 (Planned):**
-- API rate limiting
-- WebSocket real-time events
-- Audit log persistence
-- Role-based operator auth
-
-### 💬 Community Contribution
-
-**Share on Social Media:**
-- Template: [community-post-template.md](docs/community-post-template.md)
-- Post your link here: *https://x.com/YOUR_POST*
-
-### 📝 Complete Documentation Index
-
-- [DEPLOYMENT.md](docs/DEPLOYMENT.md) - Production deployment guide
-- [USER_GUIDE.md](docs/user-guide.md) - End-user instructions
-- [SECURITY_CHECKLIST.md](docs/security-checklist.md) - Security audit
-- [IMPROVEMENT_ROADMAP.md](docs/improvement-roadmap.md) - Future roadmap
-- [LEVEL6_SUBMISSION.md](docs/level6-submission.md) - Full submission details
-- [DEMO_DAY_PITCH.md](docs/demo-day-pitch.md) - 2-minute pitch
-- [GOOGLE_FORM_TEMPLATE.md](docs/google-form-template.md) - Form setup guide
-
-## Local Development Setup
-
-### API Backend
-
-```powershell
-cd api
-npm install
-npm run dev
+```text
+GBXTMXHHEEEW3VNYHEZYAVV3Q7MF7SLP2CXK3C5K6IBCNNX7CP67F2IM
+GC4UYA4GWY35KGQ7U434DXQBC4HZ6HAMJ2LOMMHC3FJAHHV23RJUB7EV
+GDPGD3WEAVACUKCONRDUELD46ML5KDQAC2JTF7QE6EEEW7VSFYZEBZX5
+GA4INDKZSBMYUL2DKUMC2732COE4CLKRX6YUIZS56UWLL2F6DD4ZL3G5
+GDYD6GZ6QWKEULFZU6HMLSH4JM5IAJXBY3HFMCHZHTHIGH5DKEVNX2ZM
+GDWL2RCDFQVDGH3IJL4ZGLX5CGU27MO6R7OQVCNYLQWROYZND2B6ENCI
+GBL2APVSMV2IYSO2B6C67VASKRJHXVCAOSHEBLC6BM4CBSKDMQOU25HU
+GAVNSWLAN4VG54IVLHCF3O45ZOAZSPLNH7GNR25RVFLH434BAQS3JJAO
+GCCHWOJNEC7VJ2NCTIQYKYYYWZSZRUU2KAYVY5VMDWF3ONYKWUH6DO7I
+GCHRZKNZGV27USWARNID7YPVUBXV6WNPG6YRVLKQ4QDUURMJY4OU5JJ5
+GDNN6X4H3SUEN2F5XUQA3BDYCSRO54AVV5GWFIGO3DTLPONEMCS4DSLV
+GCNSHMQNN66RDGXXWA3MV7CHOMZ5YCC2D7EYPUJWZICTZV4QQ2ZMNFOP
+GCKX3NOWP7LYF2L6YWMFIKNKROBHVLDEQSAAWWQHDSXNVWUTDHRPZYIH
+GCHS7OSQNPBA2XUFAVGIPNK72DED3WWD2DJOA4ANDQ7BHM4R5GDRJSS7
+GCWXWMORXOEB2JWVCE7LBWFLNT5QFQ5JKQVRFNB3AZRQUSLUCHXBM2O2
+GDLXN35JGULDTNEZGGFV6IQKDULH5O6GN5L7BY252AMAFME7RCXYWXAB
+GBJP4RV3PLYSQZKQMUQGO5NO4XIEEYXHYIVR2GCWETFNGSEPQRRSAN6O
+GBTLBOA5M5P6RUMWVL6UXRFFUAJX4X6AMHFFY3LDM5L6ES2FQL2OEFER
+GBJE3VLOOSAJKZFB7ILEUY6UK2CONTPQVI75APNG7USR64VT2AAMETI6
+GCSDJ2BQTERO3RFGLUR4Q4KVJKWGFWAY423HBIWHJSTSMUE7DNUL2JGO
+GCP42RESSZ2YTIK7SMTRC3T27AIPHBMJJMGOMK63YK4YTLMF6HWO26QX
+GB67HLEMWX3VLRYPSLUFZ5HCTIF55DHNPTHV55YAY5OKFTKVLE7IN5F4
+GC5Y25BO5R5DPU6NHPUZHW6JDABW5Z4ETAOLE2D4ZOU4O36ISJQRVBRS
+GBOQMOY5KHPMVXFZNUT4CNH2N3NPFXTXD4G6MQT7JXKGU6VSTRPRRO5P
+GD7M6TIBC422HNXG5SMID5Z2GVRQ55ODDG63HEZXGR7DJ36YLD6VKHIA
+GDFK6ZKBYVXSS6XU5HC3BDGOK5N2GOQ6LSIDXDIWZYOQML5ZFUEOH7MG
+GAAVRCI7U3OG5T52LIY53KP5XWZCZ7ZK6TOU7CZH5NHLMOGCEKFBP3CN
+GBFFWPNU2VKKUBO2FPMWF6PS6XGFN3RR7G7R3PXFXOHRNDEECE7LPWSA
+GBZYOAEY4H5BFZY2FN7GWUOG6TX54S37VKSYZMWDSMMLD5GJLS46T4HW
+GBG3HAUGSWVSVF7LWRXCDFXBJLBDMSBWISLTYDAOXRR7BKOZS572RTX4
 ```
 
-Runs at `http://localhost:4000`
+## User Onboarding Evidence
 
-### Web Frontend
+### Google Form setup
+
+- guide: [docs/google-form-template.md](./docs/google-form-template.md)
+
+### Export files
+
+- CSV: [docs/onboarding-template.csv](./docs/onboarding-template.csv)
+- Excel: [docs/onboarding-responses.xlsx](./docs/onboarding-responses.xlsx)
+
+### Improvement plan based on feedback
+
+- roadmap: [docs/improvement-roadmap.md](./docs/improvement-roadmap.md)
+- note: replace placeholder commit links in that document with your real public commit URLs before submission
+
+## Documentation Index
+
+- architecture: [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md)
+- API reference: [docs/API.md](./docs/API.md)
+- user guide: [docs/user-guide.md](./docs/user-guide.md)
+- deployment guide: [docs/DEPLOYMENT.md](./docs/DEPLOYMENT.md)
+- testing guide: [docs/TESTING.md](./docs/TESTING.md)
+- troubleshooting guide: [docs/TROUBLESHOOTING.md](./docs/TROUBLESHOOTING.md)
+- security checklist: [docs/security-checklist.md](./docs/security-checklist.md)
+- improvement roadmap: [docs/improvement-roadmap.md](./docs/improvement-roadmap.md)
+- submission pack: [docs/level6-submission.md](./docs/level6-submission.md)
+- demo day pitch: [docs/demo-day-pitch.md](./docs/demo-day-pitch.md)
+- community post template: [docs/community-post-template.md](./docs/community-post-template.md)
+
+## Validation Commands
 
 ```powershell
 cd web
-npm install
-npm run dev
+npm run lint
+npm run build
+
+cd ..\api
+node --check src/index.js
 ```
 
-Runs at `http://localhost:5173` or `http://localhost:5174`
+## Final Submission Notes
 
-### Database
-
-MongoDB is included in `docker-compose.yml` and runs at `mongodb://localhost:27017/trustloop`
-
-## Testing the Application
-
-### 1. Test Dashboard
-- Open http://localhost:5174
-- Create, confirm, and monitor trust loops
-- Check real-time updates (auto-refresh 30s)
-
-### 2. Test Metrics
-- Visit `/metrics`
-- Verify active users, completion rate, trust scores display
-- Check historical data charts
-
-### 3. Test Monitoring
-- Visit `/monitoring`
-- Verify API uptime, latency, and service status
-- Check security readiness
-
-### 4. Test Onboarding & CSV Export
-- Visit `/onboarding`
-- Fill out form with wallet address
-- Click "Export CSV" to download user records
-
-### 5. Test Approval Workflow
-- Go to `/loops/:id`
-- Verify multi-party approval gates
-- Test close action behavior
-
-## Git Commit History
-
-Ensure 15+ meaningful commits documenting:
-- Feature implementation
-- Bug fixes
-- Documentation updates
-- Security improvements
-
-View all commits:
-```bash
-git log --oneline | head -20
-```
+This repository now contains the application code, dashboards, export artifacts, and documentation structure needed for a Level 6 submission. The remaining non-code items are public deployment, public social proof, public commit history, and real user collection links.
