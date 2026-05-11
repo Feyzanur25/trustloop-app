@@ -1,290 +1,306 @@
-🚀 TrustLoop – Production Ready Stellar Application
-   
+# 🚀 TrustLoop – Production Ready Stellar Application
 
-🔴 Live Demo: https://web-5dlm6qkga-feyzanur25s-projects.vercel.app/
+[![Stellar](https://img.shields.io/badge/Stellar-Testnet-blue)]()
+[![React](https://img.shields.io/badge/Frontend-React-61dafb)]()
+[![Node.js](https://img.shields.io/badge/Backend-Node.js-green)]()
+[![Status](https://img.shields.io/badge/Status-Production_Ready-success)]()
 
-🎥 Demo Video: https://www.youtube.com/watch?v=cFP9JjQDp9g
+🔴 **Live Demo**  
+https://web-5dlm6qkga-feyzanur25s-projects.vercel.app/
 
-📊 User Dataset (30+ verified): https://docs.google.com/spreadsheets/d/18AmzDfSUtz5FqXFK-Y1VJgJmIkD6Nuo2q1nC9djhf5s/edit?gid=1186746776#gid=1186746776
+🎥 **Demo Video**  
+https://youtu.be/ieTD3J7gx5E
 
-🌟 Overview
+📊 **Verified User Dataset (30+ Users)**  
+https://docs.google.com/spreadsheets/d/18AmzDfSUtz5FqXFK-Y1VJgJmIkD6Nuo2q1nC9djhf5s/edit
 
-TrustLoop is a production-ready Stellar-based application that enables trust-driven workflows between clients and freelancers using structured approval logic and on-chain signals.
+---
 
-✔ Real users onboarded
+# 🌟 Overview
 
-✔ Metrics & monitoring dashboards
+TrustLoop is a production-ready Stellar-based application designed to create trust-driven workflows between clients and freelancers using structured approval systems and blockchain event tracking.
 
-✔ Multi-party approval system
+The platform demonstrates:
 
-✔ Production-ready architecture
+- ✅ Real user onboarding
+- ✅ Metrics & monitoring dashboards
+- ✅ Multi-party approval workflows
+- ✅ Production-ready architecture
+- ✅ Feedback-driven improvements
+- ✅ Stellar blockchain integration
 
-🎯 Live Application
+---
 
-Frontend: https://web-5dlm6qkga-feyzanur25s-projects.vercel.app/
-API: Serverless fallback system active (no external dependency required)
-🌟 Overview
-TrustLoop is a production-ready Stellar-based application with real users, monitoring, and feedback-driven improvements.
+# 🌍 Why This Project Matters
 
-👥 Table 1A – Old Users
-User Name	Email	Wallet
-Sema Çiftçi	semaciftci23@gmail.com	GC6AXRCCWINZ26JSQDVJYH3YJ4TDORD2SU7L5V4ZXBZJ43XEVGWZFPAV
-Sılanur Polat	silapolat08@gmail.com	GBREF4WXYKLLUQZZHIY4E2WQ5N3NMAB4W26V472AP2SJVZQOU3GBOR5B
-Züleyha Ateş	zuleyhaates25@gmail.com	GBWKENQV2J4SYSRULJA3CVYCXVUAMLQQL73S2NYYY3XZHWZSDHKFG6D2
-Yüsra Çolak	yusraclk@gmail.com	GD7E45CSAIQV2FJO5CGXB4YGNUYXUJZ7YWQNCYFWMG4D34CGB5UVS6Q3
-Melek Gürler	melek256@gmail.com	GC3JXR2OBJP2Z3MFS7MDSFCN7RVQYWW7YQMTAX5AUKS7RQLT7J5J4EQW
-👥 Table 1B – New Users (30)
-User Name	Email	Wallet
-İsmail Ateş	ismail25@gmail.com	GBXTMXHHEEEW3VNYHEZYAVV3Q7MF7SLP2CXK3C5K6IBCNNX7CP67F2IM
-Afra Duru	durusoyafra07@gmail.com	GC4UYA4GWY35KGQ7U434DXQBC4HZ6HAMJ2LOMMHC3FJAHHV23RJUB7EV
-Feyzanur Ateş	feyzanurates4@gmail.com	GDPGD3WEAVACUKCONRDUELD46ML5KDQAC2JTF7QE6EEEW7VSFYZEBZX5
-Emre Yıldız	emreyildiz01@gmail.com	GA4INDKZSBMYUL2DKUMC2732COE4CLKRX6YUIZS56UWLL2F6DD4ZL3G5
-Zeynep Kaya	zeynepkaya.dev@gmail.com	GDYD6GZ6QWKEULFZU6HMLSH4JM5IAJXBY3HFMCHZHTHIGH5DKEVNX2ZM
-Can Demir	candemir@gmail.com	GDWL2RCDFQVDGH3IJL4ZGLX5CGU27MO6R7OQVCNYLQWROYZND2B6ENCI
-Elif Aydın	elifaydin@gmail.com	GBL2APVSMV2IYSO2B6C67VASKRJHXVCAOSHEBLC6BM4CBSKDMQOU25HU
-Burak Çelik	burakcelik@gmail.com	GAVNSWLAN4VG54IVLHCF3O45ZOAZSPLNH7GNR25RVFLH434BAQS3JJAO
-Merve Koç	mervekoc@gmail.com	GCCHWOJNEC7VJ2NCTIQYKYYYWZSZRUU2KAYVY5VMDWF3ONYKWUH6DO7I
-Oğuzhan Şahin	oguzhansahin@gmail.com	GCHRZKNZGV27USWARNID7YPVUBXV6WNPG6YRVLKQ4QDUURMJY4OU5JJ5
-Selin Arslan	selinarslan@gmail.com	GDNN6X4H3SUEN2F5XUQA3BDYCSRO54AVV5GWFIGO3DTLPONEMCS4DSLV
-Hakan Yılmaz	hakanyilmaz@gmail.com	GCNSHMQNN66RDGXXWA3MV7CHOMZ5YCC2D7EYPUJWZICTZV4QQ2ZMNFOP
-Ayşe Demir	aysedemir@gmail.com	GCKX3NOWP7LYF2L6YWMFIKNKROBHVLDEQSAAWWQHDSXNVWUTDHRPZYIH
-Kerem Acar	keremacar@gmail.com	GCHS7OSQNPBA2XUFAVGIPNK72DED3WWD2DJOA4ANDQ7BHM4R5GDRJSS7
-Derya Kurt	deryakurt@gmail.com	GCWXWMORXOEB2JWVCE7LBWFLNT5QFQ5JKQVRFNB3AZRQUSLUCHXBM2O2
-Ahmet Öz	ahmetoz@gmail.com	GDLXN35JGULDTNEZGGFV6IQKDULH5O6GN5L7BY252AMAFME7RCXYWXAB
-Nazlı Şen	nazlisen@gmail.com	GBJP4RV3PLYSQZKQMUQGO5NO4XIEEYXHYIVR2GCWETFNGSEPQRRSAN6O
-Yusuf Polat	yusufpolat@gmail.com	GBTLBOA5M5P6RUMWVL6UXRFFUAJX4X6AMHFFY3LDM5L6ES2FQL2OEFER
-Deniz Güneş	denizgunes@gmail.com	GBJE3VLOOSAJKZFB7ILEUY6UK2CONTPQVI75APNG7USR64VT2AAMETI6
-Melis Aydın	melisaydin@gmail.com	GCSDJ2BQTERO3RFGLUR4Q4KVJKWGFWAY423HBIWHJSTSMUE7DNUL2JGO
-Barış Kılıç	bariskilic@gmail.com	GCP42RESSZ2YTIK7SMTRC3T27AIPHBMJJMGOMK63YK4YTLMF6HWO26QX
-Gökhan Çetin	gokhancetin@gmail.com	GB67HLEMWX3VLRYPSLUFZ5HCTIF55DHNPTHV55YAY5OKFTKVLE7IN5F4
-Tuğba Şahin	tugbasahin@gmail.com	GC5Y25BO5R5DPU6NHPUZHW6JDABW5Z4ETAOLE2D4ZOU4O36ISJQRVBRS
-Volkan Aras	volkanaras@gmail.com	GBOQMOY5KHPMVXFZNUT4CNH2N3NPFXTXD4G6MQT7JXKGU6VSTRPRRO5P
-Pelin Demirtaş	pelindemirtas@gmail.com	GD7M6TIBC422HNXG5SMID5Z2GVRQ55ODDG63HEZXGR7DJ36YLD6VKHIA
-Cem Yıldırım	cemyildirim@gmail.com	GDFK6ZKBYVXSS6XU5HC3BDGOK5N2GOQ6LSIDXDIWZYOQML5ZFUEOH7MG
-Sibel Koç	sibelkoc@gmail.com	GAAVRCI7U3OG5T52LIY53KP5XWZCZ7ZK6TOU7CZH5NHLMOGCEKFBP3CN
-Kaan Özkan	kaanozkan@gmail.com	GBFFWPNU2VKKUBO2FPMWF6PS6XGFN3RR7G7R3PXFXOHRNDEECE7LPWSA
-Ece Aksoy	eceaksoy@gmail.com	GBZYOAEY4H5BFZY2FN7GWUOG6TX54S37VKSYZMWDSMMLD5GJLS46T4HW
-Murat Çakır	muratcakir@gmail.com	GBG3HAUGSWVSVF7LWRXCDFXBJLBDMSBWISLTYDAOXRR7BKOZS572RTX4
-💬 Table 2 – Full Feedback + Implementation
-User	Feedback	Implementation
-İsmail Ateş	Add more detailed transaction history	Event tracking added
-Afra Duru	Improve mobile UI performance	Responsive UI improved
-Feyzanur Ateş	Add more analytics features	Metrics dashboard added
-Emre Yıldız	Add transaction history view	History page added
-Zeynep Kaya	Improve mobile responsiveness	UI improved
-Can Demir	Transactions felt slow	API optimized
-Elif Aydın	Add dark mode	UI enhanced
-Burak Çelik	Improve loading speed	Performance improved
-Merve Koç	Add notifications	Notification system planned
-Oğuzhan Şahin	Improve UX clarity	UX improved
-Selin Arslan	Add analytics dashboard	Metrics extended
-Hakan Yılmaz	Improve stability	Stability improved
-Ayşe Demir	Better error messages	Error handling improved
-Kerem Acar	Improve backend speed	Backend optimized
-Derya Kurt	Add tutorials	UX improved
-Ahmet Öz	Improve UX	UI improved
-Nazlı Şen	Add language support	UX improved
-Yusuf Polat	Improve error handling	API improved
-Deniz Güneş	Add notifications	UX improved
-Melis Aydın	Improve UI	UI improved
-Barış Kılıç	Improve speed	Performance improved
-Gökhan Çetin	Add more features	System expanded
-Tuğba Şahin	Improve design	UI improved
-Volkan Aras	Add logs	Monitoring improved
-Pelin Demirtaş	Improve mobile UI	Responsive improved
-Cem Yıldırım	Add notifications	UX improved
-Sibel Koç	Improve UX	UI improved
-Kaan Özkan	Add dashboard	Dashboard improved
-Ece Aksoy	Improve UX clarity	UX improved
-Murat Çakır	Add analytics	Metrics improved
-🔐 Security
-Input validation, wallet validation, env protection, monitoring
+Modern remote collaboration systems suffer from one critical issue:
 
-🛠 Tech Stack
-React, Vite, Tailwind, Node.js, Express, Stellar SDK
+# Trust.
 
-📊 Metrics Dashboard
+TrustLoop introduces a transparent and verifiable trust layer powered by Stellar blockchain principles.
 
-Route: "/metrics"
+The platform enables:
 
-Tracked metrics:
+- 🔐 Transparent event tracking
+- 🤝 Mutual accountability
+- 📊 Data-driven trust evaluation
+- 🌐 Decentralized-ready infrastructure
 
+TrustLoop evolves beyond a simple demo into a scalable trust infrastructure layer.
+
+---
+
+# 🎯 Live Application
+
+## Frontend
+https://web-5dlm6qkga-feyzanur25s-projects.vercel.app/
+
+## Backend
+Serverless fallback architecture enabled.
+
+No external database dependency required.
+
+---
+
+# 🛠 Tech Stack
+
+## Frontend
+- React
+- Vite
+- Tailwind CSS
+- React Router
+- Recharts
+- Lucide React
+
+## Backend
+- Node.js
+- Express.js
+
+## Blockchain
+- Stellar SDK
+- Horizon API
+- Stellar Testnet
+
+---
+
+# ⚙️ Core Features
+
+## ✅ Multi-Party Approval System
+
+TrustLoop implements a multi-signature inspired workflow system:
+
+- Requires both client & freelancer approval
+- Prevents unilateral transaction closure
+- Enables trust-based execution
+- Mimics escrow and multi-signature logic
+
+---
+
+# 📊 Metrics Dashboard
+
+### Route
+
+```bash
+/metrics
+Tracked Metrics
 Daily Active Users (DAU)
-Transactions count
-Completion rate
-Trust score
+Transaction Count
+Completion Rate
+Trust Score
 Retention
-📸 Screenshot:imageimage
-
 📡 Monitoring Dashboard
-
-Route: "/monitoring"
-
-Displays:
-
-API/system status
+Route
+/monitoring
+Monitoring Includes
+API status tracking
+System health monitoring
 Latency tracking
-Error handling
+Error handling visibility
 Security readiness
 Indexing visibility
-📸 Screenshot:
-
-"Monitoring Dashboard"
-
-imageimageimage
-🧪 User Onboarding
-
-Users were onboarded using a structured Google Form:
-
-Collected data:
-
-Name
-Email
-Wallet address
-Product rating
-Feedback
-📊 Dataset (Excel): https://docs.google.com/spreadsheets/d/18AmzDfSUtz5FqXFK-Y1VJgJmIkD6Nuo2q1nC9djhf5s/edit
-
-⚙️ Advanced Feature – Multi-Party Approval
-
-TrustLoop implements a multi-signature inspired approval system:
-
-Requires both client and freelancer approval
-Prevents unilateral transaction closure
-Ensures trust-based execution
-This design mimics real-world escrow and multi-signature workflows on Stellar.
-
 📦 Data Indexing
 
-Stellar Horizon (Testnet) integration
+Integrated with Stellar Horizon Testnet.
 
-Event tracking:
-
-"trust.created"
-"trust.confirmed"
-"trust.closed"
-Indexed into internal dashboards for fast querying
-
-Example:
-
+Tracked Events
+trust.created
+trust.confirmed
+trust.closed
+Example Endpoint
 GET /api/transactions?user=PUBLIC_KEY
-
 🔐 Security Checklist
 
-✔ Input validation implemented
+Implemented security systems:
 
-✔ Wallet address validation
+✅ Input validation
+✅ Wallet address validation
+✅ Environment variable protection
+✅ Safe fallback architecture
+✅ Error handling system
+✅ Multi-party approval security
 
-✔ Environment variable protection
+📄 Full Checklist
 
-✔ Safe fallback architecture
-
-✔ Error handling system
-
-✔ Multi-party approval security
-
-🔗 Full checklist: docs/security-checklist.md
-
+docs/security-checklist.md
 🗄️ Data Strategy
 
-Hybrid architecture:
+TrustLoop uses a hybrid architecture:
 
 Local fallback storage
 In-memory state management
 Stellar Testnet indexing
-Ensures:
+Benefits
+✅ Stability
+✅ Reliability
+✅ Faster demo execution
+✅ No external DB dependency
+🧪 User Onboarding
 
-✔ Stability
+Users were onboarded through structured Google Forms.
 
-✔ Reliability
+Collected Data
+Name
+Email
+Wallet Address
+Product Rating
+User Feedback
 
-✔ No external DB dependency
+📊 Dataset
+https://docs.google.com/spreadsheets/d/18AmzDfSUtz5FqXFK-Y1VJgJmIkD6Nuo2q1nC9djhf5s/edit
 
-🛠 Tech Stack
+# 👥 EXISTING USERS
 
-Frontend:
+┌────────────────────┬────────────────────────────┬──────────────────────────────────────────────────────────────┐
+│ User Name          │ Email                      │ Wallet Address                                               │
+├────────────────────┼────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ Sema Çiftçi        │ semaciftci23@gmail.com    │ GC6AXRCCWINZ26JSQDVJYH3YJ4TDORD2SU7L5V4ZXBZJ43XEVGWZFPAV    │
+├────────────────────┼────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ Sılanur Polat      │ silapolat08@gmail.com     │ GBREF4WXYKLLUQZZHIY4E2WQ5N3NMAB4W26V472AP2SJVZQOU3GBOR5B    │
+├────────────────────┼────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ Züleyha Ateş       │ zuleyhaates25@gmail.com   │ GBWKENQV2J4SYSRULJA3CVYCXVUAMLQQL73S2NYYY3XZHWZSDHKFG6D2    │
+├────────────────────┼────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ Yüsra Çolak        │ yusraclk@gmail.com        │ GD7E45CSAIQV2FJO5CGXB4YGNUYXUJZ7YWQNCYFWMG4D34CGB5UVS6Q3    │
+├────────────────────┼────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ Melek Gürler       │ melek256@gmail.com        │ GC3JXR2OBJP2Z3MFS7MDSFCN7RVQYWW7YQMTAX5AUKS7RQLT7J5J4EQW    │
+└────────────────────┴────────────────────────────┴──────────────────────────────────────────────────────────────┘
 
-React
-Vite
-Tailwind CSS
-Backend:
+👥 Table 1B – New Users (30+)
+┌────────────────────┬────────────────────────────┬──────────────────────────────────────────────────────────────┬──────────────────────────────────────────────────────┐
+│ User Name          │ Email                      │ Wallet Address                                               │ Feedback                                             │
+├────────────────────┼────────────────────────────┼──────────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────┤
+│ İsmail Ateş        │ ismail25@gmail.com        │ GBXTMXHHEEEW3VNYHEZYAVV3Q7MF7SLP2CXK3C5K6IBCNNX7CP67F2IM    │ Add more detailed transaction history                │
+├────────────────────┼────────────────────────────┼──────────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────┤
+│ Afra Duru          │ durusoyafra07@gmail.com   │ GC4UYA4GWY35KGQ7U434DXQBC4HZ6HAMJ2LOMMHC3FJAHHV23RJUB7EV    │ Improve mobile UI performance                        │
+├────────────────────┼────────────────────────────┼──────────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────┤
+│ Feyzanur Ateş      │ feyzanurates4@gmail.com   │ GDPGD3WEAVACUKCONRDUELD46ML5KDQAC2JTF7QE6EEEW7VSFYZEBZX5    │ Add more analytics features                          │
+├────────────────────┼────────────────────────────┼──────────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────┤
+│ Emre Yıldız        │ emreyildiz01@gmail.com    │ GA4INDKZSBMYUL2DKUMC2732COE4CLKRX6YUIZS56UWLL2F6DD4ZL3G5    │ Add transaction history view                         │
+├────────────────────┼────────────────────────────┼──────────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────┤
+│ Zeynep Kaya        │ zeynepkaya.dev@gmail.com  │ GDYD6GZ6QWKEULFZU6HMLSH4JM5IAJXBY3HFMCHZHTHIGH5DKEVNX2ZM    │ Improve mobile responsiveness                        │
+├────────────────────┼────────────────────────────┼──────────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────┤
+│ Can Demir          │ candemir@gmail.com        │ GDWL2RCDFQVDGH3IJL4ZGLX5CGU27MO6R7OQVCNYLQWROYZND2B6ENCI    │ Transactions felt slow                               │
+├────────────────────┼────────────────────────────┼──────────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────┤
+│ Elif Aydın         │ elifaydin@gmail.com       │ GBL2APVSMV2IYSO2B6C67VASKRJHXVCAOSHEBLC6BM4CBSKDMQOU25HU    │ Add dark mode                                        │
+├────────────────────┼────────────────────────────┼──────────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────┤
+│ Burak Çelik        │ burakcelik@gmail.com      │ GAVNSWLAN4VG54IVLHCF3O45ZOAZSPLNH7GNR25RVFLH434BAQS3JJAO    │ Improve loading speed                                │
+├────────────────────┼────────────────────────────┼──────────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────┤
+│ Merve Koç          │ mervekoc@gmail.com        │ GCCHWOJNEC7VJ2NCTIQYKYYYWZSZRUU2KAYVY5VMDWF3ONYKWUH6DO7I    │ Add notifications                                    │
+├────────────────────┼────────────────────────────┼──────────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────┤
+│ Oğuzhan Şahin      │ oguzhansahin@gmail.com    │ GCHRZKNZGV27USWARNID7YPVUBXV6WNPG6YRVLKQ4QDUURMJY4OU5JJ5    │ Improve UX clarity                                   │
+├────────────────────┼────────────────────────────┼──────────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────┤
+│ Selin Arslan       │ selinarslan@gmail.com     │ GDNN6X4H3SUEN2F5XUQA3BDYCSRO54AVV5GWFIGO3DTLPONEMCS4DSLV    │ Add analytics dashboard                              │
+├────────────────────┼────────────────────────────┼──────────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────┤
+│ Hakan Yılmaz       │ hakanyilmaz@gmail.com     │ GCNSHMQNN66RDGXXWA3MV7CHOMZ5YCC2D7EYPUJWZICTZV4QQ2ZMNFOP    │ Improve stability                                    │
+├────────────────────┼────────────────────────────┼──────────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────┤
+│ Ayşe Demir         │ aysedemir@gmail.com       │ GCKX3NOWP7LYF2L6YWMFIKNKROBHVLDEQSAAWWQHDSXNVWUTDHRPZYIH    │ Better error messages                                │
+├────────────────────┼────────────────────────────┼──────────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────┤
+│ Kerem Acar         │ keremacar@gmail.com       │ GCHS7OSQNPBA2XUFAVGIPNK72DED3WWD2DJOA4ANDQ7BHM4R5GDRJSS7    │ Improve backend speed                                │
+├────────────────────┼────────────────────────────┼──────────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────┤
+│ Derya Kurt         │ deryakurt@gmail.com       │ GCWXWMORXOEB2JWVCE7LBWFLNT5QFQ5JKQVRFNB3AZRQUSLUCHXBM2O2    │ Add tutorials                                        │
+├────────────────────┼────────────────────────────┼──────────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────┤
+│ Ahmet Öz           │ ahmetoz@gmail.com         │ GDLXN35JGULDTNEZGGFV6IQKDULH5O6GN5L7BY252AMAFME7RCXYWXAB    │ Improve UX                                           │
+├────────────────────┼────────────────────────────┼──────────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────┤
+│ Nazlı Şen          │ nazlisen@gmail.com        │ GBJP4RV3PLYSQZKQMUQGO5NO4XIEEYXHYIVR2GCWETFNGSEPQRRSAN6O    │ Add language support                                 │
+├────────────────────┼────────────────────────────┼──────────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────┤
+│ Yusuf Polat        │ yusufpolat@gmail.com      │ GBTLBOA5M5P6RUMWVL6UXRFFUAJX4X6AMHFFY3LDM5L6ES2FQL2OEFER    │ Improve error handling                               │
+├────────────────────┼────────────────────────────┼──────────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────┤
+│ Deniz Güneş        │ denizgunes@gmail.com      │ GBJE3VLOOSAJKZFB7ILEUY6UK2CONTPQVI75APNG7USR64VT2AAMETI6    │ Add notifications                                    │
+├────────────────────┼────────────────────────────┼──────────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────┤
+│ Melis Aydın        │ melisaydin@gmail.com      │ GCSDJ2BQTERO3RFGLUR4Q4KVJKWGFWAY423HBIWHJSTSMUE7DNUL2JGO    │ Improve UI                                           │
+├────────────────────┼────────────────────────────┼──────────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────┤
+│ Barış Kılıç        │ bariskilic@gmail.com      │ GCP42RESSZ2YTIK7SMTRC3T27AIPHBMJJMGOMK63YK4YTLMF6HWO26QX    │ Improve speed                                        │
+├────────────────────┼────────────────────────────┼──────────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────┤
+│ Gökhan Çetin       │ gokhancetin@gmail.com     │ GB67HLEMWX3VLRYPSLUFZ5HCTIF55DHNPTHV55YAY5OKFTKVLE7IN5F4    │ Add more features                                    │
+├────────────────────┼────────────────────────────┼──────────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────┤
+│ Tuğba Şahin        │ tugbasahin@gmail.com      │ GC5Y25BO5R5DPU6NHPUZHW6JDABW5Z4ETAOLE2D4ZOU4O36ISJQRVBRS    │ Improve design                                       │
+├────────────────────┼────────────────────────────┼──────────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────┤
+│ Volkan Aras        │ volkanaras@gmail.com      │ GBOQMOY5KHPMVXFZNUT4CNH2N3NPFXTXD4G6MQT7JXKGU6VSTRPRRO5P    │ Add logs                                             │
+├────────────────────┼────────────────────────────┼──────────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────┤
+│ Pelin Demirtaş     │ pelindemirtas@gmail.com   │ GD7M6TIBC422HNXG5SMID5Z2GVRQ55ODDG63HEZXGR7DJ36YLD6VKHIA    │ Improve mobile UI                                    │
+├────────────────────┼────────────────────────────┼──────────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────┤
+│ Cem Yıldırım       │ cemyildirim@gmail.com     │ GDFK6ZKBYVXSS6XU5HC3BDGOK5N2GOQ6LSIDXDIWZYOQML5ZFUEOH7MG    │ Add notifications                                    │
+├────────────────────┼────────────────────────────┼──────────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────┤
+│ Sibel Koç          │ sibelkoc@gmail.com        │ GAAVRCI7U3OG5T52LIY53KP5XWZCZ7ZK6TOU7CZH5NHLMOGCEKFBP3CN    │ Improve UX                                           │
+├────────────────────┼────────────────────────────┼──────────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────┤
+│ Kaan Özkan         │ kaanozkan@gmail.com       │ GBFFWPNU2VKKUBO2FPMWF6PS6XGFN3RR7G7R3PXFXOHRNDEECE7LPWSA    │ Add dashboard                                        │
+├────────────────────┼────────────────────────────┼──────────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────┤
+│ Ece Aksoy          │ eceaksoy@gmail.com        │ GBZYOAEY4H5BFZY2FN7GWUOG6TX54S37VKSYZMWDSMMLD5GJLS46T4HW    │ Improve UX clarity                                   │
+├────────────────────┼────────────────────────────┼──────────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────┤
+│ Murat Çakır        │ muratcakir@gmail.com      │ GBG3HAUGSWVSVF7LWRXCDFXBJLBDMSBWISLTYDAOXRR7BKOZS572RTX4    │ Add analytics                                        │
+└────────────────────┴────────────────────────────┴──────────────────────────────────────────────────────────────┴──────────────────────────────────────────────────────┘
 
-Node.js
-Express
-Blockchain:
-
-Stellar SDK
-Horizon API
 📈 Key Metrics
-
-30+ active users
-~87% completion rate
-Real-time event tracking
-Stable production demo
+✅ 30+ verified active users
+✅ ~87% completion rate
+✅ Real-time event tracking
+✅ Stable production demo
+✅ Monitoring & metrics active
+✅ Production-ready architecture
 🚀 Improvement Roadmap
-
+Planned Improvements
 Mobile UI enhancements
 Advanced analytics dashboard
 Notification system
 Performance optimization
-📄 Full roadmap: docs/improvement-roadmap.md
+Extended monitoring systems
 
+📄 Full Roadmap
+
+docs/improvement-roadmap.md
 📣 Community Contribution
 
-imagehttps://x.com/FeyzanurA67744/status/2038908789101842654
-📝 Documentation
+Twitter/X Contribution
+https://x.com/FeyzanurA67744/status/2038908789101842654
 
+📝 Documentation
 docs/security-checklist.md
 docs/user-guide.md
 docs/improvement-roadmap.md
-🌍 Why This Project Matters
-TrustLoop is designed to solve one of the most critical problems in modern digital systems: trust between users.
-
-In remote, freelance, and decentralized environments, agreements are often informal and difficult to verify. TrustLoop introduces a structured and verifiable trust layer powered by blockchain principles.
-
-Instead of relying on assumptions, the system enables:
-
-🔐 Transparent interactions through event tracking
-🤝 Mutual accountability via multi-party approval
-📊 Data-driven trust evaluation using metrics and monitoring
-🌐 A decentralized-ready architecture built on Stellar
-By combining real user onboarding, feedback-driven improvements, and live system metrics, TrustLoop evolves beyond a simple application and becomes a trust infrastructure layer.
-
-This demonstrates how trust can be:
-
-Measured
-Verified
-Continuously improved
-🚀 TrustLoop lays the foundation for scalable, reliable, and transparent digital collaboration systems.
-
+docs/API.md
+docs/DEPLOYMENT.md
+docs/TESTING.md
+docs/TROUBLESHOOTING.md
 🎤 Demo Day Ready
 
-TrustLoop is fully prepared for Demo Day:
+TrustLoop is fully prepared for Demo Day.
 
-✔ Live working product
-
-✔ Real users onboarded
-
-✔ Metrics & monitoring active
-
-✔ Advanced feature implemented
-
-✔ Production-ready system
-
+✅ Live working application
+✅ Real users onboarded
+✅ Metrics & monitoring active
+✅ Advanced feature implemented
+✅ Production-ready architecture
+✅ Real blockchain integration
 🧠 Final Note
-TrustLoop is fully production-ready and scalable.
 
-🚀 Ready for real-world usage.
+TrustLoop demonstrates the transition from prototype to production-ready infrastructure.
 
-👉 Full dataset (30+ users):
+The project combines:
 
-https://docs.google.com/spreadsheets/d/18AmzDfSUtz5FqXFK-Y1VJgJmIkD6Nuo2q1nC9djhf5s/edit
-
-👉 All accounts can be verified via Stellar Explorer.
-
-TrustLoop demonstrates a complete transition from prototype to production:
-
-Real-world usage
-Trust-based transaction logic
+Real-world onboarding
+Trust-based workflows
+Monitoring systems
+Security practices
+Blockchain verification
 Scalable architecture
-🚀 Ready for further scaling and onboarding 100+ users.
+
+🚀 Ready for future scaling and onboarding 100+ users.
