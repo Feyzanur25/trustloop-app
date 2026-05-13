@@ -89,6 +89,11 @@ TrustLoop implements a multi-signature inspired workflow system:
 
 <img width="1919" height="910" alt="image" src="https://github.com/user-attachments/assets/df7aa5de-e1e6-4bba-ae35-853d1ee76a60" />
 
+📡 Monitoring Dashboard
+
+<img width="1919" height="913" alt="image" src="https://github.com/user-attachments/assets/f35a3f2e-6063-424d-a81d-39ae381e06aa" />
+
+
 ### Route
 
 ```bash
@@ -100,8 +105,6 @@ Completion Rate
 Trust Score
 Retention
 📡 Monitoring Dashboard
-<img width="1919" height="913" alt="image" src="https://github.com/user-attachments/assets/c109d21b-c75c-484e-989b-4d2b9c3491d8" />
-
 Route
 /monitoring
 Monitoring Includes
