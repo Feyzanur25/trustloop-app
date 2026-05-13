@@ -50,18 +50,6 @@ TrustLoop evolves beyond a simple demo into a scalable trust infrastructure laye
 
 ---
 
-# 🎯 Live Application
-
-## Frontend
-https://web-5dlm6qkga-feyzanur25s-projects.vercel.app/
-
-## Backend
-Serverless fallback architecture enabled.
-
-No external database dependency required.
-
----
-
 # 🛠 Tech Stack
 
 ## Frontend
