@@ -100,6 +100,8 @@ Completion Rate
 Trust Score
 Retention
 📡 Monitoring Dashboard
+<img width="1919" height="913" alt="image" src="https://github.com/user-attachments/assets/c109d21b-c75c-484e-989b-4d2b9c3491d8" />
+
 Route
 /monitoring
 Monitoring Includes
