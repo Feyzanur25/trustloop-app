@@ -6,7 +6,7 @@
 [![Status](https://img.shields.io/badge/Status-Production_Ready-success)]()
 
 🔴 **Live Demo**  
-web-taupe-mu-71.vercel.app
+https://web-49pslbbjk-feyzanur25s-projects.vercel.app/
 
 🎥 **Demo Video**  
 https://youtu.be/ieTD3J7gx5E
