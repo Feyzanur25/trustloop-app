@@ -85,6 +85,8 @@ TrustLoop implements a multi-signature inspired workflow system:
 ---
 
 # 📊 Metrics Dashboard
+<img width="1919" height="913" alt="image" src="https://github.com/user-attachments/assets/6f3ca581-b2b5-46f3-852e-d4be4720fe1f" />
+
 
 ### Route
 
