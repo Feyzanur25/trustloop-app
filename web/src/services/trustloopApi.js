@@ -1,6 +1,5 @@
 import { http } from "./http";
 import { getConnectedWallet } from "./wallet";
-import onboardingSeed from "../shared/onboarding-seed.json";
 
 const HORIZON_TESTNET = "https://horizon-testnet.stellar.org";
 const LOOPS_KEY = "trustloop:loops:v3";
@@ -195,14 +194,14 @@ const BASE_ONBOARDING_SEED = [
 
 void BASE_ONBOARDING_SEED;
 function buildOnboardingSeedRecords() {
-  return onboardingSeed.map((record, index) => ({
+  return BASE_ONBOARDING_SEED.map((record, index) => ({
       id: `ONB-${String(index + 1).padStart(3, "0")}`,
       createdAt: new Date(Date.now() - (index % 10) * 24 * 60 * 60_000).toISOString(),
-      name: record.name,
-      email: record.email,
-      walletAddress: record.walletAddress,
-      feedback: record.feedback,
-      productRating: record.productRating,
+      name: record[0],
+      email: record[1],
+      walletAddress: record[2],
+      feedback: record[3],
+      productRating: record[4],
     })
   );
 }
