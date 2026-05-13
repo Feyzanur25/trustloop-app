@@ -1,6 +1,6 @@
 import { http } from "./http";
 import { getConnectedWallet } from "./wallet";
-import onboardingSeed from "../../../shared/onboarding-seed.json";
+import onboardingSeed from "../shared/onboarding-seed.json";
 
 const HORIZON_TESTNET = "https://horizon-testnet.stellar.org";
 const LOOPS_KEY = "trustloop:loops:v3";
