@@ -63,6 +63,8 @@ To ensure production-grade application tracking, two internal routes handle live
    * **Retention & Trust Scores:** Quantifiable performance index per user node.
   
      <img width="1919" height="834" alt="image" src="https://github.com/user-attachments/assets/fad356ca-e9e0-4de7-9974-4c2892769be9" />
+     <img width="1919" height="834" alt="image" src="https://github.com/user-attachments/assets/854c180b-2b67-47c5-93a4-07a5277cf2b6" />
+
 
 
 2. **Monitoring Dashboard (`/monitoring`):**
