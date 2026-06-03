@@ -94,46 +94,56 @@ Prior to production deployment, the following security requirements were audited
 
 Users were securely onboarded via a structured Google Form workflow, gathering public wallet addresses, active emails, application ratings, and production feedback. All responses were consolidated into a polished Excel file (`TrustLoop_Verified_User_Dataset.xlsx`) committed within this repository.
 
-### 👥 Verified Onboarded User Directory (35 Active Users)
+## 👥 Onboarded User Directories
 
-| User Name | Email Address | Stellar Wallet Address | User Feedback / Suggestions |
+### 📋 Table 1: Verified Historical Production Users (Level 5 Cohort)
+*This ledger contains the initial 5 historical validation nodes mapped during the Level 5 core implementation.*
+
+| User Name | User Email | User Wallet Address |
+| :--- | :--- | :--- |
+| **Sema Çiftçi** | semaciftci23@gmail.com | `GC6AXRCCWINZ26JSQDVJYH3YH3YJ4TDORD2SU7L5V4ZXBZJ43XEVGWZFPAV` |
+| **Sılanur Polat** | silapolat08@gmail.com | `GBREF4WXYKLLUQZZHIY4E2WQ5N3NMAB4W26V472AP2SJVZQOU3GBOR5B` |
+| **Züleyha Ateş** | zuleyhaates25@gmail.com | `GBWKENQV2J4SYSRULJA3CVYCXVUAMLQQL73S2NYYY3XZHWZSDHKFG6D2` |
+| **Yüsra Çolak** | yusraclk@gmail.com | `GD7E45CSAIQV2FJO5CGXB4YGNUYXUJZ7YWQNCYFWMG4D34CGB5UVS6Q3` |
+| **Melek Gürler** | melek256@gmail.com | `GC3JXR2OBJP2Z3MFS7MDSFCN7RVQYWW7YQMTAX5AUKS7RQLT7J5J4EQW` |
+
+---
+
+### 📋 Table 2: Onboarded Production Validation Nodes & Resolution History (Level 6 Cohort)
+*This matrix details the 30 active Level 6 production user nodes alongside the precise 7-character repository Commit Shas tracking their optimization requests or architectural integration.*
+
+| User Name | User Email | User Wallet Address | Commit ID / Resolution |
 | :--- | :--- | :--- | :--- |
-| **Sema Çiftçi** | semaciftci23@gmail.com | `GC6AXRCCWINZ26JSQDVJYH3YJ4TDORD2SU7L5V4ZXBZJ43XEVGWZFPAV` | - |
-| **Sılanur Polat** | silapolat08@gmail.com | `GBREF4WXYKLLUQZZHIY4E2WQ5N3NMAB4W26V472AP2SJVZQOU3GBOR5B` | - |
-| **Züleyha Ateş** | zuleyhaates25@gmail.com | `GBWKENQV2J4SYSRULJA3CVYCXVUAMLQQL73S2NYYY3XZHWZSDHKFG6D2` | - |
-| **Yüsra Çolak** | yusraclk@gmail.com | `GD7E45CSAIQV2FJO5CGXB4YGNUYXUJZ7YWQNCYFWMG4D34CGB5UVS6Q3` | - |
-| **Melek Gürler** | melek256@gmail.com | `GC3JXR2OBJP2Z3MFS7MDSFCN7RVQYWW7YQMTAX5AUKS7RQLT7J5J4EQW` | - |
-| **İsmail Ateş** | ismail25@gmail.com | `GBXTMXHHEEEW3VNYHEZYAVV3Q7MF7SLP2CXK3C5K6IBCNNX7CP67F2IM` | Add more detailed transaction history |
-| **Afra Duru** | durusoyafra07@gmail.com | `GC4UYA4GWY35KGQ7U434DXQBC4HZ6HAMJ2LOMMHC3FJAHHV23RJUB7EV` | Improve mobile UI performance |
-| **Feyzanur Ateş** | feyzanurates4@gmail.com | `GDPGD3WEAVACUKCONRDUELD46ML5KDQAC2JTF7QE6EEEW7VSFYZEBZX5` | Add more analytics features |
-| **Emre Yıldız** | emreyildiz01@gmail.com | `GA4INDKZSBMYUL2DKUMC2732COE4CLKRX6YUIZS56UWLL2F6DD4ZL3G5` | Add transaction history view |
-| **Zeynep Kaya** | zeynepkaya.dev@gmail.com | `GDYD6GZ6QWKEULFZU6HMLSH4JM5IAJXBY3HFMCHZHTHIGH5DKEVNX2ZM` | Improve mobile responsiveness |
-| **Can Demir** | candemir@gmail.com | `GDWL2RCDFQVDGH3IJL4ZGLX5CGU27MO6R7OQVCNYLQWROYZND2B6ENCI` | Transactions felt slow |
-| **Elif Aydın** | elifaydin@gmail.com | `GBL2APVSMV2IYSO2B6C67VASKRJHXVCAOSHEBLC6BM4CBSKDMQOU25HU` | Add dark mode |
-| **Burak Çelik** | burakcelik@gmail.com | `GAVNSWLAN4VG54IVLHCF3O45ZOAZSPLNH7GNR25RVFLH434BAQS3JJAO` | Improve loading speed |
-| **Merve Koç** | mervekoc@gmail.com | `GCCHWOJNEC7VJ2NCTIQYKYYYWZSZRUU2KAYVY5VMDWF3ONYKWUH6DO7I` | Add notifications |
-| **Oğuzhan Şahin** | oguzhansahin@gmail.com | `GCHRZKNZGV27USWARNID7YPVUBXV6WNPG6YRVLKQ4QDUURMJY4OU5JJ5` | Improve UX clarity |
-| **Selin Arslan** | selinarslan@gmail.com | `GDNN6X4H3SUEN2F5XUQA3BDYCSRO54AVV5GWFIGO3DTLPONEMCS4DSLV` | Add analytics dashboard |
-| **Hakan Yılmaz** | hakanyilmaz@gmail.com | `GCNSHMQNN66RDGXXWA3MV7CHOMZ5YCC2D7EYPUJWZICTZV4QQ2ZMNFOP` | Improve stability |
-| **Ayşe Demir** | aysedemir@gmail.com | `GCKX3NOWP7LYF2L6YWMFIKNKROBHVLDEQSAAWWQHDSXNVWUTDHRPZYIH` | Better error messages |
-| **Kerem Acar** | keremacar@gmail.com | `GCHS7OSQNPBA2XUFAVGIPNK72DED3WWD2DJOA4ANDQ7BHM4R5GDRJSS7` | Improve backend speed |
-| **Derya Kurt** | deryakurt@gmail.com | `GCWXWMORXOEB2JWVCE7LBWFLNT5QFQ5JKQVRFNB3AZRQUSLUCHXBM2O2` | Add tutorials |
-| **Ahmet Öz** | ahmetoz@gmail.com | `GDLXN35JGULDTNEZGGFV6IQKDULH5O6GN5L7BY252AMAFME7RCXYWXAB` | Improve UX |
-| **Nazlı Şen** | nazlisen@gmail.com | `GBJP4RV3PLYSQZKQMUQGO5NO4XIEEYXHYIVR2GCWETFNGSEPQRRSAN6O` | Add language support |
-| **Yusuf Polat** | yusufpolat@gmail.com | `GBTLBOA5M5P6RUMWVL6UXRFFUAJX4X6AMHFFY3LDM5L6ES2FQL2OEFER` | Improve error handling |
-| **Deniz Güneş** | denizgunes@gmail.com | `GBJE3VLOOSAJKZFB7ILEUY6UK2CONTPQVI75APNG7USR64VT2AAMETI6` | Add notifications |
-| **Melis Aydın** | melisaydin@gmail.com | `GCSDJ2BQTERO3RFGLUR4Q4KVJKWGFWAY423HBIWHJSTSMUE7DNUL2JGO` | Improve UI |
-| **Barış Kılıç** | bariskilic@gmail.com | `GCP42RESSZ2YTIK7SMTRC3T27AIPHBMJJMGOMK63YK4YTLMF6HWO26QX` | Improve speed |
-| **Gökhan Çetin** | gokhancetin@gmail.com | `GB67HLEMWX3VLRYPSLUFZ5HCTIF55DHNPTHV55YAY5OKFTKVLE7IN5F4` | Add more features |
-| **Tuğba Şahin** | tugbasahin@gmail.com | `GC5Y25BO5R5DPU6NHPUZHW6JDABW5Z4ETAOLE2D4ZOU4O36ISJQRVBRS` | Improve design |
-| **Volkan Aras** | volkanaras@gmail.com | `GBOQMOY5KHPMVXFZNUT4CNH2N3NPFXTXD4G6MQT7JXKGU6VSTRPRRO5P` | Add logs |
-| **Pelin Demirtaş** | pelindemirtas@gmail.com | `GD7M6TIBC422HNXG5SMID5Z2GVRQ55ODDG63HEZXGR7DJ36YLD6VKHIA` | Improve mobile UI |
-| **Cem Yıldırım** | cemyildirim@gmail.com | `GDFK6ZKBYVXSS6XU5HC3BDGOK5N2GOQ6LSIDXDIWZYOQML5ZFUEOH7MG` | Add notifications |
-| **Sibel Koç** | sibelkoc@gmail.com | `GAAVRCI7U3OG5T52LIY53KP5XWZCZ7ZK6TOU7CZH5NHLMOGCEKFBP3CN` | Improve UX |
-| **Kaan Özkan** | kaanozkan@gmail.com | `GBFFWPNU2VKKUBO2FPMWF6PS6XGFN3RR7G7R3PXFXOHRNDEECE7LPWSA` | Add dashboard |
-| **Ece Aksoy** | eceaksoy@gmail.com | `GBZYOAEY4H5BFZY2FN7GWUOG6TX54S37VKSYZMWDSMMLD5GJLS46T4HW` | Improve UX clarity |
-| **Murat Çakır** | muratcakir@gmail.com | `GBG3HAUGSWVSVF7LWRXCDFXBJLBDMSBWISLTYDAOXRR7BKOZS572RTX4` | Add analytics |
-
+| **İsmail Ateş** | ismail25@gmail.com | `GBXTMXHHEEEW3VNYHEZYAVV3Q7MF7SLP2CXK3C5K6IBCNNX7CP67F2IM` | `151f6d5` |
+| **Afra Duru** | durusoyafra07@gmail.com | `GC4UYA4GWY35KGQ7U434DXQBC4HZ6HAMJ2LOMMHC3FJAHHV23RJUB7EV` | `16096e2` |
+| **Feyzanur Ateş** | feyzanurates4@gmail.com | `GDPGD3WEAVACUKCONRDUELD46ML5KDQAC2JTF7QE6EEEW7VSFYZEBZX5` | `e5a023f` |
+| **Emre Yıldız** | emreyildiz01@gmail.com | `GA4INDKZSBMYUL2DKUMC2732COE4CLKRX6YUIZS56UWLL2F6DD4ZL3G5` | `6299078` |
+| **Zeynep Kaya** | zeynepkaya.dev@gmail.com | `GDYD6GZ6QWKEULFZU6HMLSH4JM5IAJXBY3HFMCHZHTHIGH5DKEVNX2ZM` | `b17911e` |
+| **Can Demir** | candemir@gmail.com | `GDWL2RCDFQVDGH3IJL4ZGLX5CGU27MO6R7OQVCNYLQWROYZND2B6ENCI` | `699c4d0` |
+| **Elif Aydın** | elifaydin@gmail.com | `GBL2APVSMV2IYSO2B6C67VASKRJHXVCAOSHEBLC6BM4CBSKDMQOU25HU` | **Triaged Out** |
+| **Burak Çelik** | burakcelik@gmail.com | `GAVNSWLAN4VG54IVLHCF3O45ZOAZSPLNH7GNR25RVFLH434BAQS3JJAO` | `699c4d0` |
+| **Merve Koç** | mervekoc@gmail.com | `GCCHWOJNEC7VJ2NCTIQYKYYYWZSZRUU2KAYVY5VMDWF3ONYKWUH6DO7I` | `3acfe7a` |
+| **Oğuzhan Şahin** | oguzhansahin@gmail.com | `GCHRZKNZGV27USWARNID7YPVUBXV6WNPG6YRVLKQ4QDUURMJY4OU5JJ5` | `f158156` |
+| **Selin Arslan** | selinarslan@gmail.com | `GDNN6X4H3SUEN2F5XUQA3BDYCSRO54AVV5GWFIGO3DTLPONEMCS4DSLV` | `e5a023f` |
+| **Hakan Yılmaz** | hakanyilmaz@gmail.com | `GCNSHMQNN66RDGXXWA3MV7CHOMZ5YCC2D7EYPUJWZICTZV4QQ2ZMNFOP` | `c47e9f2` |
+| **Ayşe Demir** | aysedemir@gmail.com | `GCKX3NOWP7LYF2L6YWMFIKNKROBHVLDEQSAAWWQHDSXNVWUTDHRPZYIH` | `6299078` |
+| **Kerem Acar** | keremacar@gmail.com | `GCHS7OSQNPBA2XUFAVGIPNK72DED3WWD2DJOA4ANDQ7BHM4R5GDRJSS7` | `699c4d0` |
+| **Derya Kurt** | deryakurt@gmail.com | `GCWXWMORXOEB2JWVCE7LBWFLNT5QFQ5JKQVRFNB3AZRQUSLUCHXBM2O2` | **Triaged Out** |
+| **Ahmet Öz** | ahmetoz@gmail.com | `GDLXN35JGULDTNEZGGFV6IQKDULH5O6GN5L7BY252AMAFME7RCXYWXAB` | `f444c0e` |
+| **Nazlı Şen** | nazlisen@gmail.com | `GBJP4RV3PLYSQZKQMUQGO5NO4XIEEYXHYIVR2GCWETFNGSEPQRRSAN6O` | **Triaged Out** |
+| **Yusuf Polat** | yusufpolat@gmail.com | `GBTLBOA5M5P6RUMWVL6UXRFFUAJX4X6AMHFFY3LDM5L6ES2FQL2OEFER` | `6299078` |
+| **Deniz Güneş** | denizgunes@gmail.com | `GBJE3VLOOSAJKZFB7ILEUY6UK2CONTPQVI75APNG7USR64VT2AAMETI6` | `d370255` |
+| **Melis Aydın** | melisaydin@gmail.com | `GCSDJ2BQTERO3RFGLUR4Q4KVJKWGFWAY423HBIWHJSTSMUE7DNUL2JGO` | `c47e9f2` |
+| **Pelin Demirtaş** | pelindemirtas@gmail.com | `GD7M6TIBC422HNXG5SMID5Z2GVRQ55ODDG63HEZXGR7DJ36YLD6VKHIA` | `16096e2` |
+| **Murat Çakır** | muratcakir@gmail.com | `GBG3HAUGSWVSVF7LWRXCDFXBJLBDMSBWISLTYDAOXRR7BKOZS572RTX4` | `2700ce9` |
+| **Cem Yıldırım** | cemyildirim@gmail.com | `GDFK6ZKBYVXSS6XU5HC3BDGOK5N2GOQ6LSIDXDIWZYOQML5ZFUEOH7MG` | `ef8166a` |
+| **Sibel Koç** | sibelkoc@gmail.com | `GAAVRCI7U3OG5T52LIY53KP5XWZCZ7ZK6TOU7CZH5NHLMOGCEKFBP3CN` | `16096e2` |
+| **Ece Aksoy** | eceaksoy@gmail.com | `GBZYOAEY4H5BFZY2FN7GWUOG6TX54S37VKSYZMWDSMMLD5GJLS46T4HW` | `16096e2` |
+| **Barış Kılıç** | bariskilic@gmail.com | `GCP42RESSZ2YTIK7SMTRC3T27AIPHBMJJMGOMK63YK4YTLMF6HWO26QX` | `c47e9f2` |
+| **Tuğba Şahin** | tugbasahin@gmail.com | `GC5Y25BO5R5DPU6NHPUZHW6JDABW5Z4ETAOLE2D4ZOU4O36ISJQRVBRS` | `c47e9f2` |
+| **Gökhan Çetin** | gokhancetin@gmail.com | `GB67HLEMWX3VLRYPSLUFZ5HCTIF55DHNPTHV55YAY5OKFTKVLE7IN5F4` | **Triaged Out** |
+| **Volkan Aras** | volkanaras@gmail.com | `GBOQMOY5KHPMVXFZNUT4CNH2N3NPFXTXD4G6MQT7JXKGU6VSTRPRRO5P` | **Triaged Out** |
+| **Kaan Özkan** | kaanozkan@gmail.com | `GBFFWPNU2VKKUBO2FPMWF6PS6XGFN3RR7G7R3PXFXOHRNDEECE7LPWSA` | **Triaged Out** |
 ---
 
 ## 📈 Improvement Roadmap & Feedback Triage (Git Commit Analysis)
