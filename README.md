@@ -61,6 +61,9 @@ To ensure production-grade application tracking, two internal routes handle live
    * **Transaction Count:** Total multi-party trust pipelines deployed on Stellar.
    * **Completion Rate:** Evaluates system health and successful workflow closures (~87%).
    * **Retention & Trust Scores:** Quantifiable performance index per user node.
+  
+     <img width="1919" height="834" alt="image" src="https://github.com/user-attachments/assets/fad356ca-e9e0-4de7-9974-4c2892769be9" />
+
 
 2. **Monitoring Dashboard (`/monitoring`):**
    * Real-time API status tracking, engine latency charts, error-catching visibility, and indexing pipeline queue health.
