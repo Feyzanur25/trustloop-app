@@ -1,4 +1,4 @@
-# 🚀 TrustLoop – Production Ready Stellar Application
+# 🚀 TrustLoop – Production-Ready Smart Workflow Infrastructure (Black Belt Level)
 
 [![Stellar](https://img.shields.io/badge/Stellar-Testnet-blue)]()
 [![React](https://img.shields.io/badge/Frontend-React-61dafb)]()
@@ -7,8 +7,6 @@
 
 
 ---
-
-# 🚀 TrustLoop – Production-Ready Smart Workflow Infrastructure (Black Belt Level)
 
 ## 🔴 Live Links & Demo
 * **Live Demo (UI):** [TrustLoop Web Application (Vercel)](https://web-49pslbbjk-feyzanur25s-projects.vercel.app/)
