@@ -72,6 +72,8 @@ To ensure production-grade application tracking, two internal routes handle live
   
      <img width="1919" height="838" alt="image" src="https://github.com/user-attachments/assets/75ce6e37-7467-4fdc-b6c7-b749582a2ecd" />
      <img width="1919" height="838" alt="image" src="https://github.com/user-attachments/assets/3bd2e482-0972-4b52-a625-b41ab7bf8543" />
+     <img width="1919" height="829" alt="image" src="https://github.com/user-attachments/assets/76fe25a8-d3a5-4a21-bb83-4e49431167a3" />
+
 
 
 
