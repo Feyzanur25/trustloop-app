@@ -79,7 +79,6 @@ Prior to production deployment, the following security requirements were audited
 * [x] **Stellar Wallet Validation:** RegEx-based public key verification enforcing a 56-character alphanumeric layout starting with `G`.
 * [x] **Environment Protection:** Absolute separation of secrets using secure server-side `.env` variables.
 * [x] **Safe Fallback Architecture:** In-memory fallback and local caching layers preventing application crashes during Horizon Mainnet downtime.
-* [x] **Internal Security Review:** Internal self-audit and security checklist compliance verified and approved for production readiness.
 
 👉 *The complete security breakdown can be read at **`docs/security-checklist.md`**.*
 
