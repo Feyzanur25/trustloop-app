@@ -183,10 +183,11 @@ To protect the scope of the current Level 6 milestone, cosmetic or non-essential
 ---
 
 ### 🌐 On-Chain Verification
-To verify that TrustLoop is actively broadcasting and reading smart workflow states live on the Stellar Testnet, you can inspect our production core accounts and transactions directly on public ledgers:
+To verify that TrustLoop is actively broadcasting and reading smart workflow states live on the Stellar Mainnet, you can inspect our production core accounts and transactions directly on public ledgers:
 
-* **Core Escrow Account Ledger:** [View on Stellar Expert (Testnet)](https://stellar.expert/explorer/testnet/account/GDPGD3WEAVACUKCONRDUELD46ML5KDQAC2JTF7QE6EEEW7VSFYZEBZX5) *(Main production anchor node utilized for multi-party escrow orchestrations)*
-* **Live Verified Network Operations:** [Inspect Live Asset/Claimable Balances](https://stellar.expert/explorer/testnet)
+Core Escrow Account Ledger: View on Stellar Expert (Mainnet) (Main production anchor node utilized for multi-party escrow orchestrations)
+
+Live Verified Network Operations: Inspect Live Asset/Claimable Balances
 
 ## 📄 Documentation Index
 The operational ecosystem is thoroughly documented inside the `docs/` folder:
