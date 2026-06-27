@@ -141,12 +141,10 @@ export default function Onboarding() {
   };
 
   return (
-    <div className="space-y-6 rounded-[28px] border border-white/10 bg-[linear-gradient(120deg,rgba(27,19,40,0.8),rgba(19,29,35,0.95))] p-6 backdrop-blur-xl">
+    <div className="surface-shell space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <div className="text-sm uppercase tracking-[0.24em] text-white/45">
-            Growth
-          </div>
+          <div className="section-title">Growth</div>
           <div className="mt-2 text-3xl font-semibold tracking-[-0.04em] text-white">
             User Onboarding Hub
           </div>
@@ -157,7 +155,7 @@ export default function Onboarding() {
 
         <div className="flex flex-wrap gap-3">
           <button
-            className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/[0.05] px-4 py-3 text-sm text-white hover:bg-white/[0.08]"
+            className="btn-secondary inline-flex items-center gap-2"
             onClick={() => downloadCsv("trustloop-onboarding.csv", records)}
             type="button"
           >
@@ -165,11 +163,11 @@ export default function Onboarding() {
             Export CSV
           </button>
 
-          <div className="rounded-2xl border border-emerald-400/20 bg-emerald-400/10 px-4 py-3 text-sm text-emerald-100">
+          <div className="stat-pill border-emerald-400/20 bg-emerald-400/10 text-emerald-100">
             {records.length}+ user records ready
           </div>
 
-          <div className="rounded-2xl border border-cyan-400/20 bg-cyan-400/10 px-4 py-3 text-sm text-cyan-100">
+          <div className="stat-pill border-cyan-400/20 bg-cyan-400/10 text-cyan-100">
             Avg. rating: {averageRating}/5
           </div>
         </div>
@@ -193,7 +191,7 @@ export default function Onboarding() {
 
           <div className="mt-5 space-y-4">
             <input
-              className="w-full rounded-2xl border border-white/10 bg-white/[0.05] px-4 py-3 text-sm text-white outline-none placeholder:text-white/35"
+              className="input-field"
               placeholder="Full name"
               value={form.name}
               onChange={(e) =>
@@ -203,7 +201,7 @@ export default function Onboarding() {
             />
 
             <input
-              className="w-full rounded-2xl border border-white/10 bg-white/[0.05] px-4 py-3 text-sm text-white outline-none placeholder:text-white/35"
+              className="input-field"
               placeholder="Email"
               type="email"
               value={form.email}
@@ -214,7 +212,7 @@ export default function Onboarding() {
             />
 
             <input
-              className="w-full rounded-2xl border border-white/10 bg-white/[0.05] px-4 py-3 text-sm text-white outline-none placeholder:text-white/35"
+              className="input-field"
               placeholder="Wallet address"
               value={form.walletAddress}
               onChange={(e) =>
@@ -227,7 +225,7 @@ export default function Onboarding() {
             />
 
             <textarea
-              className="min-h-32 w-full rounded-2xl border border-white/10 bg-white/[0.05] px-4 py-3 text-sm text-white outline-none placeholder:text-white/35"
+              className="input-field min-h-32"
               placeholder="Product feedback"
               value={form.feedback}
               onChange={(e) =>
@@ -236,7 +234,7 @@ export default function Onboarding() {
             />
 
             <select
-              className="w-full rounded-2xl border border-white/10 bg-white/[0.05] px-4 py-3 text-sm text-white outline-none"
+              className="input-field"
               value={form.productRating}
               onChange={(e) =>
                 setForm((current) => ({

@@ -12,12 +12,59 @@ import opsApi from "../services/opsApi";
 
 function statusTone(status) {
   if (status === "up" || status === "operational" || status === "healthy" || status === "completed") {
-    return "border-emerald-400/20 bg-emerald-400/10 text-emerald-100";
+    return "border-emerald-400/20 bg-emerald-400/12 text-emerald-100";
   }
   if (status === "degraded" || status === "partial" || status === "pending") {
-    return "border-amber-400/20 bg-amber-400/10 text-amber-100";
+    return "border-amber-400/20 bg-amber-400/12 text-amber-100";
   }
-  return "border-rose-400/20 bg-rose-400/10 text-rose-100";
+  return "border-rose-400/20 bg-rose-400/12 text-rose-100";
+}
+
+function Badge({ label, tone }) {
+  return (
+    <span className={`inline-flex rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] ${tone}`}>
+      {label}
+    </span>
+  );
+}
+
+function SummaryCard({ icon, label, value, detail }) {
+  return (
+    <div className="rounded-[28px] border border-white/10 bg-white/[0.04] p-6 shadow-[0_24px_60px_rgba(0,0,0,0.16)] transition hover:-translate-y-0.5 hover:bg-white/[0.06]">
+      <div className="flex items-center justify-between gap-3">
+        <div className="text-sm font-semibold uppercase tracking-[0.18em] text-white/60">{label}</div>
+        <div className="grid h-12 w-12 place-items-center rounded-3xl bg-slate-900 text-cyan-300 shadow-[0_12px_30px_rgba(34,211,238,0.16)]">
+          {icon}
+        </div>
+      </div>
+      <div className="mt-5 text-4xl font-semibold tracking-[-0.04em] text-white">{value}</div>
+      <p className="mt-3 text-sm leading-6 text-white/55">{detail}</p>
+    </div>
+  );
+}
+
+function StatusRow({ label, status, detail }) {
+  return (
+    <div className="flex flex-col gap-3 rounded-[24px] border border-white/10 bg-white/[0.03] p-5">
+      <div className="flex items-center justify-between gap-4">
+        <div className="text-sm font-semibold text-white">{label}</div>
+        <span className={`rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] ${statusTone(status)}`}>
+          {status}
+        </span>
+      </div>
+      <p className="text-sm leading-6 text-white/60">{detail}</p>
+    </div>
+  );
+}
+
+function DetailTile({ title, value, meta }) {
+  return (
+    <div className="rounded-[22px] border border-white/10 bg-white/[0.04] p-5">
+      <div className="text-sm text-white/50">{title}</div>
+      <div className="mt-3 text-2xl font-semibold text-white">{value}</div>
+      {meta ? <p className="mt-2 text-sm text-white/55">{meta}</p> : null}
+    </div>
+  );
 }
 
 const fallbackMonitoring = {
@@ -43,7 +90,7 @@ const fallbackMonitoring = {
     {
       name: "Notification Pipeline",
       status: "degraded",
-      detail: "Notifications are functional with reduced refresh frequency during demo mode.",
+      detail: "Notifications are functional with reduced refresh frequency.",
     },
   ],
   alerts: [
@@ -71,19 +118,6 @@ const fallbackSecurity = [
   { id: 5, label: "Dual-approval workflow protection", status: "completed" },
   { id: 6, label: "Rate limiting preparation", status: "pending" },
 ];
-
-function SmallCard({ icon, label, value, hint }) {
-  return (
-    <div className="rounded-[22px] border border-white/10 bg-white/[0.04] p-5">
-      <div className="flex items-center gap-2 text-sm text-white/60">
-        {icon}
-        <span>{label}</span>
-      </div>
-      <div className="mt-3 text-3xl font-semibold text-white">{value}</div>
-      <div className="mt-2 text-sm text-white/50">{hint}</div>
-    </div>
-  );
-}
 
 export default function Monitoring() {
   const [monitoring, setMonitoring] = useState(fallbackMonitoring);
@@ -135,7 +169,6 @@ export default function Monitoring() {
     }
 
     loadMonitoring();
-
     return () => {
       active = false;
     };
@@ -147,9 +180,10 @@ export default function Monitoring() {
   );
 
   const completedSecurityChecks = useMemo(
-    () => security.filter((item) =>
-      ["completed", "healthy", "operational", "up"].includes(item.status)
-    ).length,
+    () =>
+      security.filter((item) =>
+        ["completed", "healthy", "operational", "up"].includes(item.status)
+      ).length,
     [security]
   );
 
@@ -161,217 +195,181 @@ export default function Monitoring() {
     [monitoring.services]
   );
 
-  return (
-    <div className="space-y-6 rounded-[28px] border border-white/10 bg-[linear-gradient(120deg,rgba(15,25,42,0.9),rgba(18,31,39,0.8))] p-6 backdrop-blur-xl">
-      <div className="flex flex-wrap items-start justify-between gap-4">
-        <div className="max-w-3xl">
-          <div className="text-sm uppercase tracking-[0.24em] text-white/45">
-            Operations
-          </div>
-          <div className="mt-2 text-3xl font-semibold tracking-[-0.04em] text-white">
-            Monitoring & Security
-          </div>
-          <p className="mt-3 max-w-2xl text-sm leading-6 text-white/60">
-            Production-readiness monitoring for TrustLoop, including service health,
-            indexer visibility, latency tracking, and security checklist coverage
-            across Stellar Testnet validation flows.
-          </p>
-        </div>
+  const serviceHealthLabel = useMemo(() => {
+    const total = monitoring.services?.length || 0;
+    if (operationalServices === total) return "All systems green";
+    if (operationalServices >= total - 1) return "Minor degradation";
+    return "Partial instability detected";
+  }, [monitoring.services, operationalServices]);
 
-        <div className="flex flex-wrap gap-3">
-          <div className={`rounded-2xl border px-4 py-2 text-sm ${statusTone(monitoring.status)}`}>
-            {usingFallback ? "Demo monitoring active" : monitoring.status}
+  return (
+    <div className="mx-auto max-w-7xl space-y-6 px-4 py-8 sm:px-6 lg:px-8">
+      <div className="rounded-[32px] border border-white/10 bg-slate-950/95 p-8 shadow-[0_35px_120px_rgba(0,0,0,0.24)]">
+        <div className="flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between">
+          <div className="max-w-3xl space-y-3">
+            <div className="section-title">Operations</div>
+            <h1 className="text-4xl font-semibold tracking-[-0.04em] text-white sm:text-5xl">
+              Monitoring, health, and security at a glance.
+            </h1>
+            <p className="max-w-2xl text-sm leading-7 text-white/65 sm:text-base">
+              TrustLoop monitoring surfaces live service health, indexer visibility, latency trends, and audit-ready security posture.
+            </p>
           </div>
-          <div className="rounded-2xl border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-sm text-cyan-100">
-            {operationalServices}/{monitoring.services?.length || 0} services healthy
+
+          <div className="flex flex-wrap items-center gap-3">
+            <Badge
+              label={usingFallback ? "Demo mode" : monitoring.status || "Unknown"}
+              tone={statusTone(usingFallback ? "pending" : monitoring.status)}
+            />
+            <Badge
+              label={`${operationalServices}/${monitoring.services?.length || 0} services healthy`}
+              tone="border-cyan-400/20 bg-cyan-400/12 text-cyan-100"
+            />
           </div>
         </div>
       </div>
 
       {error ? (
-        <div className="rounded-2xl border border-amber-400/20 bg-amber-400/10 px-4 py-3 text-sm text-amber-100">
+        <div className="rounded-[24px] border border-amber-400/20 bg-amber-400/10 px-5 py-4 text-sm text-amber-100">
           {error}
         </div>
       ) : null}
 
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        <SmallCard
-          icon={<Server size={17} />}
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <SummaryCard
+          icon={<Server size={20} />}
           label="API uptime"
           value={`${uptimeMinutes}m`}
-          hint="Current monitored runtime window"
+          detail="Measured runtime window for core operations"
         />
-        <SmallCard
-          icon={<Radar size={17} />}
+        <SummaryCard
+          icon={<Radar size={20} />}
           label="Average latency"
           value={`${monitoring.avgLatencyMs || 0}ms`}
-          hint="Observed response latency"
+          detail="Live response profile across endpoints"
         />
-        <SmallCard
-          icon={<Database size={17} />}
+        <SummaryCard
+          icon={<Database size={20} />}
           label="Indexed events"
           value={indexer.indexedEvents || 0}
-          hint="Tracked trust loop and event activity"
+          detail="Processed trust loop and event records"
         />
-        <SmallCard
-          icon={<ShieldCheck size={17} />}
-          label="Security checks"
+        <SummaryCard
+          icon={<ShieldCheck size={20} />}
+          label="Security coverage"
           value={`${completedSecurityChecks}/${security.length}`}
-          hint="Checklist completion status"
+          detail="Checklist items verified for operational readiness"
         />
       </div>
 
-      <div className="grid gap-4 md:grid-cols-3">
-        <div className="rounded-[22px] border border-white/10 bg-white/[0.04] p-4">
-          <div className="flex items-center gap-2 text-sm text-white/60">
-            <Activity size={16} />
-            Monitoring mode
-          </div>
-          <div className="mt-3 text-lg font-semibold text-white">
-            Testnet-backed operational visibility
-          </div>
-          <div className="mt-1 text-sm text-white/50">
-            Includes service health, indexer sync, and controlled demo validation.
-          </div>
+      <div className="grid gap-6 xl:grid-cols-[1.5fr_0.95fr]">
+        <div className="space-y-6">
+          <section className="rounded-[28px] border border-white/10 bg-black/15 p-6 shadow-[0_24px_60px_rgba(0,0,0,0.18)]">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <div className="text-sm font-semibold uppercase tracking-[0.18em] text-white/50">Service status</div>
+                <h2 className="mt-3 text-2xl font-semibold text-white">Operational service health</h2>
+              </div>
+              <div className="rounded-3xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white/70">
+                {serviceHealthLabel}
+              </div>
+            </div>
+
+            <div className="mt-6 grid gap-4">
+              {(monitoring.services || []).map((service) => (
+                <StatusRow
+                  key={service.name}
+                  label={service.name}
+                  status={service.status}
+                  detail={service.detail}
+                />
+              ))}
+            </div>
+          </section>
+
+          <section className="rounded-[28px] border border-white/10 bg-black/15 p-6 shadow-[0_24px_60px_rgba(0,0,0,0.18)]">
+            <div className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.18em] text-white/50">
+              <Activity size={16} />
+              Platform snapshot
+            </div>
+            <div className="mt-4 grid gap-4 sm:grid-cols-2">
+              <DetailTile
+                title="Sync source"
+                value={indexer.source || "Stellar Testnet"}
+                meta="Event indexing origin"
+              />
+              <DetailTile
+                title="Last synced"
+                value={indexer.lastSyncedAt || "-"}
+                meta="Recent indexer visibility"
+              />
+              <DetailTile
+                title="Indexed loops"
+                value={indexer.indexedLoops || 0}
+                meta="Loop data available for dashboard queries"
+              />
+              <DetailTile
+                title="Backfill queue"
+                value={indexer.pendingBackfill ?? 0}
+                meta="Pending historical sync tasks"
+              />
+            </div>
+          </section>
         </div>
 
-        <div className="rounded-[22px] border border-white/10 bg-white/[0.04] p-4">
-          <div className="flex items-center gap-2 text-sm text-white/60">
-            <CheckCircle2 size={16} />
-            Readiness summary
-          </div>
-          <div className="mt-3 text-lg font-semibold text-white">
-            {completedSecurityChecks >= 5 ? "Strong security posture" : "Partial security completion"}
-          </div>
-          <div className="mt-1 text-sm text-white/50">
-            Based on current checklist completion and service health signals.
-          </div>
-        </div>
-
-        <div className="rounded-[22px] border border-white/10 bg-white/[0.04] p-4">
-          <div className="flex items-center gap-2 text-sm text-white/60">
-            <ShieldCheck size={16} />
-            Indexing source
-          </div>
-          <div className="mt-3 text-lg font-semibold text-white">
-            {indexer.source || "Stellar Testnet"}
-          </div>
-          <div className="mt-1 text-sm text-white/50">
-            Event data is monitored and surfaced for dashboard and review flows.
-          </div>
-        </div>
-      </div>
-
-      <div className="grid gap-6 xl:grid-cols-[1.2fr_1fr]">
-        <section className="rounded-[24px] border border-white/10 bg-black/15 p-5">
-          <div className="text-lg font-semibold text-white">Service status</div>
-          <div className="mt-2 text-sm text-white/50">
-            Core runtime services involved in the production-readiness demo.
-          </div>
-
-          <div className="mt-4 space-y-3">
-            {(monitoring.services || []).map((service) => (
-              <div
-                key={service.name}
-                className="flex items-start justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3"
-              >
-                <div>
-                  <div className="font-medium text-white">{service.name}</div>
-                  <div className="text-sm text-white/55">{service.detail}</div>
-                </div>
+        <aside className="space-y-6">
+          <section className="rounded-[28px] border border-white/10 bg-black/15 p-6 shadow-[0_24px_60px_rgba(0,0,0,0.18)]">
+            <div className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.18em] text-white/50">
+              <CheckCircle2 size={16} />
+              Security readiness
+            </div>
+            <div className="mt-4 space-y-3">
+              {security.map((item) => (
                 <div
-                  className={`rounded-full border px-3 py-1 text-xs ${statusTone(service.status)}`}
+                  key={item.id}
+                  className="flex items-center justify-between rounded-[22px] border border-white/10 bg-white/[0.04] px-4 py-4"
                 >
-                  {service.status}
+                  <span className="text-sm text-white/75">{item.label}</span>
+                  <span className={`rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] ${statusTone(item.status)}`}>
+                    {item.status}
+                  </span>
                 </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="rounded-[24px] border border-white/10 bg-black/15 p-5">
-          <div className="text-lg font-semibold text-white">Indexer visibility</div>
-          <div className="mt-2 text-sm text-white/50">
-            Current indexing status for trust loops and related events.
-          </div>
-
-          <div className="mt-4 space-y-4 text-sm text-white/70">
-            <div className="rounded-2xl bg-white/[0.04] px-4 py-3">
-              <div className="text-white/50">Source</div>
-              <div className="mt-1 text-white">{indexer.source || "-"}</div>
+              ))}
             </div>
+          </section>
 
-            <div className="rounded-2xl bg-white/[0.04] px-4 py-3">
-              <div className="text-white/50">Last sync</div>
-              <div className="mt-1 text-white">{indexer.lastSyncedAt || "-"}</div>
+          <section className="rounded-[28px] border border-amber-400/15 bg-amber-500/[0.06] p-6 shadow-[0_24px_60px_rgba(241,156,83,0.14)]">
+            <div className="flex items-center gap-3 text-lg font-semibold text-white">
+              <AlertTriangle size={20} />
+              Active alerts
             </div>
-
-            <div className="rounded-2xl bg-white/[0.04] px-4 py-3">
-              <div className="text-white/50">Indexed loops</div>
-              <div className="mt-1 text-white">{indexer.indexedLoops || 0}</div>
+            <p className="mt-2 text-sm text-white/65">
+              Key notices surfaced from monitoring and demo resilience checks.
+            </p>
+            <div className="mt-5 space-y-3">
+              {monitoring.alerts?.length ? (
+                monitoring.alerts.map((alert) => (
+                  <div key={alert.title} className="rounded-2xl bg-black/15 p-4">
+                    <div className="font-semibold text-white">{alert.title}</div>
+                    <p className="mt-1 text-sm text-white/65">{alert.detail}</p>
+                  </div>
+                ))
+              ) : (
+                <div className="rounded-2xl bg-white/[0.04] p-4 text-sm text-white/60">
+                  No active alerts currently. The platform is operating normally.
+                </div>
+              )}
             </div>
-
-            <div className="rounded-2xl bg-white/[0.04] px-4 py-3">
-              <div className="text-white/50">Indexed events</div>
-              <div className="mt-1 text-white">{indexer.indexedEvents || 0}</div>
-            </div>
-
-            <div className="rounded-2xl bg-white/[0.04] px-4 py-3">
-              <div className="text-white/50">Backfill queue</div>
-              <div className="mt-1 text-white">{indexer.pendingBackfill ?? 0}</div>
-            </div>
-          </div>
-        </section>
+          </section>
+        </aside>
       </div>
 
-      <section className="rounded-[24px] border border-white/10 bg-black/15 p-5">
-        <div className="text-lg font-semibold text-white">Security checklist</div>
-        <div className="mt-2 text-sm text-white/50">
-          Readiness items covering validation, wallet safety, and operational safeguards.
-        </div>
-
-        <div className="mt-4 grid gap-3 md:grid-cols-2">
-          {security.map((item) => (
-            <div
-              key={item.id}
-              className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3"
-            >
-              <span className="text-sm text-white/75">{item.label}</span>
-              <span className={`rounded-full border px-3 py-1 text-xs ${statusTone(item.status)}`}>
-                {item.status}
-              </span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {monitoring.alerts?.length ? (
-        <section className="rounded-[24px] border border-amber-400/15 bg-amber-500/[0.06] p-5">
-          <div className="flex items-center gap-2 text-lg font-semibold text-white">
-            <AlertTriangle size={18} />
-            Active alerts
-          </div>
-          <div className="mt-2 text-sm text-white/60">
-            Operational notices surfaced during monitoring and demo validation.
-          </div>
-
-          <div className="mt-4 space-y-3">
-            {monitoring.alerts.map((alert) => (
-              <div key={alert.title} className="rounded-2xl bg-black/15 px-4 py-3">
-                <div className="font-medium text-white">{alert.title}</div>
-                <div className="mt-1 text-sm text-white/65">{alert.detail}</div>
-              </div>
-            ))}
-          </div>
-        </section>
-      ) : null}
-
-      <div className="rounded-[22px] border border-white/10 bg-white/[0.04] p-4 text-sm text-white/55">
+      <div className="rounded-[24px] border border-white/10 bg-white/[0.04] p-5 text-sm text-white/55">
         {loading
-          ? "Loading monitoring..."
+          ? "Loading monitoring data..."
           : usingFallback
-          ? "Showing resilient demo monitoring data because live monitoring endpoints are currently unavailable."
-          : "Live monitoring data loaded successfully from operations services."}
+          ? "Showing demo monitoring data while live endpoints warm up."
+          : "Live monitoring data loaded for TrustLoop operations."}
       </div>
     </div>
   );

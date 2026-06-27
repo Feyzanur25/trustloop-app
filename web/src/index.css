@@ -32,43 +32,126 @@
   animation: fadeIn 0.5s ease-out;
 }
 
-:root {
-  color-scheme: dark;
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", sans-serif;
-  background:
-    radial-gradient(circle at top left, rgba(12, 86, 77, 0.34), transparent 34%),
-    radial-gradient(circle at 18% 82%, rgba(9, 89, 108, 0.28), transparent 30%),
-    linear-gradient(135deg, #051219 0%, #05070d 42%, #110a18 100%);
-  color: #f6f7f9;
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background: #020308;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background:
+      radial-gradient(circle at top left, rgba(16, 185, 129, 0.22), transparent 20%),
+      radial-gradient(circle at 80% 18%, rgba(56, 189, 248, 0.12), transparent 24%),
+      linear-gradient(145deg, #020308 0%, #020b16 40%, #07111b 100%);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  #root {
+    width: 100%;
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background: rgba(52, 211, 153, 0.45);
+    color: #f9fafb;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, rgba(52, 211, 153, 0.7), rgba(16, 185, 129, 0.55));
+    border-radius: 999px;
+    border: 2px solid rgba(7, 11, 18, 0.8);
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
 }
 
-html,
-body,
-#root {
-  min-height: 100%;
+@layer components {
+  .glass-panel {
+    @apply border border-white/10 bg-white/[0.04] backdrop-blur-xl;
+  }
+
+  .surface-panel {
+    @apply rounded-[26px] border border-white/10 shadow-[0_24px_80px_rgba(0,0,0,0.48)] backdrop-blur-xl;
+    background: rgba(7, 10, 18, 0.94);
+  }
+
+  .surface-card {
+    @apply rounded-[24px] border border-white/10 bg-slate-950/95 shadow-[0_14px_40px_rgba(0,0,0,0.25)] backdrop-blur-xl;
+  }
+
+  .surface-shell {
+    @apply rounded-[28px] border border-white/10 p-6 backdrop-blur-xl;
+    background: linear-gradient(120deg, rgba(6, 14, 24, 0.98), rgba(5, 10, 20, 0.94) 58%, rgba(12, 16, 30, 0.98));
+  }
+
+  .surface-subtle {
+    @apply rounded-[22px] border border-white/10 bg-slate-950/95 p-4;
+  }
+
+  .section-title {
+    @apply text-[0.92rem] font-semibold tracking-[0.18em] text-white/60 uppercase;
+  }
+
+  .card-hover {
+    @apply transition duration-300 hover:-translate-y-0.5 hover:border-white/15 hover:bg-white/[0.06];
+  }
+
+  .panel-glow {
+    @apply shadow-[0_0_0_1px_rgba(255,255,255,0.03),0_18px_50px_rgba(0,0,0,0.35)];
+  }
+
+  .btn-primary {
+    @apply rounded-[18px] border border-emerald-400/25 bg-gradient-to-r from-emerald-400/20 to-cyan-400/15 px-5 py-3 text-[0.95rem] font-semibold text-white shadow-[0_10px_25px_rgba(16,185,129,0.14)] transition hover:scale-[1.01] hover:from-emerald-400/25 hover:to-cyan-400/20;
+  }
+
+  .btn-secondary {
+    @apply rounded-[18px] border border-white/10 bg-slate-900/80 px-5 py-3 text-[0.95rem] font-medium text-white transition hover:bg-slate-900/95;
+  }
+
+  .input-field {
+    @apply w-full rounded-2xl border border-white/10 bg-white/[0.05] px-4 py-3 text-sm text-white outline-none placeholder:text-white/35 focus:border-emerald-400/25 focus:bg-white/[0.06] focus:ring-2 focus:ring-emerald-400/10;
+  }
+
+  .metric-card {
+    @apply rounded-[22px] border border-white/10 bg-white/[0.04] p-5;
+  }
+
+  .stat-pill {
+    @apply rounded-2xl border px-4 py-2 text-sm;
+  }
+
+  .table-shell {
+    @apply overflow-hidden rounded-2xl border border-white/10 bg-slate-950/95;
+  }
 }
 
-html {
-  background: #05070d;
-}
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  background:
-    radial-gradient(circle at top left, rgba(12, 86, 77, 0.34), transparent 34%),
-    radial-gradient(circle at 18% 82%, rgba(9, 89, 108, 0.28), transparent 30%),
-    linear-gradient(135deg, #051219 0%, #05070d 42%, #110a18 100%);
-}
-
-#root {
-  width: 100%;
-}
-
-button,
-input,
-select,
-textarea {
-  font: inherit;
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(90deg, #f8fafc 0%, #b7f7d3 50%, #67e8f9 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
 }

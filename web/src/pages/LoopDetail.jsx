@@ -98,10 +98,10 @@ export default function LoopDetail() {
     (approvals.clientApproved && approvals.freelancerApproved);
 
   return (
-    <div className="space-y-6 rounded-[28px] border border-white/10 bg-[linear-gradient(120deg,rgba(16,27,34,0.94),rgba(20,18,34,0.88))] p-6 text-white backdrop-blur-xl">
+    <div className="surface-shell space-y-6 text-white">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <div className="text-sm uppercase tracking-[0.24em] text-white/45">TrustLoop</div>
+          <div className="section-title">TrustLoop</div>
           <div className="mt-2 text-3xl font-semibold tracking-[-0.04em]">{loop.id}</div>
           <div className="mt-2 text-sm text-white/60">
             {loop.counterparty} · {loop.role} · {loop.status}
@@ -113,7 +113,7 @@ export default function LoopDetail() {
           </div>
           <Link
             to="/"
-            className="rounded-2xl border border-white/10 bg-white/[0.05] px-4 py-2 text-sm hover:bg-white/[0.08]"
+            className="btn-secondary"
           >
             Back
           </Link>
@@ -121,19 +121,19 @@ export default function LoopDetail() {
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        <div className="rounded-[22px] border border-white/10 bg-white/[0.04] p-4">
+        <div className="metric-card">
           <div className="text-xs text-white/55">Trust score</div>
           <div className="mt-2 text-2xl font-semibold">{loop.score}/100</div>
         </div>
-        <div className="rounded-[22px] border border-white/10 bg-white/[0.04] p-4">
+        <div className="metric-card">
           <div className="text-xs text-white/55">Expires in</div>
           <div className="mt-2 text-2xl font-semibold">{loop.expiresInDays || 0} days</div>
         </div>
-        <div className="rounded-[22px] border border-white/10 bg-white/[0.04] p-4">
+        <div className="metric-card">
           <div className="text-xs text-white/55">Last event</div>
           <div className="mt-2 text-lg font-semibold">{loop.lastEvent || "-"}</div>
         </div>
-        <div className="rounded-[22px] border border-white/10 bg-white/[0.04] p-4">
+        <div className="metric-card">
           <div className="text-xs text-white/55">Approval policy</div>
           <div className="mt-2 text-lg font-semibold">
             {approvals.requiredApprovals === 2 ? "Dual approval" : "Single approval"}

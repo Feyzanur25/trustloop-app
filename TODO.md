@@ -1,5 +1,6 @@
-# CI/CD npm lock file fix - COMPLETE
+# TODO
 
-## Steps:
-- [x] Updated .github/workflows/ci-cd.yml: Removed cache: "npm" from setup-node, upgraded all checkout to v4, setup-node to v4
-- [x] Ready to commit/push and test
+- [ ] `api/data/store.json` içinde demo state’i eski 35’lik görünüme getirmek (loops=35, TL-001..TL-035)
+- [ ] `events` ve `approvals` alanlarını her loop için tutarlı üretmek
+- [ ] Uygulama çalışıyorsa / dashboard’ta new loop ve liste sayımının 35 göründüğünü doğrulamak
+

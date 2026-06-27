@@ -4,6 +4,7 @@ import AppLayout from "./ui/AppLayout";
 import Dashboard from "./pages/Dashboard";
 import Events from "./pages/Events";
 import LoopDetail from "./pages/LoopDetail";
+import Loops from "./pages/Loops";
 import Metrics from "./pages/Metrics";
 import Monitoring from "./pages/Monitoring";
 import Onboarding from "./pages/Onboarding";
@@ -17,6 +18,7 @@ export default function App() {
         <Route path="/metrics" element={<Metrics />} />
         <Route path="/monitoring" element={<Monitoring />} />
         <Route path="/onboarding" element={<Onboarding />} />
+        <Route path="/loops" element={<Loops />} />
         <Route path="/loops/:id" element={<LoopDetail />} />
       </Route>
     </Routes>

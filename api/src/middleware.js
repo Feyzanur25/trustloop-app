@@ -85,4 +85,4 @@ function asyncHandler(fn) {
   };
 }
 
-module.exports = { AppError, errorHandler, requestLogger, asyncHandler, createRateLimiter };
+export { AppError, errorHandler, requestLogger, asyncHandler, createRateLimiter };
