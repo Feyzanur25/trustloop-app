@@ -145,6 +145,11 @@ Users were securely onboarded via a structured Google Form workflow, gathering p
 
 The 30+ production user feedbacks were aggregated, evaluated, and cross-referenced with the codebase history. Below is an engineering-level breakdown explaining exactly which suggestions were mapped into development commits, which items were prioritized, and why specific entries were triaged out of the current MVP scope:
 
+### 🔧 Recent Technical Improvements (v2.1.0)
+* **Critical Bug Fix:** Resolved missing `approvalProgress` export in `trustHelpers.js` that was causing application crashes on the Loops page.
+* **Developer Experience:** Added Windows-compatible startup scripts (`npm run start:win` and `npm run dev:win`) that automatically launch Chrome browser for rapid development.
+* **Data Persistence:** Enhanced backend state management to ensure user onboarding data persists correctly across server restarts.
+
 ### 📑 1. Prioritized & Implemented Feedback
 
 #### A) Detailed Transaction History & Visibility
