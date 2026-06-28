@@ -1240,21 +1240,17 @@ Please ensure that new contributions include documentation and follow the existi
 
 ## 🌐 Stellar Mainnet Account
 
-TrustLoop operates on the **Stellar Mainnet** using the following production account for blockchain interactions and transaction processing.
+TrustLoop operates on the **Stellar Mainnet** using the following production account for blockchain interactions.
 
-| Property           | Value                                                      |
-| ------------------ | ---------------------------------------------------------- |
-| **Network**        | Stellar Mainnet                                            |
-| **Account Status** | ✅ Active                                                   |
-| **Public Account** | `GDPGD3WEAVACUKCONRDUELD46ML5KDQAC2JTF7QE6EEEW7VSFYZEBZX5` |
+| Property | Value |
+|----------|-------|
+| Network | Stellar Mainnet |
+| Account Status | ✅ Active |
+| Public Account | `GDPGD3WEAVACUKCONRDUELD46ML5KDQAC2JTF7QE6EEEW7VSFYZEBZX5` |
 
 ### 🔍 Explorer
 
-**Stellar Expert Account**
-
 https://stellar.expert/explorer/public/account/GDPGD3WEAVACUKCONRDUELD46ML5KDQAC2JTF7QE6EEEW7VSFYZEBZX5
-
-The account can be publicly verified through the Stellar Expert blockchain explorer, providing transparent proof of Mainnet activity.
 
 
 
