@@ -62,8 +62,10 @@ To ensure production-grade application tracking, two internal routes handle live
    * **Completion Rate:** Evaluates system health and successful workflow closures (~87%).
    * **Retention & Trust Scores:** Quantifiable performance index per user node.
   
-     <img width="1919" height="834" alt="image" src="https://github.com/user-attachments/assets/fad356ca-e9e0-4de7-9974-4c2892769be9" />
-     <img width="1919" height="834" alt="image" src="https://github.com/user-attachments/assets/854c180b-2b67-47c5-93a4-07a5277cf2b6" />
+    <img width="1917" height="896" alt="image" src="https://github.com/user-attachments/assets/ac6fa7ca-7457-4657-9adb-ca5378110e65" />
+
+     <img width="1918" height="912" alt="image" src="https://github.com/user-attachments/assets/5482b135-bbbf-4f3b-97ee-d3ff5c974ef8" />
+
 
 2. **Monitoring Dashboard (`/monitoring`):**
    * Real-time API status tracking, engine latency charts, error-catching visibility, and indexing pipeline queue health.
