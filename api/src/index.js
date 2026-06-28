@@ -4,7 +4,9 @@ import cors from "cors";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 import { errorHandler, requestLogger, createRateLimiter } from "./middleware.js";
-import { getState, addEvent, refreshLoopScoresInState, importLocalState } from "./data/state.js";
+import { getStateAsync, addEvent, refreshLoopScoresInState, importLocalState } from "./data/state.js";
+
+
 import { buildMonitoringSummary } from "./logic/trustScore.js";
 import { recordRequest, recordLatency, getMetrics as getRequestMetrics } from "./data/metrics.js";
 
@@ -44,11 +46,13 @@ app.get("/api/health", (_req, res) => {
   });
 });
 
-import loopsRouter from "./routes/loops.js";
-import eventsRouter from "./routes/events.js";
-import onboardingRouter from "./routes/onboarding.js";
-import metricsRouter from "./routes/metrics.js";
-import monitoringRouter from "./routes/monitoring.js";
+import loopsRouter from "./routes/loops.db.js";
+
+import eventsRouter from "./routes/events.db.js";
+import onboardingRouter from "./routes/onboarding.db.js";
+import metricsRouter from "./routes/metrics.db.js";
+import monitoringRouter from "./routes/monitoring.db.js";
+
 
 app.use("/api/trustloops", loopsRouter);
 app.use("/api/events", eventsRouter);
@@ -56,8 +60,10 @@ app.use("/api/onboarding", onboardingRouter);
 app.use("/api/metrics", metricsRouter);
 app.use("/api/monitoring", monitoringRouter);
 
-app.get("/api/indexer", (_req, res) => {
-  const state = getState();
+app.get("/api/indexer", async (_req, res) => {
+
+  const state = await getStateAsync();
+
   const indexerStatus = {
     status: "healthy",
     source: "TrustLoop persistent API store",
@@ -87,7 +93,8 @@ app.get("/api/security-checklist", (_req, res) => {
   ]);
 });
 
-app.post("/api/admin/import-local-state", (req, res) => {
+app.post("/api/admin/import-local-state", async (req, res) => {
+
   const { loops, events, onboardingProfiles, approvals } = req.body ?? {};
 
   const nextRaw = {
@@ -100,7 +107,8 @@ app.post("/api/admin/import-local-state", (req, res) => {
     },
   };
 
-  const result = importLocalState(nextRaw);
+  const result = await importLocalState(nextRaw);
+
 
   res.json({
     ok: true,
@@ -126,5 +134,7 @@ app.use((_req, res) => {
 const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, () => {
-  console.log(`API running at http://localhost:${PORT} (persistent JSON mode)`);
+  console.log(`API running at http://localhost:${PORT} (persistent DB mode)`);
+
+
 });

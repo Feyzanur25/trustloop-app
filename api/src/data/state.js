@@ -1,33 +1,41 @@
-import { loadState, commitState } from "./store.js";
 import { addEvent as addEventToArray, refreshLoopScores } from "../logic/trustScore.js";
+import { getStateFromDb, commitStateToDb } from "./stateStore.js";
 
-let state = loadState();
+let statePromise = getStateFromDb();
 
-export function getState() {
-  return state;
+export function getStateAsync() {
+  statePromise = statePromise || getStateFromDb();
+  return statePromise;
 }
 
-export function setState(nextState) {
-  state = nextState;
-  commitState(state);
+export async function setState(nextState) {
+  // Keep cache updated for subsequent operations.
+  statePromise = Promise.resolve(nextState);
+  await commitStateToDb(nextState);
 }
 
-export function touchIndexerSync() {
+export async function touchIndexerSync() {
+  const state = await getStateAsync();
   state.meta.lastIndexerSyncAt = new Date().toISOString();
+  await setState(state);
 }
 
-export function addEvent(type, loopId, detail) {
+export async function addEvent(type, loopId, detail) {
+  const state = await getStateAsync();
   addEventToArray(state.events, type, loopId, detail);
-  touchIndexerSync();
+  await touchIndexerSync();
 }
 
-export function refreshLoopScoresInState() {
+export async function refreshLoopScoresInState() {
+  const state = await getStateAsync();
   state.loops = refreshLoopScores(state.loops, state.approvals);
+  await setState(state);
 }
 
-export function importLocalState(nextRaw) {
-  const normalized = require("./seed.js").normalizeState(nextRaw);
-  state = normalized;
-  commitState(state);
-  return state;
+export async function importLocalState(nextRaw) {
+  const { normalizeState } = await import("./seed.js");
+  const normalized = normalizeState(nextRaw);
+  await setState(normalized);
+  return normalized;
 }
+
