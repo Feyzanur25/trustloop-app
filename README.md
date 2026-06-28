@@ -242,6 +242,7 @@ The monitoring module provides real-time visibility into:
 * Background Services
 * Transaction Queue
 
+
 ---
 
 ## 📊 Metrics Dashboard
@@ -790,7 +791,12 @@ The monitoring dashboard provides visibility into:
 
 📷 **Monitoring Dashboard Screenshot**
 
-> *(Insert screenshot here)*
+<img width="1918" height="912" alt="image" src="https://github.com/user-attachments/assets/756f21ad-40f1-46a4-8b74-5a56e6e0421c" />
+
+<img width="1918" height="912" alt="image" src="https://github.com/user-attachments/assets/9d25d235-37fa-4b5d-8440-c55ba5ce59ea" />
+
+<img width="1918" height="905" alt="image" src="https://github.com/user-attachments/assets/9089142f-9820-404b-84ad-4e5f48629716" />
+
 
 ---
 
@@ -820,7 +826,10 @@ Tracked metrics include:
 
 📷 **Metrics Dashboard Screenshot**
 
-> *(Insert screenshot here)*
+ <img width="1917" height="896" alt="image" src="https://github.com/user-attachments/assets/ac6fa7ca-7457-4657-9adb-ca5378110e65" />
+
+ <img width="1918" height="912" alt="image" src="https://github.com/user-attachments/assets/5482b135-bbbf-4f3b-97ee-d3ff5c974ef8" />
+
 
 ---
 
@@ -892,6 +901,60 @@ The platform has been evaluated with verified users who interacted with the prod
 | Google Form Collection  |    ✅   |
 | Production Feedback     |    ✅   |
 | Blockchain Transactions |    ✅   |
+
+
+## 👥 Onboarded User Directories
+
+### 📋 Table 1: Verified Historical Production Users (Level 5 Cohort)
+*This ledger contains the initial 5 historical validation nodes mapped during the Level 5 core implementation.*
+
+| User Name | User Email | User Wallet Address |
+| :--- | :--- | :--- |
+| **Sema Çiftçi** | semaciftci23@gmail.com | `GC6AXRCCWINZ26JSQDVJYH3YH3YJ4TDORD2SU7L5V4ZXBZJ43XEVGWZFPAV` |
+| **Sılanur Polat** | silapolat08@gmail.com | `GBREF4WXYKLLUQZZHIY4E2WQ5N3NMAB4W26V472AP2SJVZQOU3GBOR5B` |
+| **Züleyha Ateş** | zuleyhaates25@gmail.com | `GBWKENQV2J4SYSRULJA3CVYCXVUAMLQQL73S2NYYY3XZHWZSDHKFG6D2` |
+| **Yüsra Çolak** | yusraclk@gmail.com | `GD7E45CSAIQV2FJO5CGXB4YGNUYXUJZ7YWQNCYFWMG4D34CGB5UVS6Q3` |
+| **Melek Gürler** | melek256@gmail.com | `GC3JXR2OBJP2Z3MFS7MDSFCN7RVQYWW7YQMTAX5AUKS7RQLT7J5J4EQW` |
+
+
+### 📋 Table 2: Onboarded Production Validation Nodes & Resolution History (Level 6 Cohort)
+*This matrix details the 30 active Level 6 production user nodes alongside the precise 7-character repository Commit Shas tracking their optimization requests or architectural integration.*
+
+| User Name | User Email | User Wallet Address | Commit ID / Resolution |
+| :--- | :--- | :--- | :--- |
+| **İsmail Ateş** | ismail25@gmail.com | `GBXTMXHHEEEW3VNYHEZYAVV3Q7MF7SLP2CXK3C5K6IBCNNX7CP67F2IM` | `151f6d5` |
+| **Afra Duru** | durusoyafra07@gmail.com | `GC4UYA4GWY35KGQ7U434DXQBC4HZ6HAMJ2LOMMHC3FJAHHV23RJUB7EV` | `16096e2` |
+| **Feyzanur Ateş** | feyzanurates4@gmail.com | `GDPGD3WEAVACUKCONRDUELD46ML5KDQAC2JTF7QE6EEEW7VSFYZEBZX5` | `e5a023f` |
+| **Emre Yıldız** | emreyildiz01@gmail.com | `GA4INDKZSBMYUL2DKUMC2732COE4CLKRX6YUIZS56UWLL2F6DD4ZL3G5` | `6299078` |
+| **Zeynep Kaya** | zeynepkaya.dev@gmail.com | `GDYD6GZ6QWKEULFZU6HMLSH4JM5IAJXBY3HFMCHZHTHIGH5DKEVNX2ZM` | `b17911e` |
+| **Can Demir** | candemir@gmail.com | `GDWL2RCDFQVDGH3IJL4ZGLX5CGU27MO6R7OQVCNYLQWROYZND2B6ENCI` | `699c4d0` |
+| **Elif Aydın** | elifaydin@gmail.com | `GBL2APVSMV2IYSO2B6C67VASKRJHXVCAOSHEBLC6BM4CBSKDMQOU25HU` | **Roadmap Backlog** |
+| **Burak Çelik** | burakcelik@gmail.com | `GAVNSWLAN4VG54IVLHCF3O45ZOAZSPLNH7GNR25RVFLH434BAQS3JJAO` | `699c4d0` |
+| **Merve Koç** | mervekoc@gmail.com | `GCCHWOJNEC7VJ2NCTIQYKYYYWZSZRUU2KAYVY5VMDWF3ONYKWUH6DO7I` | `3acfe7a` |
+| **Oğuzhan Şahin** | oguzhansahin@gmail.com | `GCHRZKNZGV27USWARNID7YPVUBXV6WNPG6YRVLKQ4QDUURMJY4OU5JJ5` | `f158156` |
+| **Selin Arslan** | selinarslan@gmail.com | `GDNN6X4H3SUEN2F5XUQA3BDYCSRO54AVV5GWFIGO3DTLPONEMCS4DSLV` | `e5a023f` |
+| **Hakan Yılmaz** | hakanyilmaz@gmail.com | `GCNSHMQNN66RDGXXWA3MV7CHOMZ5YCC2D7EYPUJWZICTZV4QQ2ZMNFOP` | `c47e9f2` |
+| **Ayşe Demir** | aysedemir@gmail.com | `GCKX3NOWP7LYF2L6YWMFIKNKROBHVLDEQSAAWWQHDSXNVWUTDHRPZYIH` | `6299078` |
+| **Kerem Acar** | keremacar@gmail.com | `GCHS7OSQNPBA2XUFAVGIPNK72DED3WWD2DJOA4ANDQ7BHM4R5GDRJSS7` | `699c4d0` |
+| **Derya Kurt** | deryakurt@gmail.com | `GCWXWMORXOEB2JWVCE7LBWFLNT5QFQ5JKQVRFNB3AZRQUSLUCHXBM2O2` | **Roadmap Backlog** |
+| **Ahmet Öz** | ahmetoz@gmail.com | `GDLXN35JGULDTNEZGGFV6IQKDULH5O6GN5L7BY252AMAFME7RCXYWXAB` | `f444c0e` |
+| **Nazlı Şen** | nazlisen@gmail.com | `GBJP4RV3PLYSQZKQMUQGO5NO4XIEEYXHYIVR2GCWETFNGSEPQRRSAN6O` | **Roadmap Backlog** |
+| **Yusuf Polat** | yusufpolat@gmail.com | `GBTLBOA5M5P6RUMWVL6UXRFFUAJX4X6AMHFFY3LDM5L6ES2FQL2OEFER` | `6299078` |
+| **Deniz Güneş** | denizgunes@gmail.com | `GBJE3VLOOSAJKZFB7ILEUY6UK2CONTPQVI75APNG7USR64VT2AAMETI6` | `d370255` |
+| **Melis Aydın** | melisaydin@gmail.com | `GCSDJ2BQTERO3RFGLUR4Q4KVJKWGFWAY423HBIWHJSTSMUE7DNUL2JGO` | `c47e9f2` |
+| **Pelin Demirtaş** | pelindemirtas@gmail.com | `GD7M6TIBC422HNXG5SMID5Z2GVRQ55ODDG63HEZXGR7DJ36YLD6VKHIA` | `16096e2` |
+| **Murat Çakır** | muratcakir@gmail.com | `GBG3HAUGSWVSVF7LWRXCDFXBJLBDMSBWISLTYDAOXRR7BKOZS572RTX4` | `2700ce9` |
+| **Cem Yıldırım** | cemyildirim@gmail.com | `GDFK6ZKBYVXSS6XU5HC3BDGOK5N2GOQ6LSIDXDIWZYOQML5ZFUEOH7MG` | `ef8166a` |
+| **Sibel Koç** | sibelkoc@gmail.com | `GAAVRCI7U3OG5T52LIY53KP5XWZCZ7ZK6TOU7CZH5NHLMOGCEKFBP3CN` | `16096e2` |
+| **Ece Aksoy** | eceaksoy@gmail.com | `GBZYOAEY4H5BFZY2FN7GWUOG6TX54S37VKSYZMWDSMMLD5GJLS46T4HW` | `16096e2` |
+| **Barış Kılıç** | bariskilic@gmail.com | `GCP42RESSZ2YTIK7SMTRC3T27AIPHBMJJMGOMK63YK4YTLMF6HWO26QX` | `c47e9f2` |
+| **Tuğba Şahin** | tugbasahin@gmail.com | `GC5Y25BO5R5DPU6NHPUZHW6JDABW5Z4ETAOLE2D4ZOU4O36ISJQRVBRS` | `c47e9f2` |
+| **Gökhan Çetin** | gokhancetin@gmail.com | `GB67HLEMWX3VLRYPSLUFZ5HCTIF55DHNPTHV55YAY5OKFTKVLE7IN5F4` | **Roadmap Backlog** |
+| **Volkan Aras** | volkanaras@gmail.com | `GBOQMOY5KHPMVXFZNUT4CNH2N3NPFXTXD4G6MQT7JXKGU6VSTRPRRO5P` | **Roadmap Backlog** |
+| **Kaan Özkan** | kaanozkan@gmail.com | `GBFFWPNU2VKKUBO2FPMWF6PS6XGFN3RR7G7R3PXFXOHRNDEECE7LPWSA` | **Roadmap Backlog** |
+
+
+
 
 ---
 
