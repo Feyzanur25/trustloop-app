@@ -9,13 +9,8 @@
 
 ## 🔴 Live Links & Demo
 
-* **Live Demo (UI):** 
-* **Introduction & Demo Video:** 
-
-* **Live Demo (UI):** [TrustLoop Web Application (Vercel)](https://web-49pslbbjk-feyzanur25s-projects.vercel.app/)
-* **Introduction & Demo Video:** [Watch on YouTube](https://www.youtube.com/watch?v=cFP9JjQDp9g)
-
-
+* **Live Demo (UI):** https://trustloop-3ygrqb0rt-feyzanur25s-projects.vercel.app/
+* **Introduction & Demo Video:** https://www.youtube.com/watch?v=DEHQMIFN9Ok
 * **Community Contribution (X/Twitter):** [View Verified Post](https://x.com/FeyzanurA67744/status/2038908789101842654)
 * **Verified User Dataset:** [Google Sheets Live Data](https://docs.google.com/spreadsheets/d/18AmzDfSUtz5FqXFK-Y1VJgJmIkD6Nuo2q1nC9djhf5s/edit) or refer to the repository file: `TrustLoop_Verified_User_Dataset.xlsx`
 
