@@ -70,9 +70,9 @@ To ensure production-grade application tracking, two internal routes handle live
 2. **Monitoring Dashboard (`/monitoring`):**
    * Real-time API status tracking, engine latency charts, error-catching visibility, and indexing pipeline queue health.
   
-     <img width="1919" height="838" alt="image" src="https://github.com/user-attachments/assets/75ce6e37-7467-4fdc-b6c7-b749582a2ecd" />
-     <img width="1919" height="838" alt="image" src="https://github.com/user-attachments/assets/3bd2e482-0972-4b52-a625-b41ab7bf8543" />
-     <img width="1919" height="829" alt="image" src="https://github.com/user-attachments/assets/76fe25a8-d3a5-4a21-bb83-4e49431167a3" />
+<img width="1918" height="912" alt="image" src="https://github.com/user-attachments/assets/756f21ad-40f1-46a4-8b74-5a56e6e0421c" />
+<img width="1918" height="912" alt="image" src="https://github.com/user-attachments/assets/9d25d235-37fa-4b5d-8440-c55ba5ce59ea" />
+<img width="1918" height="905" alt="image" src="https://github.com/user-attachments/assets/9089142f-9820-404b-84ad-4e5f48629716" />
 
 ---
 
