@@ -15,8 +15,6 @@
 </p>
 
 ---
-
-# 🚀 TrustLoop
 ### A Production-Ready Decentralized Trust Workflow Platform Powered by Stellar
 
 [![Live Demo](https://img.shields.io/badge/Live_Demo-Vercel-blue?style=for-the-badge&logo=vercel)](https://trustloop-3ygrqb0rt-feyzanur25s-projects.vercel.app/)
