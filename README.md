@@ -24,24 +24,6 @@
 [![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-black?style=for-the-badge&logo=github)](https://github.com/Feyzanur25/trustloop-app)
 
 
-# 🌍 Live Application
-
-### 🚀 Live Demo
-
-https://trustloop-3ygrqb0rt-feyzanur25s-projects.vercel.app/
-
----
-
-### 🎥 Demo Video
-
-https://www.youtube.com/watch?v=DEHQMIFN9Ok
-
----
-
-### ⭐ GitHub Repository
-
-https://github.com/Feyzanur25/trustloop-app
-
 ---
 
 # 📖 Overview
