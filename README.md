@@ -16,6 +16,14 @@
 
 ---
 
+# 🚀 TrustLoop
+### A Production-Ready Decentralized Trust Workflow Platform Powered by Stellar
+
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Vercel-blue?style=for-the-badge&logo=vercel)](https://trustloop-3ygrqb0rt-feyzanur25s-projects.vercel.app/)
+[![Demo Video](https://img.shields.io/badge/Demo_Video-YouTube-red?style=for-the-badge&logo=youtube)](https://www.youtube.com/watch?v=DEHQMIFN9Ok)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-black?style=for-the-badge&logo=github)](https://github.com/Feyzanur25/trustloop-app)
+
+
 # 🌍 Live Application
 
 ### 🚀 Live Demo
