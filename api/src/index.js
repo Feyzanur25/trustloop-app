@@ -66,6 +66,10 @@ app.use((_req, res) => {
 
 app.use(jsonErrorHandler);
 
-app.listen(config.port, () => {
-  console.log(`TrustLoop API listening on http://localhost:${config.port}`);
-});
+if (process.env.VERCEL !== "1") {
+  app.listen(config.port, () => {
+    console.log(`TrustLoop API listening on http://localhost:${config.port}`);
+  });
+}
+
+export default app;
