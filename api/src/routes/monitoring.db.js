@@ -1,18 +1,18 @@
 import { Router } from "express";
 import { buildMonitoringSummary, buildIndexerStatus, buildSecurityChecklist } from "../logic/trustScore.js";
-import { getStateAsync } from "../data/state.js";
+import { repository } from "../repository.js";
 import { getMetrics as getRequestMetrics } from "../data/metrics.js";
 
 const router = Router();
 
-router.get("/", async (_req, res) => {
-  const state = await getStateAsync();
+router.get("/", (_req, res) => {
+  const state = repository.getState();
   const metrics = getRequestMetrics();
   res.json(buildMonitoringSummary(metrics));
 });
 
-router.get("/indexer", async (_req, res) => {
-  const state = await getStateAsync();
+router.get("/indexer", (_req, res) => {
+  const state = repository.getState();
   res.json(buildIndexerStatus(state));
 });
 

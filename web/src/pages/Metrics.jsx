@@ -97,7 +97,6 @@ function StatusPill({ children, tone = "default" }) {
 
 export default function Metrics() {
   const [data, setData] = useState(fallbackMetrics);
-  const [loading, setLoading] = useState(true);
   const [usingFallback, setUsingFallback] = useState(true);
   const [error, setError] = useState("");
 
@@ -123,9 +122,7 @@ export default function Metrics() {
       } catch (err) {
         if (!active) return;
         setUsingFallback(true);
-        setError(err?.message || "Live metrics unavailable. Showing demo data.");
-      } finally {
-        if (active) setLoading(false);
+        setError(err?.message || "Live metrics unavailable. Showing fallback data.");
       }
     }
 
@@ -185,12 +182,12 @@ export default function Metrics() {
               TrustLoop metrics designed for clarity and speed.
             </h1>
             <p className="max-w-2xl text-sm leading-7 text-white/65 sm:text-base">
-              A clean, responsive page that highlights trust loop health, wallet adoption, and testnet throughput.
+              A clean, responsive page that highlights trust loop health, wallet adoption, and mainnet throughput.
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
             <StatusPill tone={usingFallback ? "warning" : "success"}>
-              {usingFallback ? "Demo mode" : "Live mode"}
+              {usingFallback ? "Fallback mode" : "Live mode"}
             </StatusPill>
             <StatusPill tone="info">{healthSummary}</StatusPill>
           </div>
@@ -215,7 +212,7 @@ export default function Metrics() {
           icon={<Wallet size={20} />}
           label="Verified wallets"
           value={data.verifiedWallets ?? 0}
-          hint="Authenticated testnet identities"
+          hint="Authenticated mainnet identities"
           accent="emerald"
         />
         <StatCard
@@ -269,7 +266,7 @@ export default function Metrics() {
           </div>
 
           <div className="mt-6 rounded-[24px] border border-white/10 bg-white/[0.04] p-5 text-sm text-white/65">
-            The chart shows recent loop activity with clearer proportional bars for every day of testnet throughput.
+            The chart shows recent loop activity with clearer proportional bars for every day of mainnet throughput.
           </div>
         </section>
 
@@ -292,7 +289,7 @@ export default function Metrics() {
           <div className="rounded-[28px] border border-white/10 bg-slate-950/90 shadow-[0_24px_60px_rgba(0,0,0,0.18)]">
             <div className="bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 px-6 py-5">
               <div className="text-sm font-semibold uppercase tracking-[0.18em] text-white/50">Network status</div>
-              <div className="mt-3 text-lg font-semibold text-white">Stellar Testnet · Online</div>
+              <div className="mt-3 text-lg font-semibold text-white">Stellar Mainnet · Online</div>
             </div>
             <div className="space-y-3 border-t border-white/10 bg-white/[0.03] p-5 text-sm text-white/60">
               <div className="flex items-center justify-between">

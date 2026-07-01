@@ -1,32 +1,17 @@
-import {
-  Horizon,
-  TransactionBuilder,
-  Networks,
-  Operation,
-  BASE_FEE,
-  Asset,
-} from "stellar-sdk";
+import { Horizon, TransactionBuilder, Operation, BASE_FEE } from "stellar-sdk";
+import { config } from "../lib/config";
 
-const HORIZON_URL = "https://horizon-testnet.stellar.org";
-
-export async function buildManageDataTx(
-  sourcePublicKey,
-  name,
-  value
-) {
+export async function buildManageDataTx(sourcePublicKey, name, value) {
   if (!sourcePublicKey) {
     throw new Error("Missing source public key");
   }
 
-  // ✅ DOĞRU Server kullanımı
-  const server = new Horizon.Server(HORIZON_URL);
-
-  // Account bilgisi (sequence alıyoruz)
+  const server = new Horizon.Server(config.horizonUrl);
   const account = await server.loadAccount(sourcePublicKey);
 
   const tx = new TransactionBuilder(account, {
     fee: BASE_FEE,
-    networkPassphrase: Networks.TESTNET,
+    networkPassphrase: config.networkPassphrase,
   })
     .addOperation(
       Operation.manageData({

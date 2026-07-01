@@ -1,16 +1,16 @@
 # TrustLoop Improvement Roadmap
 
-This roadmap is intended for the Level 6 README improvement section.
+This document is the Level 6 feedback and next-phase section referenced from the README.
 
-## Feedback Themes From The Seeded User Set
+## Main Feedback Themes
 
-- users want clearer notifications
-- users want persistent history and reliable records
-- users want stronger metrics visibility
-- users want mobile-friendly flows
-- users want smoother error handling
+- users want clearer transaction visibility
+- users want stronger operational confidence
+- users want better mobile usability
+- users want more resilient persistence
+- users want clearer errors and onboarding guidance
 
-## Improvements Already Reflected In The Repository
+## Implemented Improvements With Commit Evidence
 
 ### 1. Persistent backend storage
 
@@ -18,79 +18,85 @@ Why:
 
 - users should not lose loop or onboarding history on restart
 
-Current repo evidence:
+Repo evidence:
 
-- [api/src/index.js](../api/src/index.js)
+- [../api/src/index.js](../api/src/index.js)
+- [../api/src/data/stateStore.js](../api/src/data/stateStore.js)
 
-Public commit link:
+Commit evidence:
 
-- `ADD_REAL_PUBLIC_COMMIT_LINK_FOR_PERSISTENCE`
+- [`23cc025`](https://github.com/Feyzanur25/trustloop-app/commit/23cc025d570999713a4c99cd27ea05e929cf9ffa)
+- [`f200b88`](https://github.com/Feyzanur25/trustloop-app/commit/f200b88975d13ef49ee061ae5ecfb0fd885d3077)
 
 ### 2. Monitoring and operations visibility
 
 Why:
 
-- production-readiness requires visible uptime, latency, and alert state
+- production readiness needs uptime, latency, and indexer status visibility
 
-Current repo evidence:
+Repo evidence:
 
-- [web/src/pages/Monitoring.jsx](../web/src/pages/Monitoring.jsx)
-- [api/src/index.js](../api/src/index.js)
+- [../web/src/pages/Monitoring.jsx](../web/src/pages/Monitoring.jsx)
+- [../api/src/data/metrics.js](../api/src/data/metrics.js)
 
-Public commit link:
+Commit evidence:
 
-- `ADD_REAL_PUBLIC_COMMIT_LINK_FOR_MONITORING`
+- [`684fec5`](https://github.com/Feyzanur25/trustloop-app/commit/684fec542fd4d5c6cc13944d9ae17fc5d576abb9)
+- [`80024e7`](https://github.com/Feyzanur25/trustloop-app/commit/80024e76cc8845bdca5574583b252e4b9cb35b63)
 
 ### 3. Metrics dashboard
 
 Why:
 
-- Level 6 requires user and transaction visibility
+- Level 6 requires user, transaction, and activity visibility
 
-Current repo evidence:
+Repo evidence:
 
-- [web/src/pages/Metrics.jsx](../web/src/pages/Metrics.jsx)
+- [../web/src/pages/Metrics.jsx](../web/src/pages/Metrics.jsx)
+- [../api/src/routes/metrics.db.js](../api/src/routes/metrics.db.js)
 
-Public commit link:
+Commit evidence:
 
-- `ADD_REAL_PUBLIC_COMMIT_LINK_FOR_METRICS`
+- [`684fec5`](https://github.com/Feyzanur25/trustloop-app/commit/684fec542fd4d5c6cc13944d9ae17fc5d576abb9)
+- [`e821b14`](https://github.com/Feyzanur25/trustloop-app/commit/e821b1413fc9a4b2a23e0a264b1fae3571d13776)
 
 ### 4. Multi-party approval workflow
 
 Why:
 
-- this is the advanced feature and core trust differentiator
+- this is the advanced feature and the main trust-control layer
 
-Current repo evidence:
+Repo evidence:
 
-- [web/src/pages/LoopDetail.jsx](../web/src/pages/LoopDetail.jsx)
-- [api/src/index.js](../api/src/index.js)
+- [../web/src/lib/trustHelpers.js](../web/src/lib/trustHelpers.js)
+- [../api/src/routes/loops.db.js](../api/src/routes/loops.db.js)
 
-Public commit link:
+Commit evidence:
 
-- `ADD_REAL_PUBLIC_COMMIT_LINK_FOR_APPROVAL_WORKFLOW`
+- [`c47e9f2`](https://github.com/Feyzanur25/trustloop-app/commit/c47e9f25162ade3a513ea4925a02cc5d03ec3e3a)
+- [`e821b14`](https://github.com/Feyzanur25/trustloop-app/commit/e821b1413fc9a4b2a23e0a264b1fae3571d13776)
 
 ### 5. Security hardening
 
 Why:
 
-- production readiness requires input validation, logging, and rate limiting
+- production usage requires validation, logging, and abuse controls
 
-Current repo evidence:
+Repo evidence:
 
-- [api/src/middleware.js](../api/src/middleware.js)
-- [docs/security-checklist.md](./security-checklist.md)
+- [../api/src/middleware.js](../api/src/middleware.js)
+- [../api/src/routes/onboarding.db.js](../api/src/routes/onboarding.db.js)
+- [./security-checklist.md](./security-checklist.md)
 
-Public commit link:
+Commit evidence:
 
-- `ADD_REAL_PUBLIC_COMMIT_LINK_FOR_SECURITY_HARDENING`
+- [`16096e2`](https://github.com/Feyzanur25/trustloop-app/commit/16096e2b2da10f6f4d9263a6d4bb06c29e5f90cf)
+- [`684fec5`](https://github.com/Feyzanur25/trustloop-app/commit/684fec542fd4d5c6cc13944d9ae17fc5d576abb9)
 
 ## Next Phase Plan
 
-These are strong next-month goals after the current submission:
-
-- move from seeded/demo onboarding to real public responses
-- deploy frontend and backend publicly with monitoring evidence
-- replace local persistent store with managed production storage
-- add stronger audit logging for approvals and closure history
-- add deeper wallet and event verification against Horizon
+- replace local persistence with managed production storage
+- add mainnet transaction explorer deep links per loop
+- add alert routing for monitoring failures
+- add audit-friendly approval history and export
+- add richer onboarding analytics from live Google Form responses

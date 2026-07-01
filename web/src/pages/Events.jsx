@@ -113,7 +113,7 @@ export default function Events() {
         <StatCard
           label="Total events"
           value={summary.total}
-          detail="Recent trust flow activity from Horizon testnet." 
+          detail="Recent trust flow activity from Horizon mainnet."
           accent=""
         />
         <StatCard
@@ -190,7 +190,7 @@ export default function Events() {
               Overview
             </div>
             <p className="mt-4 text-sm leading-6 text-white/65">
-              Events are collected from Horizon testnet operations and reflected as trust lifecycle changes for participant loops.
+              Events are collected from Horizon mainnet operations and reflected as trust lifecycle changes for participant loops.
             </p>
             <div className="mt-6 grid gap-3">
               <div className="rounded-[22px] border border-white/10 bg-white/[0.04] p-4">
@@ -225,7 +225,7 @@ export default function Events() {
       </div>
 
       <div className="rounded-[24px] border border-white/10 bg-white/[0.04] p-5 text-sm text-white/55">
-        Source: Horizon testnet operations → manage_data events for trust flow monitoring.
+        Source: Horizon mainnet operations {"->"} manage_data events for trust flow monitoring.
       </div>
     </div>
   );

@@ -20,6 +20,14 @@ export function clampNumber(value, min, max, fallback) {
   return Math.min(max, Math.max(min, parsed));
 }
 
+export function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email || "").trim());
+}
+
+export function isValidStellarPublicKey(address) {
+  return /^G[A-Z2-7]{55}$/.test(String(address || "").trim());
+}
+
 export function average(values) {
   if (!values.length) return 0;
   return Math.round(values.reduce((sum, item) => sum + item, 0) / values.length);

@@ -85,7 +85,7 @@ const fallbackMonitoring = {
     {
       name: "Metrics Aggregator",
       status: "healthy",
-      detail: "Dashboard metrics derived from onboarding and testnet activity.",
+      detail: "Dashboard metrics derived from onboarding and mainnet activity.",
     },
     {
       name: "Notification Pipeline",
@@ -95,7 +95,7 @@ const fallbackMonitoring = {
   ],
   alerts: [
     {
-      title: "Demo mode resilience enabled",
+      title: "Fallback resilience enabled",
       detail:
         "Fallback monitoring data is available if live service metrics are temporarily unavailable.",
     },
@@ -103,7 +103,7 @@ const fallbackMonitoring = {
 };
 
 const fallbackIndexer = {
-  source: "Stellar Horizon Testnet",
+  source: "Stellar Horizon Mainnet",
   lastSyncedAt: "2026-03-31 00:58 UTC",
   indexedLoops: 32,
   indexedEvents: 148,
@@ -162,7 +162,7 @@ export default function Monitoring() {
       } catch (err) {
         if (!active) return;
         setUsingFallback(true);
-        setError(err?.message || "Monitoring unavailable. Showing demo monitoring data.");
+        setError(err?.message || "Monitoring unavailable. Showing fallback monitoring data.");
       } finally {
         if (active) setLoading(false);
       }
@@ -218,7 +218,7 @@ export default function Monitoring() {
 
           <div className="flex flex-wrap items-center gap-3">
             <Badge
-              label={usingFallback ? "Demo mode" : monitoring.status || "Unknown"}
+              label={usingFallback ? "Fallback mode" : monitoring.status || "Unknown"}
               tone={statusTone(usingFallback ? "pending" : monitoring.status)}
             />
             <Badge
@@ -295,7 +295,7 @@ export default function Monitoring() {
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
               <DetailTile
                 title="Sync source"
-                value={indexer.source || "Stellar Testnet"}
+                value={indexer.source || "Stellar Mainnet"}
                 meta="Event indexing origin"
               />
               <DetailTile
@@ -368,7 +368,7 @@ export default function Monitoring() {
         {loading
           ? "Loading monitoring data..."
           : usingFallback
-          ? "Showing demo monitoring data while live endpoints warm up."
+          ? "Showing fallback monitoring data while live endpoints warm up."
           : "Live monitoring data loaded for TrustLoop operations."}
       </div>
     </div>

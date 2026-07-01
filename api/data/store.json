@@ -5,7 +5,7 @@
       "counterparty": "GDPGD3WEAVACUKCONRDUELD46ML5KDQAC2JTF7QE6EEEW7VSFYZEBZX5",
       "role": "Client",
       "status": "Active",
-      "score": 82,
+      "score": 66,
       "expiresInDays": 12,
       "lastEvent": "trust.confirmed",
       "createdAt": "2026-06-17T17:32:50.295Z",
@@ -16,7 +16,7 @@
       "counterparty": "GC4UYA4GWY35KGQ7U434DXQBC4HZ6HAMJ2LOMMHC3FJAHHV23RJUB7EV",
       "role": "Freelancer",
       "status": "Completed",
-      "score": 91,
+      "score": 88,
       "expiresInDays": 0,
       "lastEvent": "trust.closed",
       "createdAt": "2026-06-18T17:32:50.296Z",
@@ -27,7 +27,7 @@
       "counterparty": "GBXTMXHHEEEW3VNYHEZYAVV3Q7MF7SLP2CXK3C5K6IBCNNX7CP67F2IM",
       "role": "Freelancer",
       "status": "Pending",
-      "score": 58,
+      "score": 36,
       "expiresInDays": 16,
       "lastEvent": "trust.created",
       "createdAt": "2026-06-24T17:32:50.296Z",
@@ -38,11 +38,375 @@
       "counterparty": "GA4INDKZSBMYUL2DKUMC2732COE4CLKRX6YUIZS56UWLL2F6DD4ZL3G5",
       "role": "Client",
       "status": "Active",
-      "score": 76,
+      "score": 67,
       "expiresInDays": 8,
       "lastEvent": "trust.confirmed",
       "createdAt": "2026-06-26T17:32:50.296Z",
       "approvalPolicy": "dual"
+    },
+    {
+      "id": "TL-005",
+      "counterparty": "GDYD6GZ6QWKEULFZU6HMLSH4JM5IAJXBY3HFMCHZHTHIGH5DKEVNX2ZM",
+      "role": "Client",
+      "status": "Completed",
+      "score": 100,
+      "expiresInDays": 0,
+      "lastEvent": "trust.closed",
+      "createdAt": "2026-06-23T17:32:50.296Z",
+      "approvalPolicy": "dual",
+      "initiatorWallet": "GDYD6GZ6QWKEULFZU6HMLSH4JM5IAJXBY3HFMCHZHTHIGH5DKEVNX2ZM",
+      "linkedOnboardingId": "OB-005",
+      "linkedWalletAddress": "GDYD6GZ6QWKEULFZU6HMLSH4JM5IAJXBY3HFMCHZHTHIGH5DKEVNX2ZM"
+    },
+    {
+      "id": "TL-006",
+      "counterparty": "GDWL2RCDFQVDGH3IJL4ZGLX5CGU27MO6R7OQVCNYLQWROYZND2B6ENCI",
+      "role": "Freelancer",
+      "status": "Pending",
+      "score": 33,
+      "expiresInDays": 12,
+      "lastEvent": "trust.created",
+      "createdAt": "2026-06-22T17:32:50.296Z",
+      "approvalPolicy": "dual",
+      "initiatorWallet": "GDWL2RCDFQVDGH3IJL4ZGLX5CGU27MO6R7OQVCNYLQWROYZND2B6ENCI",
+      "linkedOnboardingId": "OB-006",
+      "linkedWalletAddress": "GDWL2RCDFQVDGH3IJL4ZGLX5CGU27MO6R7OQVCNYLQWROYZND2B6ENCI"
+    },
+    {
+      "id": "TL-007",
+      "counterparty": "GBL2APVSMV2IYSO2B6C67VASKRJHXVCAOSHEBLC6BM4CBSKDMQOU25HU",
+      "role": "Client",
+      "status": "Active",
+      "score": 67,
+      "expiresInDays": 13,
+      "lastEvent": "trust.confirmed",
+      "createdAt": "2026-06-21T17:32:50.296Z",
+      "approvalPolicy": "dual",
+      "initiatorWallet": "GBL2APVSMV2IYSO2B6C67VASKRJHXVCAOSHEBLC6BM4CBSKDMQOU25HU",
+      "linkedOnboardingId": "OB-007",
+      "linkedWalletAddress": "GBL2APVSMV2IYSO2B6C67VASKRJHXVCAOSHEBLC6BM4CBSKDMQOU25HU"
+    },
+    {
+      "id": "TL-008",
+      "counterparty": "GAVNSWLAN4VG54IVLHCF3O45ZOAZSPLNH7GNR25RVFLH434BAQS3JJAO",
+      "role": "Freelancer",
+      "status": "Completed",
+      "score": 100,
+      "expiresInDays": 0,
+      "lastEvent": "trust.closed",
+      "createdAt": "2026-06-20T17:32:50.296Z",
+      "approvalPolicy": "dual",
+      "initiatorWallet": "GAVNSWLAN4VG54IVLHCF3O45ZOAZSPLNH7GNR25RVFLH434BAQS3JJAO",
+      "linkedOnboardingId": "OB-008",
+      "linkedWalletAddress": "GAVNSWLAN4VG54IVLHCF3O45ZOAZSPLNH7GNR25RVFLH434BAQS3JJAO"
+    },
+    {
+      "id": "TL-009",
+      "counterparty": "GCCHWOJNEC7VJ2NCTIQYKYYYWZSZRUU2KAYVY5VMDWF3ONYKWUH6DO7I",
+      "role": "Client",
+      "status": "Pending",
+      "score": 31,
+      "expiresInDays": 15,
+      "lastEvent": "trust.created",
+      "createdAt": "2026-06-19T17:32:50.296Z",
+      "approvalPolicy": "dual",
+      "initiatorWallet": "GCCHWOJNEC7VJ2NCTIQYKYYYWZSZRUU2KAYVY5VMDWF3ONYKWUH6DO7I",
+      "linkedOnboardingId": "OB-009",
+      "linkedWalletAddress": "GCCHWOJNEC7VJ2NCTIQYKYYYWZSZRUU2KAYVY5VMDWF3ONYKWUH6DO7I"
+    },
+    {
+      "id": "TL-010",
+      "counterparty": "GCHRZKNZGV27USWARNID7YPVUBXV6WNPG6YRVLKQ4QDUURMJY4OU5JJ5",
+      "role": "Freelancer",
+      "status": "Active",
+      "score": 69,
+      "expiresInDays": 16,
+      "lastEvent": "trust.confirmed",
+      "createdAt": "2026-06-18T17:32:50.296Z",
+      "approvalPolicy": "dual",
+      "initiatorWallet": "GCHRZKNZGV27USWARNID7YPVUBXV6WNPG6YRVLKQ4QDUURMJY4OU5JJ5",
+      "linkedOnboardingId": "OB-010",
+      "linkedWalletAddress": "GCHRZKNZGV27USWARNID7YPVUBXV6WNPG6YRVLKQ4QDUURMJY4OU5JJ5"
+    },
+    {
+      "id": "TL-011",
+      "counterparty": "GDNN6X4H3SUEN2F5XUQA3BDYCSRO54AVV5GWFIGO3DTLPONEMCS4DSLV",
+      "role": "Client",
+      "status": "Completed",
+      "score": 100,
+      "expiresInDays": 0,
+      "lastEvent": "trust.closed",
+      "createdAt": "2026-06-27T17:32:50.296Z",
+      "approvalPolicy": "dual",
+      "initiatorWallet": "GDNN6X4H3SUEN2F5XUQA3BDYCSRO54AVV5GWFIGO3DTLPONEMCS4DSLV",
+      "linkedOnboardingId": "OB-011",
+      "linkedWalletAddress": "GDNN6X4H3SUEN2F5XUQA3BDYCSRO54AVV5GWFIGO3DTLPONEMCS4DSLV"
+    },
+    {
+      "id": "TL-012",
+      "counterparty": "GCNSHMQNN66RDGXXWA3MV7CHOMZ5YCC2D7EYPUJWZICTZV4QQ2ZMNFOP",
+      "role": "Freelancer",
+      "status": "Pending",
+      "score": 36,
+      "expiresInDays": 18,
+      "lastEvent": "trust.created",
+      "createdAt": "2026-06-26T17:32:50.296Z",
+      "approvalPolicy": "dual",
+      "initiatorWallet": "GCNSHMQNN66RDGXXWA3MV7CHOMZ5YCC2D7EYPUJWZICTZV4QQ2ZMNFOP",
+      "linkedOnboardingId": "OB-012",
+      "linkedWalletAddress": "GCNSHMQNN66RDGXXWA3MV7CHOMZ5YCC2D7EYPUJWZICTZV4QQ2ZMNFOP"
+    },
+    {
+      "id": "TL-013",
+      "counterparty": "GCKX3NOWP7LYF2L6YWMFIKNKROBHVLDEQSAAWWQHDSXNVWUTDHRPZYIH",
+      "role": "Client",
+      "status": "Active",
+      "score": 70,
+      "expiresInDays": 19,
+      "lastEvent": "trust.confirmed",
+      "createdAt": "2026-06-25T17:32:50.296Z",
+      "approvalPolicy": "dual",
+      "initiatorWallet": "GCKX3NOWP7LYF2L6YWMFIKNKROBHVLDEQSAAWWQHDSXNVWUTDHRPZYIH",
+      "linkedOnboardingId": "OB-013",
+      "linkedWalletAddress": "GCKX3NOWP7LYF2L6YWMFIKNKROBHVLDEQSAAWWQHDSXNVWUTDHRPZYIH"
+    },
+    {
+      "id": "TL-014",
+      "counterparty": "GCHS7OSQNPBA2XUFAVGIPNK72DED3WWD2DJOA4ANDQ7BHM4R5GDRJSS7",
+      "role": "Freelancer",
+      "status": "Completed",
+      "score": 100,
+      "expiresInDays": 0,
+      "lastEvent": "trust.closed",
+      "createdAt": "2026-06-24T17:32:50.296Z",
+      "approvalPolicy": "dual",
+      "initiatorWallet": "GCHS7OSQNPBA2XUFAVGIPNK72DED3WWD2DJOA4ANDQ7BHM4R5GDRJSS7",
+      "linkedOnboardingId": "OB-014",
+      "linkedWalletAddress": "GCHS7OSQNPBA2XUFAVGIPNK72DED3WWD2DJOA4ANDQ7BHM4R5GDRJSS7"
+    },
+    {
+      "id": "TL-015",
+      "counterparty": "GCWXWMORXOEB2JWVCE7LBWFLNT5QFQ5JKQVRFNB3AZRQUSLUCHXBM2O2",
+      "role": "Client",
+      "status": "Pending",
+      "score": 34,
+      "expiresInDays": 21,
+      "lastEvent": "trust.created",
+      "createdAt": "2026-06-23T17:32:50.296Z",
+      "approvalPolicy": "dual",
+      "initiatorWallet": "GCWXWMORXOEB2JWVCE7LBWFLNT5QFQ5JKQVRFNB3AZRQUSLUCHXBM2O2",
+      "linkedOnboardingId": "OB-015",
+      "linkedWalletAddress": "GCWXWMORXOEB2JWVCE7LBWFLNT5QFQ5JKQVRFNB3AZRQUSLUCHXBM2O2"
+    },
+    {
+      "id": "TL-016",
+      "counterparty": "GDLXN35JGULDTNEZGGFV6IQKDULH5O6GN5L7BY252AMAFME7RCXYWXAB",
+      "role": "Freelancer",
+      "status": "Active",
+      "score": 73,
+      "expiresInDays": 22,
+      "lastEvent": "trust.confirmed",
+      "createdAt": "2026-06-22T17:32:50.296Z",
+      "approvalPolicy": "dual",
+      "initiatorWallet": "GDLXN35JGULDTNEZGGFV6IQKDULH5O6GN5L7BY252AMAFME7RCXYWXAB",
+      "linkedOnboardingId": "OB-016",
+      "linkedWalletAddress": "GDLXN35JGULDTNEZGGFV6IQKDULH5O6GN5L7BY252AMAFME7RCXYWXAB"
+    },
+    {
+      "id": "TL-017",
+      "counterparty": "GBJP4RV3PLYSQZKQMUQGO5NO4XIEEYXHYIVR2GCWETFNGSEPQRRSAN6O",
+      "role": "Client",
+      "status": "Completed",
+      "score": 100,
+      "expiresInDays": 0,
+      "lastEvent": "trust.closed",
+      "createdAt": "2026-06-21T17:32:50.296Z",
+      "approvalPolicy": "dual",
+      "initiatorWallet": "GBJP4RV3PLYSQZKQMUQGO5NO4XIEEYXHYIVR2GCWETFNGSEPQRRSAN6O",
+      "linkedOnboardingId": "OB-017",
+      "linkedWalletAddress": "GBJP4RV3PLYSQZKQMUQGO5NO4XIEEYXHYIVR2GCWETFNGSEPQRRSAN6O"
+    },
+    {
+      "id": "TL-018",
+      "counterparty": "GBTLBOA5M5P6RUMWVL6UXRFFUAJX4X6AMHFFY3LDM5L6ES2FQL2OEFER",
+      "role": "Freelancer",
+      "status": "Pending",
+      "score": 40,
+      "expiresInDays": 24,
+      "lastEvent": "trust.created",
+      "createdAt": "2026-06-20T17:32:50.296Z",
+      "approvalPolicy": "dual",
+      "initiatorWallet": "GBTLBOA5M5P6RUMWVL6UXRFFUAJX4X6AMHFFY3LDM5L6ES2FQL2OEFER",
+      "linkedOnboardingId": "OB-018",
+      "linkedWalletAddress": "GBTLBOA5M5P6RUMWVL6UXRFFUAJX4X6AMHFFY3LDM5L6ES2FQL2OEFER"
+    },
+    {
+      "id": "TL-019",
+      "counterparty": "GBJE3VLOOSAJKZFB7ILEUY6UK2CONTPQVI75APNG7USR64VT2AAMETI6",
+      "role": "Client",
+      "status": "Active",
+      "score": 69,
+      "expiresInDays": 25,
+      "lastEvent": "trust.confirmed",
+      "createdAt": "2026-06-19T17:32:50.296Z",
+      "approvalPolicy": "dual",
+      "initiatorWallet": "GBJE3VLOOSAJKZFB7ILEUY6UK2CONTPQVI75APNG7USR64VT2AAMETI6",
+      "linkedOnboardingId": "OB-019",
+      "linkedWalletAddress": "GBJE3VLOOSAJKZFB7ILEUY6UK2CONTPQVI75APNG7USR64VT2AAMETI6"
+    },
+    {
+      "id": "TL-020",
+      "counterparty": "GCSDJ2BQTERO3RFGLUR4Q4KVJKWGFWAY423HBIWHJSTSMUE7DNUL2JGO",
+      "role": "Freelancer",
+      "status": "Completed",
+      "score": 100,
+      "expiresInDays": 0,
+      "lastEvent": "trust.closed",
+      "createdAt": "2026-06-18T17:32:50.296Z",
+      "approvalPolicy": "dual",
+      "initiatorWallet": "GCSDJ2BQTERO3RFGLUR4Q4KVJKWGFWAY423HBIWHJSTSMUE7DNUL2JGO",
+      "linkedOnboardingId": "OB-020",
+      "linkedWalletAddress": "GCSDJ2BQTERO3RFGLUR4Q4KVJKWGFWAY423HBIWHJSTSMUE7DNUL2JGO"
+    },
+    {
+      "id": "TL-021",
+      "counterparty": "GCP42RESSZ2YTIK7SMTRC3T27AIPHBMJJMGOMK63YK4YTLMF6HWO26QX",
+      "role": "Client",
+      "status": "Pending",
+      "score": 35,
+      "expiresInDays": 27,
+      "lastEvent": "trust.created",
+      "createdAt": "2026-06-27T17:32:50.296Z",
+      "approvalPolicy": "dual",
+      "initiatorWallet": "GCP42RESSZ2YTIK7SMTRC3T27AIPHBMJJMGOMK63YK4YTLMF6HWO26QX",
+      "linkedOnboardingId": "OB-021",
+      "linkedWalletAddress": "GCP42RESSZ2YTIK7SMTRC3T27AIPHBMJJMGOMK63YK4YTLMF6HWO26QX"
+    },
+    {
+      "id": "TL-022",
+      "counterparty": "GB67HLEMWX3VLRYPSLUFZ5HCTIF55DHNPTHV55YAY5OKFTKVLE7IN5F4",
+      "role": "Freelancer",
+      "status": "Active",
+      "score": 67,
+      "expiresInDays": 7,
+      "lastEvent": "trust.confirmed",
+      "createdAt": "2026-06-26T17:32:50.296Z",
+      "approvalPolicy": "dual",
+      "initiatorWallet": "GB67HLEMWX3VLRYPSLUFZ5HCTIF55DHNPTHV55YAY5OKFTKVLE7IN5F4",
+      "linkedOnboardingId": "OB-022",
+      "linkedWalletAddress": "GB67HLEMWX3VLRYPSLUFZ5HCTIF55DHNPTHV55YAY5OKFTKVLE7IN5F4"
+    },
+    {
+      "id": "TL-023",
+      "counterparty": "GC5Y25BO5R5DPU6NHPUZHW6JDABW5Z4ETAOLE2D4ZOU4O36ISJQRVBRS",
+      "role": "Client",
+      "status": "Completed",
+      "score": 100,
+      "expiresInDays": 0,
+      "lastEvent": "trust.closed",
+      "createdAt": "2026-06-25T17:32:50.296Z",
+      "approvalPolicy": "dual",
+      "initiatorWallet": "GC5Y25BO5R5DPU6NHPUZHW6JDABW5Z4ETAOLE2D4ZOU4O36ISJQRVBRS",
+      "linkedOnboardingId": "OB-023",
+      "linkedWalletAddress": "GC5Y25BO5R5DPU6NHPUZHW6JDABW5Z4ETAOLE2D4ZOU4O36ISJQRVBRS"
+    },
+    {
+      "id": "TL-024",
+      "counterparty": "GBOQMOY5KHPMVXFZNUT4CNH2N3NPFXTXD4G6MQT7JXKGU6VSTRPRRO5P",
+      "role": "Freelancer",
+      "status": "Pending",
+      "score": 30,
+      "expiresInDays": 9,
+      "lastEvent": "trust.created",
+      "createdAt": "2026-06-24T17:32:50.296Z",
+      "approvalPolicy": "dual",
+      "initiatorWallet": "GBOQMOY5KHPMVXFZNUT4CNH2N3NPFXTXD4G6MQT7JXKGU6VSTRPRRO5P",
+      "linkedOnboardingId": "OB-024",
+      "linkedWalletAddress": "GBOQMOY5KHPMVXFZNUT4CNH2N3NPFXTXD4G6MQT7JXKGU6VSTRPRRO5P"
+    },
+    {
+      "id": "TL-025",
+      "counterparty": "GD7M6TIBC422HNXG5SMID5Z2GVRQ55ODDG63HEZXGR7DJ36YLD6VKHIA",
+      "role": "Client",
+      "status": "Active",
+      "score": 67,
+      "expiresInDays": 10,
+      "lastEvent": "trust.confirmed",
+      "createdAt": "2026-06-23T17:32:50.296Z",
+      "approvalPolicy": "dual",
+      "initiatorWallet": "GD7M6TIBC422HNXG5SMID5Z2GVRQ55ODDG63HEZXGR7DJ36YLD6VKHIA",
+      "linkedOnboardingId": "OB-025",
+      "linkedWalletAddress": "GD7M6TIBC422HNXG5SMID5Z2GVRQ55ODDG63HEZXGR7DJ36YLD6VKHIA"
+    },
+    {
+      "id": "TL-026",
+      "counterparty": "GDFK6ZKBYVXSS6XU5HC3BDGOK5N2GOQ6LSIDXDIWZYOQML5ZFUEOH7MG",
+      "role": "Freelancer",
+      "status": "Completed",
+      "score": 100,
+      "expiresInDays": 0,
+      "lastEvent": "trust.closed",
+      "createdAt": "2026-06-22T17:32:50.296Z",
+      "approvalPolicy": "dual",
+      "initiatorWallet": "GDFK6ZKBYVXSS6XU5HC3BDGOK5N2GOQ6LSIDXDIWZYOQML5ZFUEOH7MG",
+      "linkedOnboardingId": "OB-026",
+      "linkedWalletAddress": "GDFK6ZKBYVXSS6XU5HC3BDGOK5N2GOQ6LSIDXDIWZYOQML5ZFUEOH7MG"
+    },
+    {
+      "id": "TL-027",
+      "counterparty": "GAAVRCI7U3OG5T52LIY53KP5XWZCZ7ZK6TOU7CZH5NHLMOGCEKFBP3CN",
+      "role": "Client",
+      "status": "Pending",
+      "score": 33,
+      "expiresInDays": 12,
+      "lastEvent": "trust.created",
+      "createdAt": "2026-06-21T17:32:50.296Z",
+      "approvalPolicy": "dual",
+      "initiatorWallet": "GAAVRCI7U3OG5T52LIY53KP5XWZCZ7ZK6TOU7CZH5NHLMOGCEKFBP3CN",
+      "linkedOnboardingId": "OB-027",
+      "linkedWalletAddress": "GAAVRCI7U3OG5T52LIY53KP5XWZCZ7ZK6TOU7CZH5NHLMOGCEKFBP3CN"
+    },
+    {
+      "id": "TL-028",
+      "counterparty": "GBFFWPNU2VKKUBO2FPMWF6PS6XGFN3RR7G7R3PXFXOHRNDEECE7LPWSA",
+      "role": "Freelancer",
+      "status": "Active",
+      "score": 69,
+      "expiresInDays": 13,
+      "lastEvent": "trust.confirmed",
+      "createdAt": "2026-06-20T17:32:50.296Z",
+      "approvalPolicy": "dual",
+      "initiatorWallet": "GBFFWPNU2VKKUBO2FPMWF6PS6XGFN3RR7G7R3PXFXOHRNDEECE7LPWSA",
+      "linkedOnboardingId": "OB-028",
+      "linkedWalletAddress": "GBFFWPNU2VKKUBO2FPMWF6PS6XGFN3RR7G7R3PXFXOHRNDEECE7LPWSA"
+    },
+    {
+      "id": "TL-029",
+      "counterparty": "GBZYOAEY4H5BFZY2FN7GWUOG6TX54S37VKSYZMWDSMMLD5GJLS46T4HW",
+      "role": "Client",
+      "status": "Completed",
+      "score": 100,
+      "expiresInDays": 0,
+      "lastEvent": "trust.closed",
+      "createdAt": "2026-06-19T17:32:50.296Z",
+      "approvalPolicy": "dual",
+      "initiatorWallet": "GBZYOAEY4H5BFZY2FN7GWUOG6TX54S37VKSYZMWDSMMLD5GJLS46T4HW",
+      "linkedOnboardingId": "OB-029",
+      "linkedWalletAddress": "GBZYOAEY4H5BFZY2FN7GWUOG6TX54S37VKSYZMWDSMMLD5GJLS46T4HW"
+    },
+    {
+      "id": "TL-030",
+      "counterparty": "GBG3HAUGSWVSVF7LWRXCDFXBJLBDMSBWISLTYDAOXRR7BKOZS572RTX4",
+      "role": "Freelancer",
+      "status": "Pending",
+      "score": 32,
+      "expiresInDays": 15,
+      "lastEvent": "trust.created",
+      "createdAt": "2026-06-18T17:32:50.296Z",
+      "approvalPolicy": "dual",
+      "initiatorWallet": "GBG3HAUGSWVSVF7LWRXCDFXBJLBDMSBWISLTYDAOXRR7BKOZS572RTX4",
+      "linkedOnboardingId": "OB-030",
+      "linkedWalletAddress": "GBG3HAUGSWVSVF7LWRXCDFXBJLBDMSBWISLTYDAOXRR7BKOZS572RTX4"
     }
   ],
   "events": [
@@ -93,6 +457,370 @@
       "type": "trust.created",
       "loopId": "TL-004",
       "detail": "TL-004 created"
+    },
+    {
+      "id": "EV-TL-005-trust.created",
+      "time": "2026-06-23T17:32:50.296Z",
+      "type": "trust.created",
+      "loopId": "TL-005",
+      "detail": "TL-005 created for Zeynep Kaya"
+    },
+    {
+      "id": "EV-TL-005-trust.confirmed",
+      "time": "2026-06-23T17:32:50.296Z",
+      "type": "trust.confirmed",
+      "loopId": "TL-005",
+      "detail": "TL-005 confirmed"
+    },
+    {
+      "id": "EV-TL-005-trust.closed",
+      "time": "2026-06-23T17:32:50.296Z",
+      "type": "trust.closed",
+      "loopId": "TL-005",
+      "detail": "TL-005 closed"
+    },
+    {
+      "id": "EV-TL-006-trust.created",
+      "time": "2026-06-22T17:32:50.296Z",
+      "type": "trust.created",
+      "loopId": "TL-006",
+      "detail": "TL-006 created for Can Demir"
+    },
+    {
+      "id": "EV-TL-007-trust.created",
+      "time": "2026-06-21T17:32:50.296Z",
+      "type": "trust.created",
+      "loopId": "TL-007",
+      "detail": "TL-007 created for Elif Aydın"
+    },
+    {
+      "id": "EV-TL-007-trust.confirmed",
+      "time": "2026-06-21T17:32:50.296Z",
+      "type": "trust.confirmed",
+      "loopId": "TL-007",
+      "detail": "TL-007 confirmed"
+    },
+    {
+      "id": "EV-TL-008-trust.created",
+      "time": "2026-06-20T17:32:50.296Z",
+      "type": "trust.created",
+      "loopId": "TL-008",
+      "detail": "TL-008 created for Burak Çelik"
+    },
+    {
+      "id": "EV-TL-008-trust.confirmed",
+      "time": "2026-06-20T17:32:50.296Z",
+      "type": "trust.confirmed",
+      "loopId": "TL-008",
+      "detail": "TL-008 confirmed"
+    },
+    {
+      "id": "EV-TL-008-trust.closed",
+      "time": "2026-06-20T17:32:50.296Z",
+      "type": "trust.closed",
+      "loopId": "TL-008",
+      "detail": "TL-008 closed"
+    },
+    {
+      "id": "EV-TL-009-trust.created",
+      "time": "2026-06-19T17:32:50.296Z",
+      "type": "trust.created",
+      "loopId": "TL-009",
+      "detail": "TL-009 created for Merve Koç"
+    },
+    {
+      "id": "EV-TL-010-trust.created",
+      "time": "2026-06-18T17:32:50.296Z",
+      "type": "trust.created",
+      "loopId": "TL-010",
+      "detail": "TL-010 created for Oğuzhan Şahin"
+    },
+    {
+      "id": "EV-TL-010-trust.confirmed",
+      "time": "2026-06-18T17:32:50.296Z",
+      "type": "trust.confirmed",
+      "loopId": "TL-010",
+      "detail": "TL-010 confirmed"
+    },
+    {
+      "id": "EV-TL-011-trust.created",
+      "time": "2026-06-27T17:32:50.296Z",
+      "type": "trust.created",
+      "loopId": "TL-011",
+      "detail": "TL-011 created for Selin Arslan"
+    },
+    {
+      "id": "EV-TL-011-trust.confirmed",
+      "time": "2026-06-27T17:32:50.296Z",
+      "type": "trust.confirmed",
+      "loopId": "TL-011",
+      "detail": "TL-011 confirmed"
+    },
+    {
+      "id": "EV-TL-011-trust.closed",
+      "time": "2026-06-27T17:32:50.296Z",
+      "type": "trust.closed",
+      "loopId": "TL-011",
+      "detail": "TL-011 closed"
+    },
+    {
+      "id": "EV-TL-012-trust.created",
+      "time": "2026-06-26T17:32:50.296Z",
+      "type": "trust.created",
+      "loopId": "TL-012",
+      "detail": "TL-012 created for Hakan Yılmaz"
+    },
+    {
+      "id": "EV-TL-013-trust.created",
+      "time": "2026-06-25T17:32:50.296Z",
+      "type": "trust.created",
+      "loopId": "TL-013",
+      "detail": "TL-013 created for Ayşe Demir"
+    },
+    {
+      "id": "EV-TL-013-trust.confirmed",
+      "time": "2026-06-25T17:32:50.296Z",
+      "type": "trust.confirmed",
+      "loopId": "TL-013",
+      "detail": "TL-013 confirmed"
+    },
+    {
+      "id": "EV-TL-014-trust.created",
+      "time": "2026-06-24T17:32:50.296Z",
+      "type": "trust.created",
+      "loopId": "TL-014",
+      "detail": "TL-014 created for Kerem Acar"
+    },
+    {
+      "id": "EV-TL-014-trust.confirmed",
+      "time": "2026-06-24T17:32:50.296Z",
+      "type": "trust.confirmed",
+      "loopId": "TL-014",
+      "detail": "TL-014 confirmed"
+    },
+    {
+      "id": "EV-TL-014-trust.closed",
+      "time": "2026-06-24T17:32:50.296Z",
+      "type": "trust.closed",
+      "loopId": "TL-014",
+      "detail": "TL-014 closed"
+    },
+    {
+      "id": "EV-TL-015-trust.created",
+      "time": "2026-06-23T17:32:50.296Z",
+      "type": "trust.created",
+      "loopId": "TL-015",
+      "detail": "TL-015 created for Derya Kurt"
+    },
+    {
+      "id": "EV-TL-016-trust.created",
+      "time": "2026-06-22T17:32:50.296Z",
+      "type": "trust.created",
+      "loopId": "TL-016",
+      "detail": "TL-016 created for Ahmet Öz"
+    },
+    {
+      "id": "EV-TL-016-trust.confirmed",
+      "time": "2026-06-22T17:32:50.296Z",
+      "type": "trust.confirmed",
+      "loopId": "TL-016",
+      "detail": "TL-016 confirmed"
+    },
+    {
+      "id": "EV-TL-017-trust.created",
+      "time": "2026-06-21T17:32:50.296Z",
+      "type": "trust.created",
+      "loopId": "TL-017",
+      "detail": "TL-017 created for Nazlı Şen"
+    },
+    {
+      "id": "EV-TL-017-trust.confirmed",
+      "time": "2026-06-21T17:32:50.296Z",
+      "type": "trust.confirmed",
+      "loopId": "TL-017",
+      "detail": "TL-017 confirmed"
+    },
+    {
+      "id": "EV-TL-017-trust.closed",
+      "time": "2026-06-21T17:32:50.296Z",
+      "type": "trust.closed",
+      "loopId": "TL-017",
+      "detail": "TL-017 closed"
+    },
+    {
+      "id": "EV-TL-018-trust.created",
+      "time": "2026-06-20T17:32:50.296Z",
+      "type": "trust.created",
+      "loopId": "TL-018",
+      "detail": "TL-018 created for Yusuf Polat"
+    },
+    {
+      "id": "EV-TL-019-trust.created",
+      "time": "2026-06-19T17:32:50.296Z",
+      "type": "trust.created",
+      "loopId": "TL-019",
+      "detail": "TL-019 created for Deniz Güneş"
+    },
+    {
+      "id": "EV-TL-019-trust.confirmed",
+      "time": "2026-06-19T17:32:50.296Z",
+      "type": "trust.confirmed",
+      "loopId": "TL-019",
+      "detail": "TL-019 confirmed"
+    },
+    {
+      "id": "EV-TL-020-trust.created",
+      "time": "2026-06-18T17:32:50.296Z",
+      "type": "trust.created",
+      "loopId": "TL-020",
+      "detail": "TL-020 created for Melis Aydın"
+    },
+    {
+      "id": "EV-TL-020-trust.confirmed",
+      "time": "2026-06-18T17:32:50.296Z",
+      "type": "trust.confirmed",
+      "loopId": "TL-020",
+      "detail": "TL-020 confirmed"
+    },
+    {
+      "id": "EV-TL-020-trust.closed",
+      "time": "2026-06-18T17:32:50.296Z",
+      "type": "trust.closed",
+      "loopId": "TL-020",
+      "detail": "TL-020 closed"
+    },
+    {
+      "id": "EV-TL-021-trust.created",
+      "time": "2026-06-27T17:32:50.296Z",
+      "type": "trust.created",
+      "loopId": "TL-021",
+      "detail": "TL-021 created for Barış Kılıç"
+    },
+    {
+      "id": "EV-TL-022-trust.created",
+      "time": "2026-06-26T17:32:50.296Z",
+      "type": "trust.created",
+      "loopId": "TL-022",
+      "detail": "TL-022 created for Gökhan Çetin"
+    },
+    {
+      "id": "EV-TL-022-trust.confirmed",
+      "time": "2026-06-26T17:32:50.296Z",
+      "type": "trust.confirmed",
+      "loopId": "TL-022",
+      "detail": "TL-022 confirmed"
+    },
+    {
+      "id": "EV-TL-023-trust.created",
+      "time": "2026-06-25T17:32:50.296Z",
+      "type": "trust.created",
+      "loopId": "TL-023",
+      "detail": "TL-023 created for Tuğba Şahin"
+    },
+    {
+      "id": "EV-TL-023-trust.confirmed",
+      "time": "2026-06-25T17:32:50.296Z",
+      "type": "trust.confirmed",
+      "loopId": "TL-023",
+      "detail": "TL-023 confirmed"
+    },
+    {
+      "id": "EV-TL-023-trust.closed",
+      "time": "2026-06-25T17:32:50.296Z",
+      "type": "trust.closed",
+      "loopId": "TL-023",
+      "detail": "TL-023 closed"
+    },
+    {
+      "id": "EV-TL-024-trust.created",
+      "time": "2026-06-24T17:32:50.296Z",
+      "type": "trust.created",
+      "loopId": "TL-024",
+      "detail": "TL-024 created for Volkan Aras"
+    },
+    {
+      "id": "EV-TL-025-trust.created",
+      "time": "2026-06-23T17:32:50.296Z",
+      "type": "trust.created",
+      "loopId": "TL-025",
+      "detail": "TL-025 created for Pelin Demirtaş"
+    },
+    {
+      "id": "EV-TL-025-trust.confirmed",
+      "time": "2026-06-23T17:32:50.296Z",
+      "type": "trust.confirmed",
+      "loopId": "TL-025",
+      "detail": "TL-025 confirmed"
+    },
+    {
+      "id": "EV-TL-026-trust.created",
+      "time": "2026-06-22T17:32:50.296Z",
+      "type": "trust.created",
+      "loopId": "TL-026",
+      "detail": "TL-026 created for Cem Yıldırım"
+    },
+    {
+      "id": "EV-TL-026-trust.confirmed",
+      "time": "2026-06-22T17:32:50.296Z",
+      "type": "trust.confirmed",
+      "loopId": "TL-026",
+      "detail": "TL-026 confirmed"
+    },
+    {
+      "id": "EV-TL-026-trust.closed",
+      "time": "2026-06-22T17:32:50.296Z",
+      "type": "trust.closed",
+      "loopId": "TL-026",
+      "detail": "TL-026 closed"
+    },
+    {
+      "id": "EV-TL-027-trust.created",
+      "time": "2026-06-21T17:32:50.296Z",
+      "type": "trust.created",
+      "loopId": "TL-027",
+      "detail": "TL-027 created for Sibel Koç"
+    },
+    {
+      "id": "EV-TL-028-trust.created",
+      "time": "2026-06-20T17:32:50.296Z",
+      "type": "trust.created",
+      "loopId": "TL-028",
+      "detail": "TL-028 created for Kaan Özkan"
+    },
+    {
+      "id": "EV-TL-028-trust.confirmed",
+      "time": "2026-06-20T17:32:50.296Z",
+      "type": "trust.confirmed",
+      "loopId": "TL-028",
+      "detail": "TL-028 confirmed"
+    },
+    {
+      "id": "EV-TL-029-trust.created",
+      "time": "2026-06-19T17:32:50.296Z",
+      "type": "trust.created",
+      "loopId": "TL-029",
+      "detail": "TL-029 created for Ece Aksoy"
+    },
+    {
+      "id": "EV-TL-029-trust.confirmed",
+      "time": "2026-06-19T17:32:50.296Z",
+      "type": "trust.confirmed",
+      "loopId": "TL-029",
+      "detail": "TL-029 confirmed"
+    },
+    {
+      "id": "EV-TL-029-trust.closed",
+      "time": "2026-06-19T17:32:50.296Z",
+      "type": "trust.closed",
+      "loopId": "TL-029",
+      "detail": "TL-029 closed"
+    },
+    {
+      "id": "EV-TL-030-trust.created",
+      "time": "2026-06-18T17:32:50.296Z",
+      "type": "trust.created",
+      "loopId": "TL-030",
+      "detail": "TL-030 created for Murat Çakır"
     }
   ],
   "onboardingProfiles": [
@@ -421,9 +1149,197 @@
       "freelancerApproved": false,
       "requiredApprovals": 2,
       "updatedAt": "2026-06-26T17:32:50.296Z"
+    },
+    "TL-005": {
+      "clientApproved": true,
+      "freelancerApproved": true,
+      "requiredApprovals": 2,
+      "updatedAt": "2026-06-23T17:32:50.296Z"
+    },
+    "TL-006": {
+      "clientApproved": false,
+      "freelancerApproved": false,
+      "requiredApprovals": 2,
+      "updatedAt": "2026-06-22T17:32:50.296Z"
+    },
+    "TL-007": {
+      "clientApproved": false,
+      "freelancerApproved": false,
+      "requiredApprovals": 2,
+      "updatedAt": "2026-06-21T17:32:50.296Z"
+    },
+    "TL-008": {
+      "clientApproved": true,
+      "freelancerApproved": true,
+      "requiredApprovals": 2,
+      "updatedAt": "2026-06-20T17:32:50.296Z"
+    },
+    "TL-009": {
+      "clientApproved": false,
+      "freelancerApproved": false,
+      "requiredApprovals": 2,
+      "updatedAt": "2026-06-19T17:32:50.296Z"
+    },
+    "TL-010": {
+      "clientApproved": false,
+      "freelancerApproved": false,
+      "requiredApprovals": 2,
+      "updatedAt": "2026-06-18T17:32:50.296Z"
+    },
+    "TL-011": {
+      "clientApproved": true,
+      "freelancerApproved": true,
+      "requiredApprovals": 2,
+      "updatedAt": "2026-06-27T17:32:50.296Z"
+    },
+    "TL-012": {
+      "clientApproved": false,
+      "freelancerApproved": false,
+      "requiredApprovals": 2,
+      "updatedAt": "2026-06-26T17:32:50.296Z"
+    },
+    "TL-013": {
+      "clientApproved": false,
+      "freelancerApproved": false,
+      "requiredApprovals": 2,
+      "updatedAt": "2026-06-25T17:32:50.296Z"
+    },
+    "TL-014": {
+      "clientApproved": true,
+      "freelancerApproved": true,
+      "requiredApprovals": 2,
+      "updatedAt": "2026-06-24T17:32:50.296Z"
+    },
+    "TL-015": {
+      "clientApproved": false,
+      "freelancerApproved": false,
+      "requiredApprovals": 2,
+      "updatedAt": "2026-06-23T17:32:50.296Z"
+    },
+    "TL-016": {
+      "clientApproved": false,
+      "freelancerApproved": false,
+      "requiredApprovals": 2,
+      "updatedAt": "2026-06-22T17:32:50.296Z"
+    },
+    "TL-017": {
+      "clientApproved": true,
+      "freelancerApproved": true,
+      "requiredApprovals": 2,
+      "updatedAt": "2026-06-21T17:32:50.296Z"
+    },
+    "TL-018": {
+      "clientApproved": false,
+      "freelancerApproved": false,
+      "requiredApprovals": 2,
+      "updatedAt": "2026-06-20T17:32:50.296Z"
+    },
+    "TL-019": {
+      "clientApproved": false,
+      "freelancerApproved": false,
+      "requiredApprovals": 2,
+      "updatedAt": "2026-06-19T17:32:50.296Z"
+    },
+    "TL-020": {
+      "clientApproved": true,
+      "freelancerApproved": true,
+      "requiredApprovals": 2,
+      "updatedAt": "2026-06-18T17:32:50.296Z"
+    },
+    "TL-021": {
+      "clientApproved": false,
+      "freelancerApproved": false,
+      "requiredApprovals": 2,
+      "updatedAt": "2026-06-27T17:32:50.296Z"
+    },
+    "TL-022": {
+      "clientApproved": false,
+      "freelancerApproved": false,
+      "requiredApprovals": 2,
+      "updatedAt": "2026-06-26T17:32:50.296Z"
+    },
+    "TL-023": {
+      "clientApproved": true,
+      "freelancerApproved": true,
+      "requiredApprovals": 2,
+      "updatedAt": "2026-06-25T17:32:50.296Z"
+    },
+    "TL-024": {
+      "clientApproved": false,
+      "freelancerApproved": false,
+      "requiredApprovals": 2,
+      "updatedAt": "2026-06-24T17:32:50.296Z"
+    },
+    "TL-025": {
+      "clientApproved": false,
+      "freelancerApproved": false,
+      "requiredApprovals": 2,
+      "updatedAt": "2026-06-23T17:32:50.296Z"
+    },
+    "TL-026": {
+      "clientApproved": true,
+      "freelancerApproved": true,
+      "requiredApprovals": 2,
+      "updatedAt": "2026-06-22T17:32:50.296Z"
+    },
+    "TL-027": {
+      "clientApproved": false,
+      "freelancerApproved": false,
+      "requiredApprovals": 2,
+      "updatedAt": "2026-06-21T17:32:50.296Z"
+    },
+    "TL-028": {
+      "clientApproved": false,
+      "freelancerApproved": false,
+      "requiredApprovals": 2,
+      "updatedAt": "2026-06-20T17:32:50.296Z"
+    },
+    "TL-029": {
+      "clientApproved": true,
+      "freelancerApproved": true,
+      "requiredApprovals": 2,
+      "updatedAt": "2026-06-19T17:32:50.296Z"
+    },
+    "TL-030": {
+      "clientApproved": false,
+      "freelancerApproved": false,
+      "requiredApprovals": 2,
+      "updatedAt": "2026-06-18T17:32:50.296Z"
     }
   },
   "meta": {
-    "lastIndexerSyncAt": "2026-06-27T17:32:50.296Z"
+    "lastIndexerSyncAt": "2026-06-27T17:32:50.296Z",
+    "lastCleanupAt": "2026-07-01T20:51:15.229Z"
+  },
+  "auth": {
+    "sessions": [],
+    "challenges": [],
+    "sponsorshipIntents": [],
+    "rateLimits": [
+      {
+        "key": "::1:/monitoring",
+        "seenAt": 1782939075197
+      },
+      {
+        "key": "::1:/monitoring/indexer",
+        "seenAt": 1782939075203
+      },
+      {
+        "key": "::1:/monitoring/security-checklist",
+        "seenAt": 1782939075212
+      },
+      {
+        "key": "::1:/monitoring",
+        "seenAt": 1782939075217
+      },
+      {
+        "key": "::1:/monitoring/indexer",
+        "seenAt": 1782939075227
+      },
+      {
+        "key": "::1:/monitoring/security-checklist",
+        "seenAt": 1782939075231
+      }
+    ]
   }
 }

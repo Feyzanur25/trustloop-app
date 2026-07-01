@@ -50,7 +50,7 @@ export default function Loops() {
         trustloopApi.listOnboardingProfiles(),
       ]);
       setLoops(Array.isArray(loopsData) ? loopsData : []);
-      setOnboardingProfiles(Array.isArray(profilesData?.records) ? profilesData.records : []);
+      setOnboardingProfiles(Array.isArray(profilesData) ? profilesData : []);
     } catch (e) {
       console.error("[Loops] load error", e);
       setError(e?.message || "Failed to load loops");
@@ -72,6 +72,16 @@ export default function Loops() {
       : 0;
 
     return { active, pending, completed, avgScore };
+  }, [loops]);
+
+  const loopIdByWallet = useMemo(() => {
+    return loops.reduce((acc, loop) => {
+      const wallet = String(loop.linkedWalletAddress || loop.counterparty || "").trim();
+      if (wallet && !acc[wallet]) {
+        acc[wallet] = loop.id;
+      }
+      return acc;
+    }, {});
   }, [loops]);
 
   if (loading) {
@@ -256,7 +266,7 @@ export default function Loops() {
               </thead>
               <tbody>
                 {onboardingProfiles.map((profile, index) => {
-                  const loopId = `TL-${String(index + 1).padStart(3, "0")}`;
+                  const loopId = loopIdByWallet[String(profile.walletAddress || "").trim()] || "-";
                   return (
                     <tr key={profile.id || loopId} className="border-t border-white/10 hover:bg-white/[0.04] transition">
                       <td className="px-4 py-3 font-semibold text-cyan-300">{loopId}</td>

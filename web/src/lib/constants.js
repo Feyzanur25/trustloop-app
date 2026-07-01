@@ -5,7 +5,7 @@ export const STORAGE_KEYS = {
   APPROVALS: "trustloop:approvals:v2",
 };
 
-export const HORIZON_TESTNET = "https://horizon-testnet.stellar.org";
+export const STELLAR_NETWORK = "MAINNET";
 
 export const TRUST_EVENT_TYPES = {
   CREATED: "trust.created",

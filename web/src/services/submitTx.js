@@ -1,6 +1,6 @@
 // web/src/services/submitTx.js
-export async function submitToHorizon(signedXdr, network = "TESTNET") {
-  const net = String(network || "TESTNET").toUpperCase();
+export async function submitToHorizon(signedXdr, network = "MAINNET") {
+  const net = String(network || "MAINNET").toUpperCase();
 
   const horizon =
     net === "TESTNET"

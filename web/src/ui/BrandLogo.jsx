@@ -5,7 +5,6 @@ export function BrandLogo({
   name = "TrustLoop",
   size = "md",
   className = "",
-  fallbackText,
 }) {
   const sizeClasses = {
     sm: "h-10 w-10 text-[0.72rem]",

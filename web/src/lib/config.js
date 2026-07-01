@@ -1,7 +1,13 @@
 export const config = {
   apiBaseUrl: import.meta.env.VITE_API_BASE_URL || "",
-  sorobanRpcUrl: import.meta.env.VITE_SOROBAN_RPC_URL || "https://soroban-rpc.stellar.org",
-  networkPassphrase: "Test SDF Network ; September 2015",
+  network: String(import.meta.env.VITE_STELLAR_NETWORK || "MAINNET").toUpperCase(),
+  horizonUrl: import.meta.env.VITE_STELLAR_HORIZON_URL || "https://horizon.stellar.org",
+  sorobanRpcUrl:
+    import.meta.env.VITE_SOROBAN_RPC_URL || "https://mainnet.sorobanrpc.com",
+  networkPassphrase:
+    String(import.meta.env.VITE_STELLAR_NETWORK || "MAINNET").toUpperCase() === "TESTNET"
+      ? "Test SDF Network ; September 2015"
+      : "Public Global Stellar Network ; September 2015",
   brand: {
     name: import.meta.env.VITE_BRAND_NAME || "TrustLoop",
     tagline: import.meta.env.VITE_BRAND_TAGLINE || "On-chain workflow intelligence",

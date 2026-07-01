@@ -149,7 +149,7 @@ export default function Onboarding() {
             User Onboarding Hub
           </div>
           <div className="mt-2 text-sm text-white/55">
-            Verified onboarding records, user ratings, and Stellar Testnet wallet registry
+            Verified onboarding records, user ratings, and Stellar mainnet wallet registry
           </div>
         </div>
 

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { nowIso } from "../utils/helpers.js";
+import { isValidEmail, isValidStellarPublicKey, nowIso } from "../utils/helpers.js";
 import { getState, setState } from "../data/state.js";
 
 const router = Router();
@@ -16,6 +16,14 @@ router.post("/", (req, res) => {
   const { name, email, walletAddress } = req.body ?? {};
   if (!name || !email || !walletAddress) {
     return res.status(400).json({ error: "name, email and walletAddress are required" });
+  }
+
+  if (!isValidEmail(email)) {
+    return res.status(400).json({ error: "email must be a valid email address" });
+  }
+
+  if (!isValidStellarPublicKey(walletAddress)) {
+    return res.status(400).json({ error: "walletAddress must be a valid Stellar public key" });
   }
 
   const state = getState();

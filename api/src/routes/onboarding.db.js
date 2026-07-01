@@ -1,38 +1,35 @@
 import { Router } from "express";
-import { nowIso, shortWallet } from "../utils/helpers.js";
-import { getStateAsync, setState } from "../data/state.js";
+import { parseOnboardingInput } from "../validators.js";
+import { repository } from "../repository.js";
+import { shortWallet } from "../utils/helpers.js";
 
 const router = Router();
 
-router.get("/", async (_req, res) => {
-  const state = await getStateAsync();
+router.get("/", (_req, res) => {
+  const state = repository.getState();
   res.json({
     count: state.onboardingProfiles.length,
     records: state.onboardingProfiles,
   });
 });
 
-router.post("/", async (req, res) => {
-  const { name, email, walletAddress } = req.body ?? {};
-  if (!name || !email || !walletAddress) {
-    return res.status(400).json({ error: "name, email and walletAddress are required" });
-  }
-
-  const state = await getStateAsync();
+router.post("/", (req, res, next) => {
+  try {
+    const payload = parseOnboardingInput(req.body);
+    const state = repository.getState();
   const record = {
     id: `OB-${String(state.onboardingProfiles.length + 1).padStart(3, "0")}`,
-    createdAt: nowIso(),
-    name: String(name).trim(),
-    email: String(email).trim(),
-    walletAddress: String(walletAddress).trim(),
-    walletShort: shortWallet(walletAddress),
-    feedback: String(req.body.feedback || "").trim(),
-    productRating: Math.min(5, Math.max(1, Number(req.body.productRating) || 4)),
+    createdAt: new Date().toISOString(),
+    ...payload,
+    walletShort: shortWallet(payload.walletAddress),
   };
 
   state.onboardingProfiles.unshift(record);
-  await setState(state);
+    repository.save();
   res.status(201).json(record);
+  } catch (error) {
+    next(error);
+  }
 });
 
 export default router;

@@ -3,21 +3,18 @@ import { NavLink, Outlet } from "react-router-dom";
 import {
   LayoutDashboard,
   Repeat,
-  ChevronDown,
   Activity,
   Shield,
   Users,
 } from "lucide-react";
 
 import { BrandLogo } from "./BrandLogo";
-import { submitToHorizon } from "../services/submitTx";
 import {
-  connectWallet,
+  authenticateWallet,
   disconnectWallet,
   getConnectedWallet,
-  signXdr,
 } from "../services/wallet";
-import { buildDemoManageDataXdr } from "../services/demoTx";
+import { config } from "../lib/config";
 
 function navClass({ isActive }) {
   return [
@@ -32,7 +29,6 @@ export default function AppLayout() {
   const [walletPk, setWalletPk] = useState(null);
   const [walletError, setWalletError] = useState(null);
   const [walletBusy, setWalletBusy] = useState(false);
-  const [signBusy, setSignBusy] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -49,8 +45,8 @@ export default function AppLayout() {
     setWalletError(null);
     setWalletBusy(true);
     try {
-      const pk = await connectWallet();
-      setWalletPk(pk);
+      const session = await authenticateWallet();
+      setWalletPk(session.walletAddress);
     } catch (e) {
       setWalletPk(null);
       setWalletError(e?.message || "Wallet connect failed");
@@ -63,29 +59,6 @@ export default function AppLayout() {
     disconnectWallet();
     setWalletPk(null);
     setWalletError(null);
-  };
-
-  const onSign = async () => {
-    setWalletError(null);
-    setSignBusy(true);
-
-    try {
-      if (!walletPk) throw new Error("Once wallet bagla.");
-
-      const loopId = "TL-001";
-      const action = "created";
-      const xdr = await buildDemoManageDataXdr(walletPk, { loopId, action });
-      const signedXdr = await signXdr(xdr, "TESTNET");
-      const result = await submitToHorizon(signedXdr, "TESTNET");
-
-      console.log("Submitted:", result);
-      alert(`Submitted. Hash: ${result.hash}`);
-    } catch (e) {
-      console.error(e);
-      setWalletError(e?.message || "Sign/Submit failed");
-    } finally {
-      setSignBusy(false);
-    }
   };
 
   return (
@@ -128,22 +101,13 @@ export default function AppLayout() {
                     </div>
                   </div>
 
-                  <button
-                    onClick={onSign}
-                    disabled={!walletPk || signBusy}
-                    className="mt-4 w-full rounded-[16px] border border-white/10 bg-gradient-to-r from-emerald-500/15 to-cyan-400/10 px-3 py-3 text-sm font-semibold text-white hover:bg-gradient-to-r hover:from-emerald-500/25 hover:to-cyan-400/15 disabled:opacity-60"
-                    title={!walletPk ? "Connect first" : "Sign demo tx"}
-                  >
-                    {signBusy ? "Signing..." : "Sign Demo Tx"}
-                  </button>
-
                   {walletError ? (
                     <div className="mt-3 text-xs text-rose-300">{walletError}</div>
                   ) : (
                     <div className="mt-3 text-xs leading-6 text-white/50">
-                      Freighter wallet ready
+                      Freighter wallet auth ready
                       <br />
-                      Connect and submit transactions.
+                      Connect and approve {config.network === "TESTNET" ? "testnet" : "mainnet"} fee-sponsored transactions.
                     </div>
                   )}
                 </div>

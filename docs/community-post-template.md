@@ -4,7 +4,7 @@ Use this as a draft for Twitter/X or another public community platform.
 
 ## Draft
 
-Built TrustLoop on Stellar Testnet as a production-readiness project.
+Built TrustLoop for Stellar mainnet deployment as a production-readiness project.
 
 What it includes:
 

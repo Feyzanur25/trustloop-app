@@ -38,4 +38,4 @@ These items depend on the final deployment environment and cannot be proven from
 2. Monitoring and security state are visible in the product itself.
 3. API abuse is reduced through rate limiting.
 4. User onboarding records and loop events are auditable.
-5. All wallet-facing activity is limited to Stellar Testnet for safe demonstration.
+5. Wallet and Horizon configuration are aligned to Stellar mainnet-ready deployment.

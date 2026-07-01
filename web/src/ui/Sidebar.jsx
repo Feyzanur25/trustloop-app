@@ -86,7 +86,7 @@ export function Sidebar({
 
         <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-3">
           <div className="text-xs text-white/60">Network</div>
-          <div className="mt-1 text-sm font-semibold">Stellar Testnet</div>
+          <div className="mt-1 text-sm font-semibold">Stellar Mainnet</div>
         </div>
       </div>
     </aside>

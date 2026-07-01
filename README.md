@@ -1,3 +1,4 @@
+
 # 🚀 TrustLoop
 
 ### A Production-Ready Decentralized Trust Workflow Platform Powered by Stellar
@@ -21,8 +22,14 @@
 [![Demo Video](https://img.shields.io/badge/Demo_Video-YouTube-red?style=for-the-badge&logo=youtube)](https://www.youtube.com/watch?v=DEHQMIFN9Ok)
 [![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-black?style=for-the-badge&logo=github)](https://github.com/Feyzanur25/trustloop-app)
 
+# TrustLoop
 
----
+TrustLoop is a Stellar trust workflow application for client and freelancer collaborations. The repository now includes wallet-authenticated API access, fee-sponsored Stellar transaction support, loop lifecycle management, onboarding capture, operations dashboards, and a Level 6 evidence pack.
+
+e7e35ca (Complete Stellar Level 6 improvements)
+
+## Implemented
+
 
 # 📖 Overview
 
@@ -32,7 +39,33 @@ Unlike traditional escrow systems that rely on centralized intermediaries, Trust
 
 The project has been designed as a real-world production application rather than a proof of concept. It includes monitoring dashboards, analytics, transaction indexing, security hardening, production deployment, comprehensive documentation, and verified user adoption.
 
----
+- React frontend with dashboard, loop detail, events, onboarding, metrics, and monitoring views
+- Express API with strict CORS, security headers, rate limiting, validation, and structured errors
+- SEP-10 wallet authentication
+- Fee-bump sponsorship for loop mutations
+- Participant-level authorization for approvals and lifecycle transitions
+- File-backed local persistence with production environment guidance
+
+## Architecture
+
+- `web/`: Vite + React application
+- `api/`: Express API and Stellar orchestration
+- `forms/`: Google Form template
+- `feedback/`: export artifact and process instructions
+
+Transaction flow:
+
+1. User authenticates with Freighter.
+2. API issues a SEP-10 challenge.
+3. User signs the challenge and receives a short-lived API session.
+4. API prepares a loop mutation transaction intent.
+5. User signs the transaction.
+6. API wraps it in a fee-bump transaction and submits it.
+7. API commits the loop state transition and stores the transaction hash in events.
+>>>>>>> e7e35ca (Complete Stellar Level 6 improvements)
+
+## Install
+
 
 # 🎯 Project Goals
 
@@ -46,7 +79,18 @@ The platform focuses on:
 * Providing transparent monitoring and analytics
 * Demonstrating production-grade blockchain architecture
 
----
+### API
+
+```powershell
+cd api
+copy .env.example .env
+npm install
+npm start
+```
+ e7e35ca (Complete Stellar Level 6 improvements)
+
+### Web
+
 
 # ⭐ Key Highlights
 
@@ -63,7 +107,16 @@ The platform focuses on:
 * ✅ Real User Validation
 * ✅ Community Feedback Analysis
 
----
+```powershell
+cd web
+copy .env.example .env
+npm install
+npm run dev
+```
+e7e35ca (Complete Stellar Level 6 improvements)
+
+## Mainnet Setup
+
 
 # 🏆 Stellar Builders Level 6 Checklist
 
@@ -87,7 +140,23 @@ The platform focuses on:
 | Real Transaction Activity   |    ✅   |
 | 30+ Meaningful Commits      |    ✅   |
 
----
+API:
+
+- `STELLAR_NETWORK=MAINNET`
+- `STELLAR_HORIZON_URL=https://horizon.stellar.org`
+- `STELLAR_NETWORK_PASSPHRASE=Public Global Stellar Network ; September 2015`
+- `STELLAR_SPONSOR_SECRET_KEY=<real sponsor secret>`
+- `STELLAR_SPONSOR_PUBLIC_KEY=<matching public key>`
+- `STELLAR_CHALLENGE_SECRET_KEY=<web auth signing secret>`
+
+Web:
+
+- `VITE_API_BASE_URL=<deployed API origin>`
+- `VITE_STELLAR_NETWORK=MAINNET`
+e7e35ca (Complete Stellar Level 6 improvements)
+
+## Features
+
 
 # 💡 Why TrustLoop?
 
@@ -97,7 +166,25 @@ TrustLoop addresses these challenges by introducing a decentralized workflow bui
 
 The platform enables both parties to participate equally in the trust lifecycle while maintaining a verifiable blockchain-backed audit trail.
 
----
+- Loop creation, confirmation, approval, revocation, and closure
+- Single or dual approval policies
+- Gasless UX via fee sponsorship
+- Wallet-backed auth and authorization
+- Onboarding exports and feedback tooling
+- Monitoring and metrics dashboards
+
+## Screenshots
+
+No screenshots are committed because fake evidence is not allowed. Capture real screenshots from the deployed app and store them under `docs/screenshots/`.
+
+## Wallet Setup
+e7e35ca (Complete Stellar Level 6 improvements)
+
+1. Install Freighter.
+2. Switch Freighter to the same network as the app.
+3. Fund the wallet on that network.
+4. Authenticate before performing loop mutations.
+
 
 # 🏗 System Architecture
 
@@ -122,7 +209,13 @@ The platform enables both parties to participate equally in the trust lifecycle 
                 Stellar Mainnet
 ```
 
----
+## Contract Addresses
+
+This implementation currently uses Stellar account operations and fee-bump transactions rather than a deployed Soroban contract. If a contract is introduced later, record the real contract ID in `LEVEL6_REPORT.md`.
+ e7e35ca (Complete Stellar Level 6 improvements)
+
+## Documentation
+
 
 # 🔄 Workflow
 
@@ -890,56 +983,36 @@ The platform has been evaluated with verified users who interacted with the prod
 | Production Feedback     |    ✅   |
 | Blockchain Transactions |    ✅   |
 
+=======
+- [USER_GUIDE.md](USER_GUIDE.md)
+- [TECHNICAL_DOCUMENTATION.md](TECHNICAL_DOCUMENTATION.md)
+- [DEPLOYMENT.md](DEPLOYMENT.md)
+- [SECURITY.md](SECURITY.md)
+- [SECURITY_REVIEW.md](SECURITY_REVIEW.md)
+- [LEVEL6_REPORT.md](LEVEL6_REPORT.md)
 
-## 👥 Onboarded User Directories
+## Feedback
+>>>>>>> e7e35ca (Complete Stellar Level 6 improvements)
 
-### 📋 Table 1: Verified Historical Production Users (Level 5 Cohort)
-*This ledger contains the initial 5 historical validation nodes mapped during the Level 5 core implementation.*
+- [forms/GoogleFormTemplate.md](forms/GoogleFormTemplate.md)
+- [feedback/README.md](feedback/README.md)
+- [feedback/feedback_template.xlsx](feedback/feedback_template.xlsx)
 
-| User Name | User Email | User Wallet Address |
-| :--- | :--- | :--- |
-| **Sema Çiftçi** | semaciftci23@gmail.com | `GC6AXRCCWINZ26JSQDVJYH3YH3YJ4TDORD2SU7L5V4ZXBZJ43XEVGWZFPAV` |
-| **Sılanur Polat** | silapolat08@gmail.com | `GBREF4WXYKLLUQZZHIY4E2WQ5N3NMAB4W26V472AP2SJVZQOU3GBOR5B` |
-| **Züleyha Ateş** | zuleyhaates25@gmail.com | `GBWKENQV2J4SYSRULJA3CVYCXVUAMLQQL73S2NYYY3XZHWZSDHKFG6D2` |
-| **Yüsra Çolak** | yusraclk@gmail.com | `GD7E45CSAIQV2FJO5CGXB4YGNUYXUJZ7YWQNCYFWMG4D34CGB5UVS6Q3` |
-| **Melek Gürler** | melek256@gmail.com | `GC3JXR2OBJP2Z3MFS7MDSFCN7RVQYWW7YQMTAX5AUKS7RQLT7J5J4EQW` |
+## Roadmap
+
+- move persistence to managed Postgres or Supabase
+- add automated tests for SEP-10 and sponsorship routes
+- add explorer deep links for loop transaction history
 
 
-### 📋 Table 2: Onboarded Production Validation Nodes & Resolution History (Level 6 Cohort)
-*This matrix details the 30 active Level 6 production user nodes alongside the precise 7-character repository Commit Shas tracking their optimization requests or architectural integration.*
 
-| User Name | User Email | User Wallet Address | Commit ID / Resolution |
-| :--- | :--- | :--- | :--- |
-| **İsmail Ateş** | ismail25@gmail.com | `GBXTMXHHEEEW3VNYHEZYAVV3Q7MF7SLP2CXK3C5K6IBCNNX7CP67F2IM` | `151f6d5` |
-| **Afra Duru** | durusoyafra07@gmail.com | `GC4UYA4GWY35KGQ7U434DXQBC4HZ6HAMJ2LOMMHC3FJAHHV23RJUB7EV` | `16096e2` |
-| **Feyzanur Ateş** | feyzanurates4@gmail.com | `GDPGD3WEAVACUKCONRDUELD46ML5KDQAC2JTF7QE6EEEW7VSFYZEBZX5` | `e5a023f` |
-| **Emre Yıldız** | emreyildiz01@gmail.com | `GA4INDKZSBMYUL2DKUMC2732COE4CLKRX6YUIZS56UWLL2F6DD4ZL3G5` | `6299078` |
-| **Zeynep Kaya** | zeynepkaya.dev@gmail.com | `GDYD6GZ6QWKEULFZU6HMLSH4JM5IAJXBY3HFMCHZHTHIGH5DKEVNX2ZM` | `b17911e` |
-| **Can Demir** | candemir@gmail.com | `GDWL2RCDFQVDGH3IJL4ZGLX5CGU27MO6R7OQVCNYLQWROYZND2B6ENCI` | `699c4d0` |
-| **Elif Aydın** | elifaydin@gmail.com | `GBL2APVSMV2IYSO2B6C67VASKRJHXVCAOSHEBLC6BM4CBSKDMQOU25HU` | **Roadmap Backlog** |
-| **Burak Çelik** | burakcelik@gmail.com | `GAVNSWLAN4VG54IVLHCF3O45ZOAZSPLNH7GNR25RVFLH434BAQS3JJAO` | `699c4d0` |
-| **Merve Koç** | mervekoc@gmail.com | `GCCHWOJNEC7VJ2NCTIQYKYYYWZSZRUU2KAYVY5VMDWF3ONYKWUH6DO7I` | `3acfe7a` |
-| **Oğuzhan Şahin** | oguzhansahin@gmail.com | `GCHRZKNZGV27USWARNID7YPVUBXV6WNPG6YRVLKQ4QDUURMJY4OU5JJ5` | `f158156` |
-| **Selin Arslan** | selinarslan@gmail.com | `GDNN6X4H3SUEN2F5XUQA3BDYCSRO54AVV5GWFIGO3DTLPONEMCS4DSLV` | `e5a023f` |
-| **Hakan Yılmaz** | hakanyilmaz@gmail.com | `GCNSHMQNN66RDGXXWA3MV7CHOMZ5YCC2D7EYPUJWZICTZV4QQ2ZMNFOP` | `c47e9f2` |
-| **Ayşe Demir** | aysedemir@gmail.com | `GCKX3NOWP7LYF2L6YWMFIKNKROBHVLDEQSAAWWQHDSXNVWUTDHRPZYIH` | `6299078` |
-| **Kerem Acar** | keremacar@gmail.com | `GCHS7OSQNPBA2XUFAVGIPNK72DED3WWD2DJOA4ANDQ7BHM4R5GDRJSS7` | `699c4d0` |
-| **Derya Kurt** | deryakurt@gmail.com | `GCWXWMORXOEB2JWVCE7LBWFLNT5QFQ5JKQVRFNB3AZRQUSLUCHXBM2O2` | **Roadmap Backlog** |
-| **Ahmet Öz** | ahmetoz@gmail.com | `GDLXN35JGULDTNEZGGFV6IQKDULH5O6GN5L7BY252AMAFME7RCXYWXAB` | `f444c0e` |
-| **Nazlı Şen** | nazlisen@gmail.com | `GBJP4RV3PLYSQZKQMUQGO5NO4XIEEYXHYIVR2GCWETFNGSEPQRRSAN6O` | **Roadmap Backlog** |
-| **Yusuf Polat** | yusufpolat@gmail.com | `GBTLBOA5M5P6RUMWVL6UXRFFUAJX4X6AMHFFY3LDM5L6ES2FQL2OEFER` | `6299078` |
-| **Deniz Güneş** | denizgunes@gmail.com | `GBJE3VLOOSAJKZFB7ILEUY6UK2CONTPQVI75APNG7USR64VT2AAMETI6` | `d370255` |
-| **Melis Aydın** | melisaydin@gmail.com | `GCSDJ2BQTERO3RFGLUR4Q4KVJKWGFWAY423HBIWHJSTSMUE7DNUL2JGO` | `c47e9f2` |
-| **Pelin Demirtaş** | pelindemirtas@gmail.com | `GD7M6TIBC422HNXG5SMID5Z2GVRQ55ODDG63HEZXGR7DJ36YLD6VKHIA` | `16096e2` |
-| **Murat Çakır** | muratcakir@gmail.com | `GBG3HAUGSWVSVF7LWRXCDFXBJLBDMSBWISLTYDAOXRR7BKOZS572RTX4` | `2700ce9` |
-| **Cem Yıldırım** | cemyildirim@gmail.com | `GDFK6ZKBYVXSS6XU5HC3BDGOK5N2GOQ6LSIDXDIWZYOQML5ZFUEOH7MG` | `ef8166a` |
-| **Sibel Koç** | sibelkoc@gmail.com | `GAAVRCI7U3OG5T52LIY53KP5XWZCZ7ZK6TOU7CZH5NHLMOGCEKFBP3CN` | `16096e2` |
-| **Ece Aksoy** | eceaksoy@gmail.com | `GBZYOAEY4H5BFZY2FN7GWUOG6TX54S37VKSYZMWDSMMLD5GJLS46T4HW` | `16096e2` |
-| **Barış Kılıç** | bariskilic@gmail.com | `GCP42RESSZ2YTIK7SMTRC3T27AIPHBMJJMGOMK63YK4YTLMF6HWO26QX` | `c47e9f2` |
-| **Tuğba Şahin** | tugbasahin@gmail.com | `GC5Y25BO5R5DPU6NHPUZHW6JDABW5Z4ETAOLE2D4ZOU4O36ISJQRVBRS` | `c47e9f2` |
-| **Gökhan Çetin** | gokhancetin@gmail.com | `GB67HLEMWX3VLRYPSLUFZ5HCTIF55DHNPTHV55YAY5OKFTKVLE7IN5F4` | **Roadmap Backlog** |
-| **Volkan Aras** | volkanaras@gmail.com | `GBOQMOY5KHPMVXFZNUT4CNH2N3NPFXTXD4G6MQT7JXKGU6VSTRPRRO5P` | **Roadmap Backlog** |
-| **Kaan Özkan** | kaanozkan@gmail.com | `GBFFWPNU2VKKUBO2FPMWF6PS6XGFN3RR7G7R3PXFXOHRNDEECE7LPWSA` | **Roadmap Backlog** |
+## FAQ
+e7e35ca (Complete Stellar Level 6 improvements)
+
+### Is the repository mainnet-ready?
+
+The code and configuration are mainnet-ready. Real deployment, real keys, and real funded accounts still need to be provided outside the repository.
+
 
 
 
@@ -1307,3 +1380,8 @@ As the project evolves, future development will focus on expanding Stellar ecosy
 **Built with ❤️ using React, Node.js and Stellar Mainnet**
 
 </p>
+
+### Does the repository contain real deployment URLs or proofs?
+
+No. This repository does not fabricate production URLs, screenshots, transaction proofs, launch posts, or audit approvals.
+ e7e35ca (Complete Stellar Level 6 improvements)

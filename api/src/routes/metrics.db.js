@@ -1,16 +1,16 @@
 import { Router } from "express";
 import { buildOverviewMetrics } from "../logic/trustScore.js";
-import { getStateAsync } from "../data/state.js";
+import { repository } from "../repository.js";
 
 const router = Router();
 
-router.get("/overview", async (_req, res) => {
-  const state = await getStateAsync();
+router.get("/overview", (_req, res) => {
+  const state = repository.getState();
   res.json(buildOverviewMetrics(state));
 });
 
-router.get("/dashboard/stats", async (_req, res) => {
-  const state = await getStateAsync();
+router.get("/dashboard/stats", (_req, res) => {
+  const state = repository.getState();
   const overview = buildOverviewMetrics(state);
   res.json({
     loopsActive: overview.loopsByStatus.active,

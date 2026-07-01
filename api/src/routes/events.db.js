@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { getStateAsync } from "../data/state.js";
+import { repository } from "../repository.js";
 
 const router = Router();
 
-router.get("/", async (_req, res) => {
-  const state = await getStateAsync();
+router.get("/", (_req, res) => {
+  const state = repository.getState();
   res.json(state.events);
 });
 

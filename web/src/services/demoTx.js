@@ -1,7 +1,6 @@
 // web/src/services/demoTx.js
 import * as StellarSdk from "stellar-sdk";
-
-const HORIZON_TESTNET = "https://horizon-testnet.stellar.org";
+import { config } from "../lib/config";
 
 function safeValue(loopId, action) {
   const v = `${loopId}|${action}`;
@@ -12,13 +11,13 @@ export async function buildDemoManageDataXdr(
   publicKey,
   { loopId = "TL-001", action = "created" } = {}
 ) {
-  const server = new StellarSdk.Horizon.Server(HORIZON_TESTNET);
+  const server = new StellarSdk.Horizon.Server(config.horizonUrl);
 
   const account = await server.loadAccount(publicKey);
 
   const tx = new StellarSdk.TransactionBuilder(account, {
     fee: StellarSdk.BASE_FEE,
-    networkPassphrase: StellarSdk.Networks.TESTNET,
+    networkPassphrase: config.networkPassphrase,
   })
     .addOperation(
       StellarSdk.Operation.manageData({

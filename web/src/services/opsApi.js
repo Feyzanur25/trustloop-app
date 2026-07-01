@@ -1,81 +1,29 @@
 import { http } from "./http";
 import trustloopApi from "./trustloopApi";
 
-async function withFallback(request, fallback) {
-  try {
-    return await request();
-  } catch {
-    return await fallback();
-  }
-}
-
 export const opsApi = {
   getMetricsOverview() {
-    return withFallback(
-      () => http("/api/metrics/overview"),
-      () => trustloopApi.getAnalyticsSnapshot()
-    );
+    return http("/api/metrics/overview");
   },
 
   getMonitoring() {
-    return withFallback(
-      () => http("/api/monitoring"),
-      async () => ({
-        status: "degraded",
-        uptimeSeconds: 0,
-        totalRequests: 0,
-        totalErrors: 0,
-        avgLatencyMs: 0,
-        errorRate: 0,
-        services: [
-          { name: "API", status: "degraded", detail: "Fallback mode using local analytics" },
-          { name: "Indexer", status: "up", detail: "Local event indexing available" },
-          { name: "Wallet demo", status: "up", detail: "Freighter integration enabled" },
-        ],
-        alerts: [
-          {
-            severity: "medium",
-            title: "Backend offline fallback",
-            detail: "Metrics are currently generated from local browser state.",
-          },
-        ],
-      })
-    );
+    return http("/api/monitoring");
   },
 
   getIndexer() {
-    return withFallback(
-      () => http("/api/indexer"),
-      () => trustloopApi.getIndexerSummary()
-    );
+    return http("/api/monitoring/indexer");
   },
 
   getSecurityChecklist() {
-    return withFallback(
-      () => http("/api/security-checklist"),
-      async () => trustloopApi.getSecurityChecklist()
-    );
+    return http("/api/monitoring/security-checklist");
   },
 
   getOnboarding() {
-    return withFallback(
-      () => http("/api/onboarding"),
-      async () => {
-        const records = await trustloopApi.listOnboardingProfiles();
-        return { count: records.length, records };
-      }
-    );
+    return http("/api/onboarding");
   },
 
   createOnboarding(payload) {
-    return withFallback(
-      () =>
-        http("/api/onboarding", {
-          method: "POST",
-          body: JSON.stringify(payload),
-        }),
-      async () => trustloopApi.createOnboardingProfile(payload)
-    );
+    return trustloopApi.createOnboardingProfile(payload);
   },
 };
 

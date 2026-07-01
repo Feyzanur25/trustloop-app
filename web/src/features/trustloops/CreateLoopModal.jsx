@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import trustloopApi from "../../services/trustloopApi";
-import { getConnectedWallet } from "../../services/wallet";
+import { authenticateWallet } from "../../services/wallet";
 
 export default function CreateLoopModal({ onClose, onCreated }) {
   const [counterparty, setCounterparty] = useState("");
@@ -15,7 +15,7 @@ export default function CreateLoopModal({ onClose, onCreated }) {
     setBusy(true);
 
     try {
-      const walletPk = await getConnectedWallet().catch(() => null);
+      await authenticateWallet();
 
       const trimmed = counterparty.trim();
       if (!trimmed || trimmed.length < 20) {
@@ -23,7 +23,6 @@ export default function CreateLoopModal({ onClose, onCreated }) {
       }
 
       await trustloopApi.createLoop({
-        walletPk,
         counterparty: trimmed,
         role,
         expiresInDays: expiresIn,
@@ -51,7 +50,7 @@ export default function CreateLoopModal({ onClose, onCreated }) {
       <div className="relative w-[540px] max-w-[92vw] rounded-[28px] border border-white/10 bg-[#0b1220] p-6 text-white">
         <div className="text-xl font-semibold">Create TrustLoop</div>
         <div className="mt-1 text-sm text-white/55">
-          Launch a new loop with expiry rules and approval policy.
+          Launch a new loop with wallet-authenticated, fee-sponsored transaction handling.
         </div>
 
         <div className="mt-6 space-y-4">

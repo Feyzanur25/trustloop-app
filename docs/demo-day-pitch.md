@@ -2,7 +2,7 @@
 
 ## 60-Second Version
 
-TrustLoop is a Stellar Testnet collaboration workflow app designed to make trust visible between clients and freelancers.
+TrustLoop is a Stellar collaboration workflow app designed to make trust visible between clients and freelancers on mainnet-ready infrastructure.
 
 The app creates a trust lifecycle through:
 

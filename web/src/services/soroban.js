@@ -128,7 +128,7 @@ export function buildInvokeContractTransaction(
     .build();
 }
 
-export async function signAndSendSorobanTx(transaction, network = "TESTNET") {
+export async function signAndSendSorobanTx(transaction, network = config.network) {
   const client = getSorobanClient();
 
   const signedXDR = await signXdr(transaction.toXDR(), network);
@@ -163,10 +163,10 @@ export async function invokeContract({
       auth: simResponse.results[0].auth ? [simResponse.results[0].auth] : [],
     });
 
-    const signed = await signXdr(prepared.toXDR(), "TESTNET");
+    const signed = await signXdr(prepared.toXDR(), config.network);
     return await client.sendTransaction(signed);
   }
 
-  const signed = await signXdr(transaction.toXDR(), "TESTNET");
+  const signed = await signXdr(transaction.toXDR(), config.network);
   return await client.sendTransaction(signed);
 }

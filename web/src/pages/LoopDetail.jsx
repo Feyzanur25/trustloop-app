@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { CheckCircle2, ShieldCheck, TimerReset } from "lucide-react";
+import { ArrowRightCircle, CheckCircle2, Lock, ShieldCheck, TimerReset } from "lucide-react";
 import { trustloopApi } from "../services/trustloopApi";
 
 function tone(status) {
@@ -16,6 +16,7 @@ export default function LoopDetail() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [approvalBusy, setApprovalBusy] = useState("");
+  const [transitionBusy, setTransitionBusy] = useState("");
 
   const load = async () => {
     setError(null);
@@ -67,6 +68,24 @@ export default function LoopDetail() {
       setError(err?.message || "Revoke failed");
     } finally {
       setApprovalBusy("");
+    }
+  };
+
+  const onTransition = async (action) => {
+    setError(null);
+    setTransitionBusy(action);
+    try {
+      if (action === "confirm") {
+        await trustloopApi.confirmLoop(id);
+      }
+      if (action === "close") {
+        await trustloopApi.closeLoop(id);
+      }
+      await load();
+    } catch (err) {
+      setError(err?.message || "Action failed");
+    } finally {
+      setTransitionBusy("");
     }
   };
 
@@ -142,12 +161,34 @@ export default function LoopDetail() {
       </div>
 
       <section className="rounded-[24px] border border-white/10 bg-black/15 p-5">
+        <div className="mb-5 flex flex-wrap gap-3">
+          <button
+            className="rounded-2xl border border-cyan-400/20 bg-cyan-400/15 px-4 py-2 text-sm text-white disabled:opacity-60"
+            onClick={() => onTransition("confirm")}
+            disabled={transitionBusy !== "" || loop.status !== "Pending"}
+          >
+            <span className="inline-flex items-center gap-2">
+              <ArrowRightCircle size={16} />
+              {transitionBusy === "confirm" ? "Confirming..." : "Confirm loop"}
+            </span>
+          </button>
+          <button
+            className="rounded-2xl border border-emerald-400/20 bg-emerald-400/15 px-4 py-2 text-sm text-white disabled:opacity-60"
+            onClick={() => onTransition("close")}
+            disabled={transitionBusy !== "" || loop.status !== "Active" || !readyToClose}
+          >
+            <span className="inline-flex items-center gap-2">
+              <Lock size={16} />
+              {transitionBusy === "close" ? "Closing..." : "Close loop"}
+            </span>
+          </button>
+        </div>
         <div className="flex items-center gap-2 text-lg font-semibold">
           <ShieldCheck size={18} />
-          <span>Advanced feature: Multi-party approval workflow</span>
+          <span>Advanced feature: Fee-sponsored, wallet-authorized workflow</span>
         </div>
         <div className="mt-2 text-sm text-white/60">
-          This loop cannot be closed until the required participant approvals are captured.
+          Every mutating action requires wallet auth, participant authorization, and a sponsored on-chain transaction.
         </div>
 
         <div className="mt-5 grid gap-4 lg:grid-cols-2">

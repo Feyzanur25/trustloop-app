@@ -21,7 +21,7 @@ Browser (React + Vite)
   -> /api requests
 Express API
   -> JSON-backed persistent store
-  -> optional Horizon event reads from Stellar Testnet
+  -> optional Horizon event reads from Stellar Mainnet
 ```
 
 ## Frontend

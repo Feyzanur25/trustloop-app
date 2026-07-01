@@ -2,27 +2,12 @@ import {
   deleteRow,
   insertRow,
   selectAll,
-  selectBy,
-  selectById,
-  updateRow,
   upsertRow,
 } from "./db.js";
-
 import { normalizeState } from "./seed.js";
 
 async function ensureDbSeeded() {
-  // Lightweight “seeded” check. We rely on schema.sql to create tables.
-  // If onboarding_profiles is empty, seed.sql should be executed manually during setup.
-  // This function remains as a placeholder for compatibility.
-  // (Vercel best practice: keep runtime simple + idempotent.)
   await selectAll("meta");
-}
-
-function normalizeDbMetaRow(row) {
-  return {
-    id: String(row.id),
-    lastIndexerSyncAt: row.last_indexer_sync_at || new Date().toISOString(),
-  };
 }
 
 function normalizeDbLoopRow(row) {
@@ -36,7 +21,6 @@ function normalizeDbLoopRow(row) {
     lastEvent: row.last_event,
     createdAt: row.created_at,
     approvalPolicy: row.approval_policy,
-    // used by trustScore.js helpers
     lastUpdatedAt: row.updated_at,
   };
 }
@@ -87,37 +71,28 @@ export async function getStateFromDb() {
 
   const loops = (loopsRows ?? []).map(normalizeDbLoopRow);
   const approvals = {};
-  for (const a of approvalsRows ?? []) {
-    approvals[a.loop_id] = normalizeDbApprovalRow(a.loop_id, a);
+  for (const row of approvalsRows ?? []) {
+    approvals[row.loop_id] = normalizeDbApprovalRow(row.loop_id, row);
   }
 
   const events = (eventsRows ?? []).map(normalizeDbEventRow);
   const onboardingProfiles = (onboardingRows ?? []).map(normalizeDbOnboardingProfileRow);
-
-  const meta0 = (metaRows ?? [])[0];
-  const lastIndexerSyncAt =
-    meta0?.last_indexer_sync_at ?? new Date().toISOString();
+  const metaRow = (metaRows ?? [])[0];
 
   return normalizeState({
     loops,
     approvals,
     events,
     onboardingProfiles,
-    meta: { lastIndexerSyncAt },
+    meta: {
+      lastIndexerSyncAt: metaRow?.last_indexer_sync_at ?? new Date().toISOString(),
+    },
   });
 }
 
 export async function commitStateToDb(nextState) {
-  // Idempotent-ish approach for now:
-  // - Upsert loops
-  // - Upsert approvals
-  // - Replace events + onboardingProfiles + meta via delete+insert
-  // This preserves business logic without trying to compute deltas.
-  // (For production scaling, switch to proper incremental updates.)
-
   const state = normalizeState(nextState);
 
-  // loops
   for (const loop of state.loops) {
     await upsertRow("loops", {
       id: loop.id,
@@ -133,7 +108,6 @@ export async function commitStateToDb(nextState) {
     });
   }
 
-  // approvals
   for (const loopId of Object.keys(state.approvals ?? {})) {
     const approval = state.approvals[loopId];
     await upsertRow("approvals", {
@@ -146,47 +120,39 @@ export async function commitStateToDb(nextState) {
     });
   }
 
-  // meta
   await upsertRow("meta", {
     id: "meta-0",
     last_indexer_sync_at: state.meta?.lastIndexerSyncAt,
   });
 
-  // events replace
-    // delete all + insert all (simple + correct)
   const existingEvents = await selectAll("events");
-  for (const e of existingEvents) {
-    await deleteRow("events", e.id);
+  for (const row of existingEvents) {
+    await deleteRow("events", row.id);
   }
-  for (const ev of state.events) {
+  for (const event of state.events) {
     await insertRow("events", {
-      id: ev.id,
-      time: ev.createdAt,
-      type: ev.type,
-      loop_id: ev.loopId,
-      detail:
-        typeof ev.detail === "string" ? ev.detail : JSON.stringify(ev.detail ?? {}),
+      id: event.id,
+      time: event.createdAt,
+      type: event.type,
+      loop_id: event.loopId,
+      detail: typeof event.detail === "string" ? event.detail : JSON.stringify(event.detail ?? {}),
     });
   }
 
-
-
-  // onboardingProfiles replace
   const existingOnboarding = await selectAll("onboarding_profiles");
-  for (const p of existingOnboarding) {
-    await deleteRow("onboarding_profiles", p.id);
+  for (const row of existingOnboarding) {
+    await deleteRow("onboarding_profiles", row.id);
   }
-  for (const p of state.onboardingProfiles) {
+  for (const profile of state.onboardingProfiles) {
     await insertRow("onboarding_profiles", {
-      id: p.id,
-      created_at: p.createdAt,
-      name: p.name,
-      email: p.email,
-      wallet_address: p.walletAddress,
-      wallet_short: p.walletShort,
-      feedback: p.feedback,
-      product_rating: p.productRating,
+      id: profile.id,
+      created_at: profile.createdAt,
+      name: profile.name,
+      email: profile.email,
+      wallet_address: profile.walletAddress,
+      wallet_short: profile.walletShort,
+      feedback: profile.feedback,
+      product_rating: profile.productRating,
     });
   }
 }
-

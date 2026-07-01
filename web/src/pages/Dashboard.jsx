@@ -14,6 +14,7 @@ import {
 
 import { trustloopApi } from "../services/trustloopApi";
 import CreateLoopModal from "../features/trustloops/CreateLoopModal.jsx";
+import { authenticateWallet } from "../services/wallet";
 
 function cn(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -102,7 +103,8 @@ export default function Dashboard() {
       ]);
       setLoops(Array.isArray(loopsData) ? loopsData : []);
       setUserCount(Array.isArray(profiles) ? profiles.length : 0);
-      setWalletAddress(window?.stellarWalletAddress || null);
+      const walletStatus = await trustloopApi.getWalletStatus();
+      setWalletAddress(walletStatus.walletAddress || null);
     } catch (e) {
       console.error("[Dashboard] load error", e);
       setError(e?.message || "Failed to load dashboard data");
@@ -256,41 +258,35 @@ export default function Dashboard() {
                 className="btn-secondary w-full hover:bg-white/10 hover:border-white/20 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-transparent transition-all"
                 onClick={async () => {
                   try {
-                    await trustloopApi.restoreMyLocalLoopsToServer();
                     await load();
                   } catch (e) {
-                    alert(e?.message || "Restore failed");
+                    alert(e?.message || "Refresh failed");
                   }
                 }}
-                title="Browser'daki kaydedilmiş loop/event/approval cache'ini backend'e aktarır"
+                title="Refresh live data from the secured API"
               >
-                Restore local loops
+                Refresh live data
               </button>
 
               <button
                 className="btn-secondary w-full hover:bg-white/10 hover:border-white/20 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-transparent transition-all"
                 onClick={async () => {
                   try {
-                    const { getConnectedWallet, connectWallet } = await import("../services/wallet.js");
-                    const existing = await getConnectedWallet().catch(() => null);
-                    if (existing) {
-                      alert(`Wallet already connected:\n${existing.slice(0, 8)}...${existing.slice(-6)}`);
-                      return;
-                    }
-                    const address = await connectWallet();
+                    const session = await authenticateWallet();
+                    const address = session.walletAddress;
                     if (address) {
                       setWalletAddress(address);
-                      alert(`Wallet connected:\n${address.slice(0, 8)}...${address.slice(-6)}`);
+                      alert(`Wallet authenticated:\n${address.slice(0, 8)}...${address.slice(-6)}`);
                     }
                   } catch (e) {
-                    alert(e?.message || "Wallet connection failed");
+                    alert(e?.message || "Wallet authentication failed");
                   }
                 }}
               >
-                Manage wallet
+                Authenticate wallet
               </button>
               <div className="rounded-[22px] border border-white/10 bg-white/[0.04] p-4 text-sm text-white/60">
-                Quick wallet and trust loop controls from one place.
+                Mainnet wallet auth and fee-sponsored loop controls from one place.
               </div>
             </div>
           </div>
