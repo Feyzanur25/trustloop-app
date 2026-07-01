@@ -265,7 +265,7 @@ export default function Loops() {
                 </tr>
               </thead>
               <tbody>
-                {onboardingProfiles.map((profile, index) => {
+                {onboardingProfiles.map((profile) => {
                   const loopId = loopIdByWallet[String(profile.walletAddress || "").trim()] || "-";
                   return (
                     <tr key={profile.id || loopId} className="border-t border-white/10 hover:bg-white/[0.04] transition">
